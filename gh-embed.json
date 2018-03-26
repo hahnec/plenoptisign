@@ -1,0 +1,19 @@
+{
+    "embed": [
+      {
+ 			"type": "python",
+ 			"label": "plenoptisign.py",
+ 			"path": "/plenoptisign/plenoptisign.py"
+ 		},
+      {
+			"type": "python",
+			"label": "cgi_script.py",
+			"path": "/plenoptisign/bin/cgi_script.py"
+		},
+      {
+			"type": "python",
+			"label": "setup.py",
+			"path": "setup.py"
+		}
+    ]
+}
