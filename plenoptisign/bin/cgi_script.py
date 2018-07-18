@@ -22,7 +22,8 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 
 import cgi, cgitb
 import sys, csv, datetime
-from .. import plenoptisign
+sys.path.append("..")
+import plenoptisign
 
 def cgi_read():
 
@@ -64,7 +65,7 @@ def main():
 
     # save data to csv file
     t = 'Timestamp: {:%Y-%b-%d %H:%M:%S}'.format(datetime.datetime.now())
-    input_params = [object._pp, object._fs, object._hh, object._pm, object._dA, object._fU, object._HH, object._df, object._D, object._a, object._M, object._i, object._dx]
+    input_params = [object._pp, object._fs, object._hh, object._pm, object._dA, object._fU, object._HH, object._df, object._D, object._a, object._M, object._G, object._dx]
     output_params = [str_dist, str_dof, str_base, str_phi, str_tria, console_msg]
     with open('data.csv', 'a') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=' ',

@@ -14,7 +14,7 @@ class TestSPC(unittest.TestCase):
     @unpack
     def test_refo(self, vals, data_exp):
         # zip to dict
-        abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'i', 'dx']
+        abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'G', 'dx']
         data_in = dict(zip(abbs, vals))
         # object instance
         object = plenoptisign.SpcLfGeo(data_in)
@@ -34,7 +34,7 @@ class TestSPC(unittest.TestCase):
     @unpack
     def test_tria(self, vals, data_exp):
         # zip to dict
-        abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'i', 'dx']
+        abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'G', 'dx']
         data_in = dict(zip(abbs, vals))
         # object instance
         object = plenoptisign.SpcLfGeo(data_in)

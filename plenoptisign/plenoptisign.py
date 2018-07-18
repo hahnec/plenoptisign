@@ -21,7 +21,8 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import numpy as np
-from .version import __version__
+import sys, getopt
+sys.path.append('..')
 
 class SpcLfGeo(object):
     def __init__(self, data=[]):
@@ -37,7 +38,7 @@ class SpcLfGeo(object):
         self._D = self._fU/float(data["f_num"]) if "f_num" in data else self._fU/2.6846  # entrance pupil diameter of main lens
         self._a = float(data["a"]) if "a" in data else 1.0            # iterative refocusing parameter
         self._M = float(data["M"]) if "M" in data else 13             # 1-D micro image diameter
-        self._i = float(data["i"]) if "i" in data else -6             # viewpoint position
+        self._G = float(data["G"]) if "G" in data else -6             # viewpoint gap
         self._dx = float(data["dx"]) if "dx" in data else 1           # disparity value
 
         # image distance handling
@@ -215,7 +216,7 @@ class SpcLfGeo(object):
 
         return True
 
-    def plt_refo(self, plane_th=.5, ray_th=.5):
+    def plt_refo(self, plane_th=.5, ray_th=.5, fontsize=11):
 
         try:
             import matplotlib.pyplot as plt
@@ -244,12 +245,12 @@ class SpcLfGeo(object):
         # main lens principal planes
         plt.plot((self._fs+self._hh+self._bU, self._fs+self._hh+self._bU), (-self._D/10, self._D/10), linestyle='--', linewidth=plane_th, color='k')
         plt.plot((self._fs+self._hh+self._bU+self._HH, self._fs+self._hh+self._bU+self._HH), (-self._D/10, self._D/10), linestyle='--', linewidth=plane_th, color='k')
-        ax.text(self._fs+self._hh+self._bU+2, self._D/12+1, r'$H_{2U}$', fontsize=10)
-        ax.text(self._fs+self._hh+self._bU+self._HH+2, self._D/12+1, r'$H_{1U}$', fontsize=10)
+        ax.text(self._fs+self._hh+self._bU+2, self._D/12+1, r'$H_{2U}$', fontsize=fontsize)
+        ax.text(self._fs+self._hh+self._bU+self._HH+2, self._D/12+1, r'$H_{1U}$', fontsize=fontsize)
 
         # main lens focal point
         plt.plot((self._fs+self._hh+self._bU+self._HH+self._fU, self._fs+self._hh+self._bU+self._HH+self._fU), (-self._D/100, self._D/100), linestyle='-', linewidth=plane_th, color='k')
-        ax.text(self._fs+self._hh+self._bU+self._HH+self._fU, -self._D/50, r'$F_U$', fontsize=10)
+        ax.text(self._fs+self._hh+self._bU+self._HH+self._fU, -self._D/50, r'$F_U$', fontsize=fontsize)
 
         # micro lens grid
         lens_y = np.arange(-self._sc*self._pm+self._pm/2, self._sc*self._pm+self._pm/2, self._pm)
@@ -277,8 +278,8 @@ class SpcLfGeo(object):
 
         # ray plots
         # chief rays connceting micro and main lens centres
-        plt.plot((0, self._dA), (self._uc[0], 0), linestyle='-', linewidth=ray_th, color='y')
-        plt.plot((0, self._dA), (self._uc[1], 0), linestyle='-', linewidth=ray_th, color='y')
+        plt.plot((self._fs + self._hh, self._dA), (self._s[0], 0), linestyle='-', linewidth=ray_th, color='y')
+        plt.plot((self._fs + self._hh, self._dA), (self._s[1], 0), linestyle='-', linewidth=ray_th, color='y')
 
         # micro lens image side ray
         plt.plot((0, self._fs), (self._u[0], self._s[0]), linestyle='-', linewidth=ray_th, color='b')
@@ -343,40 +344,150 @@ class SpcLfGeo(object):
 
     def tria(self):
 
-        # local variable initialisation
-        mij = np.zeros(2)
-        Uij = np.zeros(2)
-        qij = np.zeros(2)
+        # variable initialisation
+        self._mij = np.zeros(2)
+        self._Uij = np.zeros(2)
+        self._qij = np.zeros(2)
 
         # ray geometry calculation
         j = 1
         s = j * self._pm
         mc = -(s / self._dA)
         uc = -mc * self._fs + s
-        self._u[0] = uc + self._pp * self._i
-        mij[0] = -self._pp * self._i / self._fs
-        mij[1] = (s - self._u[0]) / self._fs
-        Uij[0] = mij[0] * self._bU
-        Uij[1] = mij[1] * self._bU + s
-        qij[0] = (mij[0] * self._fU - Uij[0]) / self._fU
-        qij[1] = (mij[1] * self._fU - Uij[1]) / self._fU
+        self._u[0] = uc + self._pp * self._G
+        self._mij[0] = -self._pp * self._G / self._fs
+        self._mij[1] = (s - self._u[0]) / self._fs
+        self._Uij[0] = self._mij[0] * self._bU
+        self._Uij[1] = self._mij[1] * self._bU + s
+        self._qij[0] = (self._mij[0] * self._fU - self._Uij[0]) / self._fU
+        self._qij[1] = (self._mij[1] * self._fU - self._Uij[1]) / self._fU
 
         # function to solve linear system set via pseudo inverse
         pseudo_inv = lambda X: np.dot(np.transpose(X), np.linalg.inv(np.dot(X, np.transpose(X))))
 
         # locate object side related virtual camera position
-        x_int, self.B = np.dot(pseudo_inv(np.array([[-qij[1], 1], [-qij[0], 1]])), np.array([Uij[1], Uij[0]]))
-        self.phi = np.degrees(np.arctan(qij[0]))
-        ent_pup_pos = self._bU + self._HH + x_int # longitudinal entrance pupil position
+        self._intersect, self.B = np.dot(pseudo_inv(np.array([[-self._qij[1], 1], [-self._qij[0], 1]])),
+                               np.array([self._Uij[1], self._Uij[0]]))
+        self.phi = np.degrees(np.arctan(self._qij[0]))
+        self._ent_pup_pos = self._bU + self._HH + self._intersect # longitudinal entrance pupil position
 
         # estimate baseline at entrance pupil
-        self.B = qij[0] * x_int + Uij[0]
-        bNew = self._bU
-        self._ppNew = (-qij[1] * bNew + self.B) - (-qij[0] * bNew + self.B)
+        self.B = self._qij[0] * self._intersect + self._Uij[0]
+        b_new = self._bU
+        self._pp_new = (-self._qij[1] * b_new + self.B) - (-self._qij[0] * b_new + self.B)
 
         # triangulation
-        dxNew = np.transpose(self._dx) * self._ppNew # crashes if dx=0  and i=0
-        self.Z = self.B * bNew / (dxNew + bNew * -np.tan(np.radians(self.phi)))
-        #self.Z = self.Z + ent_pup_pos
+        dx_new = np.transpose(self._dx) * self._pp_new
+        self.Z = self.B * b_new / (dx_new + b_new * -np.tan(np.radians(self.phi))) if self._dx != 0 and self.phi != 0 else float('inf')
 
         return True
+
+    def plt_tria(self, plane_th=.5, ray_th=.5, fontsize=11):
+
+        try:
+            import matplotlib.pyplot as plt
+        except ImportError:
+            raise ImportError('matplotlib not available')
+
+        # ensure refo method runs in advance
+        self.tria()
+
+        plot_lim = 5000  # set 50 meter as maximum plot distance
+        if self.Z > 0 and self.Z != float('Inf'):
+            large_val = self.Z
+        else:
+            large_val = plot_lim
+
+        xmax = np.round(large_val + large_val / 10) # add 10% of the depth plane distance
+
+        ax = plt.figure().add_subplot(111)
+        plt.xlabel('$z_U$ [mm]'), plt.ylabel('$(u,s)$ [mm]')
+
+        # optical axis
+        plt.plot((0, xmax), (0, 0), linestyle='--', linewidth=plane_th, color='k')
+
+        # main lens principal planes
+        H2 = self._fs + self._hh + self._bU
+        H1 = self._fs + self._hh + self._bU + self._HH
+        plt.plot((H2, H2), (-self._D / 10, self._D / 10), linestyle='--', linewidth=plane_th, color='k')
+        plt.plot((H1, H1), (-self._D / 10, self._D / 10), linestyle='--', linewidth=plane_th, color='k')
+        ax.text(H2 + 2, self._D / 12 + 1, r'$H_{2U}$', fontsize=fontsize)
+        ax.text(H1 + 2, self._D / 12 + 1, r'$H_{1U}$', fontsize=fontsize)
+
+        # main lens focal point
+        plt.plot((H1 + self._fU, H1 + self._fU), (-self._D/100, self._D/100), linestyle='-', linewidth=plane_th, color='k')
+        ax.text(H1 + self._fU, -self._D / 50, r'$F_U$', fontsize=fontsize)
+
+        # micro lens grid
+        lens_y = np.arange(-self._sc * self._pm + self._pm / 2, self._sc * self._pm + self._pm / 2, self._pm)
+        lens_f = np.arange(-self._sc * self._pm, self._sc * self._pm, self._pm)
+        lens_x = (self._fs + self._hh) * np.ones(len(lens_y))
+        plt.plot(lens_x, lens_y, linestyle='', marker='+', linewidth=plane_th, color='k')  # micro lens borders
+        plt.plot(lens_x, lens_f, linestyle='', marker='.', linewidth=plane_th, color='k')  # micro optical axis
+        plt.plot((self._fs, self._fs), (self._sc * self._pm, -self._sc * self._pm), linestyle='-',
+                 linewidth=plane_th, color='k')
+        plt.plot((self._fs + self._hh, self._fs + self._hh), (self._sc * self._pm, -self._sc * self._pm),
+                 linestyle='-', linewidth=plane_th, color='k')
+
+        # sensor plane
+        plt.plot((0, 0), (self._sc * self._pm, -self._sc * self._pm), linestyle='-', linewidth=plane_th, color='k')
+
+        # exit and entrance pupil plane
+        plt.plot((self._dA, self._dA), (-self._D / 10, self._D / 10), linestyle='--', linewidth=plane_th, color='k')
+        plt.plot((self._ent_pup_pos, self._ent_pup_pos), (-self._D / 10, self._D / 10), linestyle='--', linewidth=plane_th, color='k')
+        ax.text(self._dA + 2, self._D / 12 + 1, r"$d_{A'}$", fontsize=fontsize)
+        ax.text(self._ent_pup_pos + 2, self._D / 12 + 1, r"$d_{A''}$", fontsize=fontsize)
+
+        # intersection planes
+        plt.plot((self.Z, self.Z), (self._D / 10, -self._D / 10), linestyle='-', linewidth=plane_th, color='r')
+        ax.text(self.Z + self.Z/100, self._D / 12 + 1, r"$\Delta x="+str(self._dx)+"$", color='r', fontsize=fontsize)
+
+        # ray plots
+
+        # virtual camera 1
+        plt.plot((self._fs + self._hh, H2), (0, self._Uij[0]), linestyle='-', linewidth=ray_th, color='b')
+        plt.plot((self._fs + self._hh, H2), (self._pm, self._Uij[1]), linestyle='-', linewidth=ray_th, color='b')
+
+        plt.plot((H2, H1), (self._Uij[0], self._Uij[0]), linestyle='--', linewidth=ray_th, color='b')
+        plt.plot((H2, H1), (self._Uij[1], self._Uij[1]), linestyle='--', linewidth=ray_th, color='b')
+
+        plt.plot((H1, self._ent_pup_pos), (self._Uij[1], self._qij[1] * self._intersect + self._Uij[1]), linestyle='-', linewidth=ray_th, color='b')
+        plt.plot((H1, self._ent_pup_pos), (self._Uij[0], self._qij[0] * self._intersect + self._Uij[0]), linestyle='--', linewidth=ray_th, color='r')
+
+        plt.plot((H1, self.Z), (self._Uij[1], self._qij[1] * (self.Z + self._intersect) + self._Uij[1]), linestyle='-', linewidth=ray_th, color='b')
+        plt.plot((H1, self.Z), (self._Uij[0], self._qij[0] * (self.Z + self._intersect) + self._Uij[0]), linestyle='--',linewidth=ray_th, color='r')
+        plt.plot((self._ent_pup_pos), (self._qij[0] * self._intersect + self._Uij[0]), 'o', color='r', linewidth=.2)
+
+        #virtual camera 2
+        Uij_y = ((self._pm / self._dA) * H2 - self._pm)
+        plt.plot((self._fs + self._hh, H2), (-self._pm, Uij_y), linestyle='-', linewidth=ray_th, color='y')
+
+        plt.plot((H2, H1), (Uij_y, Uij_y), linestyle='--', linewidth=ray_th, color='y')
+        plt.plot((H1, self.Z), (Uij_y, self._qij[0] * (self.Z + self._intersect) + self._Uij[0]), linestyle='-', linewidth=ray_th, color='y')
+        plt.plot((H1, self._ent_pup_pos), (Uij_y, 0), linestyle='-', linewidth=ray_th, color='y')
+        plt.plot((self._ent_pup_pos), (0), 'o', color='r', linewidth=.2)
+        plt.plot((self._ent_pup_pos, self.Z), (0, 0), linestyle='--', linewidth=ray_th, color='r')
+
+        # baseline
+        ax.text(self._ent_pup_pos-100, self._Uij[0]+self._Uij[0]/10, r"$B_{"+str(self._G)+"}$", color='r', fontsize=fontsize)
+
+        plt.show()
+
+        return True
+
+def main():
+
+    # construct object
+    object = SpcLfGeo()
+
+    # compute light field geometry
+    object.refo()
+    object.tria()
+
+    return True
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except Exception as e:
+        print(e)
