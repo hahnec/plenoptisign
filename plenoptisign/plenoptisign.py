@@ -378,7 +378,7 @@ class SpcLfGeo(object):
 
         # triangulation
         dx_new = np.transpose(self._dx) * self._pp_new
-        self.Z = self.B * b_new / (dx_new + b_new * -np.tan(np.radians(self.phi))) if self._dx != 0 and self.phi != 0 else float('inf')
+        self.Z = self.B * b_new / (dx_new + b_new * -np.tan(np.radians(self.phi))) if self._dx != 0 or self.phi != 0 else float('inf')
 
         return True
 
