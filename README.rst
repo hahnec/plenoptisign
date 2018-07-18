@@ -9,13 +9,11 @@ With this python module, a pair of lightfield rays is treated as a system of lin
 Usage instructions
 ===================
 
-Installation: download and install package by running
-``$ sudo python3 setup.py install`` from the command line.
+Installation: download and install package from the command line with ``$ sudo python3 setup.py install``.
 
-Running: ``$ plenoptisign``
+Run program: type and enter ``$ plenoptisign`` in your command line tool.
 
-Unit testing: 
-``$ python3 plenoptisign/tests/plenoptisign_unittest.py -v``
+Unit testing: ``$ python3 plenoptisign/tests/plenoptisign_unittest.py -v``
 
 Further information
 ===================
