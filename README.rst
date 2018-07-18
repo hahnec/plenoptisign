@@ -12,7 +12,9 @@ Usage instructions
 Installation: download and install package by running
 ``$ sudo python3 setup.py install`` from the command line.
 
-Testing: 
+Running: ``$ plenoptisign``
+
+Unit testing: 
 ``$ python3 plenoptisign/tests/plenoptisign_unittest.py -v``
 
 Further information
