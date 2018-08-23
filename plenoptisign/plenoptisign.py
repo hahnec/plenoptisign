@@ -201,7 +201,20 @@ def refo(self):
 def tria(self):
     ''' computes the distance from disparity just as baseline and virtual camera orientation of a standard plenoptic camera '''
 
+    # image distance handling
+    if self._df == 'Inf':
+        self._bU = self._fU                       # image distance at focal plane
+    elif self._df <= self._fU:
+        self._bU = float('Inf')                   # image distance at infinity
+    elif self._df > self._fU:
+        self._bU = self._fU
+        self._aU = self._df - self._fU - self._HH
+        while self._bU != (1/self._fU-1/self._aU)**-1:
+            self._bU = (1/self._fU-1/self._aU)**-1    # calculate paraxial image distance
+            self._aU = self._df - self._bU - self._HH
+
     # variable initialisation
+    self._u = np.zeros(2)
     self._mij = np.zeros(2)
     self._Uij = np.zeros(2)
     self._qij = np.zeros(2)

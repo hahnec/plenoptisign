@@ -1,6 +1,8 @@
 import unittest
 from ddt import ddt, data, unpack
-import plenoptisign
+import sys, os.path
+sys.path.append(os.path.abspath('../..'))
+from plenoptisign import SpcLfGeo
 
 @ddt
 class TestSPC(unittest.TestCase):
@@ -17,7 +19,7 @@ class TestSPC(unittest.TestCase):
         abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'G', 'dx']
         data_in = dict(zip(abbs, vals))
         # object instance
-        object = plenoptisign.SpcLfGeo(data_in)
+        object = SpcLfGeo(data_in)
         # refocusing estimation
         object.refo()
         # data readout
@@ -37,7 +39,7 @@ class TestSPC(unittest.TestCase):
         abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'G', 'dx']
         data_in = dict(zip(abbs, vals))
         # object instance
-        object = plenoptisign.SpcLfGeo(data_in)
+        object = SpcLfGeo(data_in)
         # triangulation estimation
         object.tria()
         # data readout
