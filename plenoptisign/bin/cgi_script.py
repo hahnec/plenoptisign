@@ -21,9 +21,9 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import cgi, cgitb
-import sys, csv, datetime
-sys.path.append("..")
-import plenoptisign
+import sys, csv, datetime, os.path
+sys.path.append(os.path.abspath('../..'))
+from plenoptisign import SpcLfGeo, __version__
 
 def cgi_read():
 
@@ -44,7 +44,7 @@ def main():
     data = cgi_read()
 
     # construct object
-    object = plenoptisign.SpcLfGeo(data)
+    object = SpcLfGeo(data)
 
     # compute light field geometry
     ret_refo = object.refo()

@@ -20,13 +20,13 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-import sys, getopt
-sys.path.append('..')
-from plenoptisign import plenoptisign
+import sys, getopt, os.path
+sys.path.append(os.path.abspath('../..'))
+from plenoptisign import SpcLfGeo, __version__
 
 def usage():
 
-    print("\nSPC estimator " + plenoptisign.__version__ + " by Christopher Hahne")
+    print("\nSPC estimator " + __version__ + " by Christopher Hahne")
     print("Usage: geo_spc <options>\n")
     print("Options:")
     print("-r, --refo               Refocusing results only flag")
@@ -103,7 +103,7 @@ def main():
     data = cmd_read()
 
     # construct object
-    object = plenoptisign.SpcLfGeo(data)
+    object = SpcLfGeo(data)
 
     # compute light field geometry
     ret_refo = object.refo() if refo_opt else False

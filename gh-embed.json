@@ -6,6 +6,11 @@
  			"path": "/plenoptisign/plenoptisign.py"
  		},
       {
+ 			"type": "python",
+ 			"label": "plenoptiplot.py",
+ 			"path": "/plenoptisign/plenoptiplot.py"
+ 		},
+      {
 			"type": "python",
 			"label": "cgi_script.py",
 			"path": "/plenoptisign/bin/cgi_script.py"

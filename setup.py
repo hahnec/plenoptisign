@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 from setuptools import setup
-import plenoptisign
-
-exec(open('plenoptisign/version.py').read())
+from plenoptisign import __version__
 
 setup(name='plenoptisign',
       version=__version__,
