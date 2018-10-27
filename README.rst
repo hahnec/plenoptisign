@@ -11,17 +11,13 @@ Usage instructions
 
 Use the package from the command line tool by
 
-* downlading the source using 
-``$ git clone https://github.com/hahnec/plenoptisign.git``
+* downlading the source using ``$ git clone https://github.com/hahnec/plenoptisign.git``
 
-* installing with
-``$ sudo python setup.py install``
+* installing with ``$ sudo python setup.py install``
 
-* running the program
-``$ plenoptisign``
+* running the program ``$ plenoptisign``
 
-* unit testing (optional)
-``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
+* unit testing (optional) ``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
 
 Further information
 ===================
