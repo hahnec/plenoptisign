@@ -9,15 +9,19 @@ With this python module, a pair of lightfield rays is treated as a system of lin
 Usage instructions
 ===================
 
-Use the package from the command line tool with:
+Use the package from the command line tool by
 
-Download: ``$ git clone https://github.com/hahnec/plenoptisign.git``
+downlading the source using 
+``$ git clone https://github.com/hahnec/plenoptisign.git``
 
-Installation: ``$ sudo python setup.py install``
+installing with
+``$ sudo python setup.py install``
 
-Run program: ``$ plenoptisign``
+running the program
+``$ plenoptisign``
 
-Unit testing: ``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
+and optional unit testing
+``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
 
 Further information
 ===================
