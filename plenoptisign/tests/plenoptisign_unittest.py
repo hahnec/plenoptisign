@@ -1,7 +1,5 @@
 import unittest
 from ddt import ddt, data, unpack
-import sys, os.path
-sys.path.append(os.path.abspath('../..'))
 from plenoptisign import SpcLfGeo
 
 @ddt
