@@ -18,5 +18,7 @@ class SpcLfGeo(object):
         self._dx = float(data["dx"]) if "dx" in data else 1           # disparity value
         
     # load methods and variables
-    from .plenoptisign import refo, tria
-    from .plenoptiplot import plt_refo, plt_refo
+    from .refo import refo
+    from .tria import tria
+    from .plt_refo import plt_refo
+    from .plt_tria import plt_tria
