@@ -20,8 +20,7 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-import sys, getopt, os.path
-sys.path.append(os.path.abspath('../..'))
+import sys, getopt
 from plenoptisign import SpcLfGeo, __version__
 
 def usage():
