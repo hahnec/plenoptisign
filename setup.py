@@ -15,6 +15,6 @@ setup(name='plenoptisign',
           'console_scripts': ['plenoptisign=plenoptisign.bin.cmd_script:main'],
       },
       packages=['plenoptisign'],
-      install_requires=['numpy', 'matplotlib'],
+      install_requires=['numpy', 'matplotlib', 'ddt', 'datetime'],
       include_package_data=True,
       zip_safe=False)
