@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from plenoptisign import __version__
 
 setup(name='plenoptisign',
@@ -14,7 +14,7 @@ setup(name='plenoptisign',
       entry_points = {
           'console_scripts': ['plenoptisign=plenoptisign.bin.cmd_script:main'],
       },
-      packages=['plenoptisign'],
+      packages=find_packages(),
       install_requires=['numpy', 'matplotlib', 'ddt', 'datetime'],
       include_package_data=True,
       zip_safe=False)
