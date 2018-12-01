@@ -21,7 +21,7 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import sys, getopt
-from plenoptisign import SpcLfGeo, __version__
+from plenoptisign import MainClass, __version__
 
 def usage():
 
@@ -40,7 +40,7 @@ def parse_options(argv):
     # default settings
     refo_opt = True
     tria_opt = True
-    plot_opt = False
+    plot_opt = True
 
     try:
         opts, args = getopt.getopt(argv, ":hrtp", ["help", "refo", "tria", "plot"])
@@ -102,7 +102,7 @@ def main():
     data = cmd_read()
 
     # construct object
-    object = SpcLfGeo(data)
+    object = MainClass(data)
 
     # compute light field geometry
     ret_refo = object.refo() if refo_opt else False
@@ -137,6 +137,9 @@ def main():
             print("%s \n" % msg)
     if plot_opt:
         object.plt_refo(plane_th=.5, ray_th=.5)
+        object.plt_3d(type='refo')
+        object.plt_tria(plane_th=.5, ray_th=.5)
+        object.plt_3d(type='tria')
 
 
 if __name__ == "__main__":
