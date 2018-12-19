@@ -43,7 +43,7 @@ class Mixin:
 
         xmax = np.round(large_val + large_val / 10) # add 10% of the depth plane distance
 
-        ax = plt.figure().add_subplot(111)
+        ax = plt.figure(figsize=(9, 5)).add_subplot(111)
         plt.title('Cross-sectional triangulation plot')
         plt.xlabel('$z_U$ [mm]'), plt.ylabel('$(u,s)$ [mm]')
 

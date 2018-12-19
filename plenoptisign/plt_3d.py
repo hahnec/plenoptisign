@@ -56,7 +56,7 @@ class Mixin:
         max_dist += max_dist/10
 
         # start plotting
-        plt3d = Axes3D(plt.figure())
+        plt3d = Axes3D(plt.figure(figsize=(9, 5)))
         plt3d.view_init(elev=30, azim=-120)
         plt3d.set_xlabel('z [mm]')
         plt3d.set_ylabel('x [mm]')

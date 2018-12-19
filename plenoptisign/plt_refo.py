@@ -35,7 +35,7 @@ class Mixin:
         # ensure refo method runs in advance
         self.refo()
 
-        plot_lim = 5000  # set 50 meter as maximum plot distance
+        plot_lim = 5000  # set 5 meter as maximum plot distance
         if self.d_p > 0 and self.d_p != float('Inf'):
             large_val = self.d_p
         elif self.d_m > 0 and self.d_m < plot_lim:
@@ -45,7 +45,7 @@ class Mixin:
 
         xmax = np.round(large_val+large_val/10)
 
-        ax = plt.figure().add_subplot(111)
+        ax = plt.figure(figsize=(9, 5)).add_subplot(111)
         plt.title('Cross-sectional refocusing plot')
         plt.xlabel('$z_U$ [mm]'), plt.ylabel('$(u,s)$ [mm]')
 
