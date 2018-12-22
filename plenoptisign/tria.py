@@ -39,11 +39,8 @@ class Mixin:
                 self._bU = (1/self._fU-1/self._aU)**-1    # calculate paraxial image distance
                 self._aU = self._df - self._bU - self._HH
 
-        # variable initialisation
-        self._u = np.zeros(2)
-        self._mij = np.zeros(2)
-        self._Uij = np.zeros(2)
-        self._qij = np.zeros(2)
+        # variable initialization
+        self._u, self._mij, self._Uij, self._qij = [np.zeros(2) for _ in range(4)]
 
         # ray geometry calculation
         j = 1

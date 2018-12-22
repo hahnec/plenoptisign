@@ -65,19 +65,7 @@ class Mixin:
         self.console_msg = []
 
         # local variable initialization
-        j = np.zeros(2);
-        i = np.zeros(2)
-        mc = np.zeros(2)
-        mij = np.zeros(2);
-        qij = np.zeros(2)
-        mU = np.zeros(2);
-        mL = np.zeros(2)
-        mijU = np.zeros(2);
-        mijL = np.zeros(2)
-        FijU = np.zeros(2);
-        FijL = np.zeros(2)
-        qijU = np.zeros(2);
-        qijL = np.zeros(2)
+        j, i, mc, mij, qij, mU, mL, mijU, mijL, FijL, FijU, qijU, qijL = [np.zeros(2) for _ in range(13)]
 
         # (s,u) coordinates for the intersecting rays
         smax = 2*self._M+1
