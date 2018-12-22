@@ -66,15 +66,13 @@ class Mixin:
         # plot camera axis and sensor
         plt3d.scatter(0, 0, 0, s=20, color='k')
         plt3d.plot([0, max_dist], [0, 0], [0, 0], 'k--')
-        yy, xx = np.meshgrid(np.arange(0, sen_dims[0], self._pm)-sen_dims[0]/2,
-                             np.arange(0, sen_dims[1], self._pm)-sen_dims[1]/2)
+        yy, xx = np.meshgrid((-sen_dims[0]/2, sen_dims[0]/2), (-sen_dims[1]/2, sen_dims[1]/2))
         plt3d.plot_surface(-self._bU*np.ones(xx.shape), xx, yy, color='k', alpha=0.8)
 
         # plot the depth planes
         for i in range(len(z)):
             if z[i] != float('inf'):
-                magni_pm = self._pm/self._bU*z[i]
-                yy, xx = np.meshgrid(np.arange(0, y[i], magni_pm)-y[i]/2, np.arange(0, x[i], magni_pm)-x[i]/2)
+                yy, xx = np.meshgrid((-y[i]/2, y[i]/2), (-x[i]/2, x[i]/2))
                 zz = z[i]*np.ones(xx.shape)
                 plt3d.plot_surface(zz, xx, yy, color='r', alpha=0.5) # depth plane
                 plt3d.scatter([z[i]], [0], [0], s=20, color='r') # plane-axis intersection
