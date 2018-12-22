@@ -25,7 +25,7 @@ import numpy as np
 class Mixin:
 
     def tria(self):
-        ''' computes the distance from disparity just as baseline and virtual camera orientation of a standard plenoptic camera '''
+        ''' computes depth plane distance, virtual camera orientation and baseline of a standard plenoptic camera '''
 
         # image distance handling
         if self._df == 'Inf':
@@ -63,14 +63,18 @@ class Mixin:
                                             np.array([self._Uij[1], self._Uij[0]]))
         # orientation of virtual camera
         self.phi = np.degrees(np.arctan(self._qij[0]))
-        self._ent_pup_pos = self._bU + self._HH + self._intersect # longitudinal entrance pupil position
+        
+        # longitudinal entrance pupil position
+        self._ent_pup_pos = self._bU + self._HH + self._intersect
 
-        # estimate baseline at entrance pupil
-        self.B = self._qij[0] * self._intersect + self._Uij[0]
-        b_new = self._bU
-        self._pp_new = (-self._qij[1] * b_new + self.B) - (-self._qij[0] * b_new + self.B)
+        # validate baseline approach (for debug purposes)
+        B_alt = self._qij[0] * self._intersect + self._Uij[0]
+        if not (np.equal(np.round(self.B), np.round(B_alt))):
+            raise AssertionError('Baseline validation not successful.')
 
         # triangulation
+        b_new = self._bU
+        self._pp_new = (-self._qij[1] * b_new + self.B) - (-self._qij[0] * b_new + self.B)
         dx_new = np.transpose(self._dx) * self._pp_new
         self.Z = self.B * b_new / (dx_new + b_new * -np.tan(np.radians(self.phi))) if self._dx != 0 or self.phi != 0 else float('inf')
 
