@@ -112,12 +112,12 @@ class Mixin:
             qijL[k] = (FijL[k]-self._UijL[k])/self._fU
 
         # function solver for system of linear equations
-        intersect_fun = lambda A, b: np.dot(np.linalg.inv(A), b)
+        solve_sle = lambda A, b: np.dot(np.linalg.inv(A), b)
 
         # ray intersections behind image sensor
-        b_new = self._bU-intersect_fun(np.array([[-mij[0], 1], [-mij[1], 1]]), np.array([self._s[0], self._s[1]]))[0]
-        b_new_m = self._bU-intersect_fun(np.array([[-mijL[0], 1], [-mijU[1], 1]]), np.array([self._sL[0], self._sU[1]]))[0]
-        b_new_p = self._bU-intersect_fun(np.array([[-mijU[0], 1], [-mijL[1], 1]]), np.array([self._sU[0], self._sL[1]]))[0]
+        b_new = self._bU-solve_sle(np.array([[-mij[0], 1], [-mij[1], 1]]), np.array([self._s[0], self._s[1]]))[0]
+        b_new_m = self._bU-solve_sle(np.array([[-mijL[0], 1], [-mijU[1], 1]]), np.array([self._sL[0], self._sU[1]]))[0]
+        b_new_p = self._bU-solve_sle(np.array([[-mijU[0], 1], [-mijL[1], 1]]), np.array([self._sU[0], self._sL[1]]))[0]
 
         # check if refocused object plane not at infinity
         if (self._fU <= self._bU and self._a >= 0) and b_new > self._fU:
@@ -127,12 +127,12 @@ class Mixin:
             d_new_m = (1/self._fU-1/b_new_m)**-1+self._bU+self._HH
 
             # solve for ray intersections in object space to obtain distances and DoF
-            self.d = intersect_fun(np.array([[-qij[0], 1], [-qij[1], 1]]), np.array([self._Uij[0], self._Uij[1]]))[
-                         0]+self._bU+self._HH
-            self.d_p = intersect_fun(np.array([[-qijU[0], 1], [-qijL[1], 1]]), np.array([self._UijU[0], self._UijL[1]]))[
-                           0]+self._bU+self._HH
-            self.d_m = intersect_fun(np.array([[-qijL[0], 1], [-qijU[1], 1]]), np.array([self._UijL[0], self._UijU[1]]))[
-                           0]+self._bU+self._HH
+            self.d = solve_sle(np.array([[-qij[0], 1], [-qij[1], 1]]), np.array([self._Uij[0], self._Uij[1]]))[0]\
+                                +self._bU+self._HH
+            self.d_p = solve_sle(np.array([[-qijU[0], 1], [-qijL[1], 1]]), np.array([self._UijU[0], self._UijL[1]]))[0]\
+                                +self._bU+self._HH
+            self.d_m = solve_sle(np.array([[-qijL[0], 1], [-qijU[1], 1]]), np.array([self._UijL[0], self._UijU[1]]))[0]\
+                                +self._bU+self._HH
             self.dof = self.d_p-self.d_m
 
             # check if far depth of field border at infinity
@@ -152,7 +152,7 @@ class Mixin:
                 # d_new_m = float('Inf')
                 self.dof = float('Inf')
             else:
-                self.d_m = intersect_fun(np.array([[-qijL[0], 1], [-qijU[1], 1]]),
+                self.d_m = solve_sle(np.array([[-qijL[0], 1], [-qijU[1], 1]]),
                                          np.array([self._UijL[0], self._UijU[1]]))[0]+self._bU+self._HH
                 d_new_m = (1/self._fU-1/b_new_m)**-1+self._bU+self._HH
                 self.dof = self.d_p-self.d_m
@@ -171,7 +171,7 @@ class Mixin:
                 d_new_m = float('Inf')
                 self.dof = float('Inf')
             else:
-                self.d_m = intersect_fun(np.array([[-qijL[0], 1], [-qijU[1], 1]]),
+                self.d_m = solve_sle(np.array([[-qijL[0], 1], [-qijU[1], 1]]),
                                          np.array([self._UijL[0], self._UijU[1]]))[0]+self._bU+self._HH
                 d_new_m = (1/self._fU-1/b_new_m)**-1+self._bU+self._HH
                 self.dof = self.d_p-self.d_m
@@ -185,7 +185,7 @@ class Mixin:
                 d_new_m = float('Inf')
                 self.dof = float('Inf')
             else:
-                self.d_p = intersect_fun(np.array([[-qijU[0], 1], [-qijL[1], 1]]),
+                self.d_p = solve_sle(np.array([[-qijU[0], 1], [-qijL[1], 1]]),
                                          np.array([self._UijU[0], self._UijL[1]]))[0]+self._bU+self._HH
                 d_new_p = (1/self._fU-1/b_new_p)**-1+self._bU+self._HH
 

@@ -56,11 +56,12 @@ class Mixin:
         self._qij[1] = (self._mij[1] * self._fU - self._Uij[1]) / self._fU
 
         # function solver for system of linear equations
-        intersect_fun = lambda A, b: np.dot(np.linalg.inv(A), b)
+        solve_sle = lambda A, b: np.dot(np.linalg.inv(A), b)
 
         # locate object side related virtual camera position
-        self._intersect, self.B = intersect_fun(np.array([[-self._qij[1], 1], [-self._qij[0], 1]]),
-                                                np.array([self._Uij[1], self._Uij[0]]))
+        self._intersect, self.B = solve_sle(np.array([[-self._qij[1], 1], [-self._qij[0], 1]]),
+                                            np.array([self._Uij[1], self._Uij[0]]))
+        # orientation of virtual camera
         self.phi = np.degrees(np.arctan(self._qij[0]))
         self._ent_pup_pos = self._bU + self._HH + self._intersect # longitudinal entrance pupil position
 
