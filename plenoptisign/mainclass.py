@@ -4,7 +4,7 @@ from . import plt_refo
 from . import plt_tria
 from . import plt_3d
 
-class MainClass(refo.Mixin, tria.Mixin, plt_refo.Mixin, plt_tria.Mixin, plt_3d.Mixin):
+class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.Mixin):
 
     def __init__(self, data=[]):
         # input variables from data dictionary (set default values to prevent errors)
