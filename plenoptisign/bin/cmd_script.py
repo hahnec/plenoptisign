@@ -25,8 +25,8 @@ from plenoptisign import MainClass, __version__
 
 def usage():
 
-    print("\nSPC estimator " + __version__ + " by Christopher Hahne")
-    print("Usage: geo_spc <options>\n")
+    print("\nplenoptisign v" + __version__ + " is a light field geometry estimator written by C. Hahne")
+    print("Usage: plenoptisign <options>\n")
     print("Options:")
     print("-r, --refo               Refocusing results only flag")
     print("-t, --tria               Triangulation results only flag")
