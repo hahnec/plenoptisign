@@ -21,6 +21,7 @@ Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import numpy as np
+from plenoptisign.solver import solve_sle
 
 class Mixin:
 
@@ -111,9 +112,6 @@ class Mixin:
             qijU[k] = (FijU[k]-self._UijU[k])/self._fU
             qijL[k] = (FijL[k]-self._UijL[k])/self._fU
 
-        # function solver for system of linear equations
-        solve_sle = lambda A, b: np.dot(np.linalg.inv(A), b)
-
         # ray intersections behind image sensor
         b_new = self._bU-solve_sle(np.array([[-mij[0], 1], [-mij[1], 1]]), np.array([self._s[0], self._s[1]]))[0]
         b_new_m = self._bU-solve_sle(np.array([[-mijL[0], 1], [-mijU[1], 1]]), np.array([self._sL[0], self._sU[1]]))[0]
@@ -172,7 +170,7 @@ class Mixin:
                 self.dof = float('Inf')
             else:
                 self.d_m = solve_sle(np.array([[-qijL[0], 1], [-qijU[1], 1]]),
-                                         np.array([self._UijL[0], self._UijU[1]]))[0]+self._bU+self._HH
+                                     np.array([self._UijL[0], self._UijU[1]]))[0]+self._bU+self._HH
                 d_new_m = (1/self._fU-1/b_new_m)**-1+self._bU+self._HH
                 self.dof = self.d_p-self.d_m
             # check if farther depth of field border at infinity
@@ -186,7 +184,7 @@ class Mixin:
                 self.dof = float('Inf')
             else:
                 self.d_p = solve_sle(np.array([[-qijU[0], 1], [-qijL[1], 1]]),
-                                         np.array([self._UijU[0], self._UijL[1]]))[0]+self._bU+self._HH
+                                     np.array([self._UijU[0], self._UijL[1]]))[0]+self._bU+self._HH
                 d_new_p = (1/self._fU-1/b_new_p)**-1+self._bU+self._HH
 
         # comparison of image and object side approach (for debug purposes)

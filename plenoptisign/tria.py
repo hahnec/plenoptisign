@@ -21,6 +21,7 @@ Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import numpy as np
+from plenoptisign.solver import solve_sle
 
 class Mixin:
 
@@ -54,9 +55,6 @@ class Mixin:
         self._Uij[1] = self._mij[1] * self._bU + s
         self._qij[0] = (self._mij[0] * self._fU - self._Uij[0]) / self._fU
         self._qij[1] = (self._mij[1] * self._fU - self._Uij[1]) / self._fU
-
-        # function solver for system of linear equations
-        solve_sle = lambda A, b: np.dot(np.linalg.inv(A), b)
 
         # locate object side related virtual camera position
         self._intersect, self.B = solve_sle(np.array([[-self._qij[1], 1], [-self._qij[0], 1]]),
