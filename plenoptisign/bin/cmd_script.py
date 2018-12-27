@@ -40,7 +40,7 @@ def parse_options(argv):
     # default settings
     refo_opt = True
     tria_opt = True
-    plot_opt = True
+    plot_opt = False
 
     try:
         opts, args = getopt.getopt(argv, ":hrtp", ["help", "refo", "tria", "plot"])
