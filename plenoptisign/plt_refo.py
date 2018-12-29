@@ -85,6 +85,9 @@ class Mixin:
         plt.plot((self.d, self.d), (self._D/10, -self._D/10), linestyle='-', linewidth=plane_th, color='c')
         plt.plot((self.d_p, self.d_p), (self._D/10, -self._D/10), linestyle='-', linewidth=plane_th, color='k')
         plt.plot((self.d_m, self.d_m), (self._D/10, -self._D/10), linestyle='-', linewidth=plane_th, color='r')
+        ax.text(self.d+5, self._D/12+1, r'$d_a$', fontsize=fontsize, color='c')
+        ax.text(self.d_p+5, self._D/12+1, r'$d_{a+}$', fontsize=fontsize, color='k')
+        ax.text(self.d_m+5, self._D/12+1, r'$d_{a-}$', fontsize=fontsize, color='r')
 
         # ray plots
         # chief rays connceting micro and main lens centres
