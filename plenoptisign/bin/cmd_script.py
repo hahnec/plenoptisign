@@ -123,7 +123,7 @@ def main():
         print("far DoF border: %s\n" % str_d_p)
     if ret_tria:
         print("\nbaseline B: %s" % str_base)
-        print("tilt angle: %s" % str_phi)
+        print("tilt angle Phi: %s" % str_phi)
         print("tria. distance Z: %s\n" % str_tria)
     if console_msg:
         print("\nConsole output: \n")
