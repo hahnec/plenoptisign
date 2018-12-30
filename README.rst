@@ -26,7 +26,7 @@ Further information
 
 * Demo: http://www.plenoptic.info/pages/coding.html
 
-Tested on macOS 10.13.3 /w Python 2.7 & Python 3.6
+Tested on macOS 10.14.2 and Windows 10 w/ Python 2.7 & Python 3.6
 
 Credits
 =======
