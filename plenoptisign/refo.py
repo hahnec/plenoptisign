@@ -21,7 +21,7 @@ Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import numpy as np
-from plenoptisign.solver import solve_sle
+from .solver import solve_sle
 
 class Mixin:
 
