@@ -21,7 +21,7 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import sys, getopt
-from plenoptisign import MainClass, __version__
+from plenoptisign import MainClass, VALS, ABBS, EXPR, __version__
 
 def usage():
 
@@ -68,17 +68,11 @@ def parse_options(argv):
 def cmd_read():
 
     py3 = sys.version_info[0] > 2  # boolean for Python version > 2
-    vals = [.009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'inf', 2.6846, 1.0, 13, -6, 1]   # default values
-    abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'i', 'dx']
-    expr = ['pixel pitch [mm]', 'micro lens focal length [mm]', 'micro lens principal plane distance [mm]',
-            'micro lens pitch [mm]', 'exit pupil distance [mm]', 'main lens focal length [mm]',
-            'main lens principal distance [mm]', 'main lens focus distance [mm]', 'F#', 'refocus parameter',
-            'micro image resolution [px]', 'virtual camera gap', 'disparity [px]']
-    data = dict(zip(abbs, vals))
-    name_dict = dict(zip(abbs, expr))
+    data = dict(zip(ABBS, VALS))
+    name_dict = dict(zip(ABBS, EXPR))
 
     # read input from command line and put into dict
-    for key in abbs:
+    for key in ABBS:
         if py3:
             val_input = input(str(name_dict[key]) + ": ")
         else:
@@ -136,10 +130,12 @@ def main():
         for msg in console_msg:
             print("%s \n" % msg)
     if plot_opt:
-        object.plt_refo(plane_th=.5, ray_th=.5)
-        object.plt_3d(type='refo')
-        object.plt_tria(plane_th=.5, ray_th=.5)
-        object.plt_3d(type='tria')
+        if ret_refo:
+            object.plt_refo(plane_th=.5, ray_th=.5)
+            object.plt_3d(type='refo')
+        if ret_tria:
+            object.plt_tria(plane_th=.5, ray_th=.5)
+            object.plt_3d(type='tria')
 
 
 if __name__ == "__main__":
