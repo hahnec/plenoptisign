@@ -52,10 +52,10 @@ class Mixin:
             raise e
 
         # determine maximum plot distance
-        max_dist = max(z) if max(z) != float('inf') else self.non_inf_max(z)
-        max_dist += max_dist/10
+        z_max= max(z) if max(z) != float('inf') else self.non_inf_max(z)
+        max_dist = z_max + z_max/10
 
-        # start plotting
+        # start plottingy
         plt3d = Axes3D(plt.figure(figsize=(9, 5)))
         plt3d.view_init(elev=30, azim=-120)
         plt3d.set_xlabel('z [mm]')
@@ -67,20 +67,28 @@ class Mixin:
         plt3d.scatter(0, 0, 0, s=20, color='k')
         plt3d.plot([0, max_dist], [0, 0], [0, 0], 'k--')
         yy, xx = np.meshgrid((-sen_dims[0]/2, sen_dims[0]/2), (-sen_dims[1]/2, sen_dims[1]/2))
-        plt3d.plot_surface(-self._bU*np.ones(xx.shape), xx, yy, color='k', alpha=0.8)
+        plt3d.plot_surface(-self._bU*np.ones(xx.shape), xx, yy, color='k', alpha=.8)
 
         # plot the depth planes
         for i in range(len(z)):
             if z[i] != float('inf'):
                 yy, xx = np.meshgrid((-y[i]/2, y[i]/2), (-x[i]/2, x[i]/2))
                 zz = z[i]*np.ones(xx.shape)
-                plt3d.plot_surface(zz, xx, yy, color='r', alpha=0.5) # depth plane
+                plt3d.plot_surface(zz, xx, yy, color='r', alpha=.5) # depth plane
                 plt3d.scatter([z[i]], [0], [0], s=20, color='r') # plane-axis intersection
 
                 # plot marker
                 num_str = str(range(*iter_range)[i])
                 label_str = "$d_"+num_str+"$" if type == 'refo' else "$Z_{("+str(self._G)+', '+num_str+")}$"
                 plt3d.text(z[i], x[i]/2, y[i]/2, s=label_str, fontsize=18, family='sans-serif')
+
+        # plot field of view lines
+        x_hw = self.non_inf_max(x)/2
+        y_hw = self.non_inf_max(y)/2
+        plt3d.plot([-self._bU, z_max], [-sen_dims[1]/2, x_hw], [-sen_dims[0]/2, y_hw], 'r-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self._bU, z_max], [-sen_dims[1]/2, x_hw], [sen_dims[0]/2, -y_hw], 'r-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self._bU, z_max], [sen_dims[1]/2, -x_hw], [-sen_dims[0]/2, y_hw], 'r-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self._bU, z_max], [sen_dims[1]/2, -x_hw], [sen_dims[0]/2, -y_hw], 'r-.', alpha=.8, linewidth=.5)
 
         plt.show()
 
