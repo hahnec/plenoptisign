@@ -1,6 +1,6 @@
 import unittest
 from ddt import ddt, data, unpack
-from plenoptisign import MainClass
+from plenoptisign import MainClass, ABBS
 
 @ddt
 class TestSPC(unittest.TestCase):
@@ -14,8 +14,7 @@ class TestSPC(unittest.TestCase):
     @unpack
     def test_refo(self, vals, data_exp):
         # zip to dict
-        abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'G', 'dx']
-        data_in = dict(zip(abbs, vals))
+        data_in = dict(zip(ABBS, vals))
         # object instance
         object = MainClass(data_in)
         # refocusing estimation
@@ -34,8 +33,7 @@ class TestSPC(unittest.TestCase):
     @unpack
     def test_tria(self, vals, data_exp):
         # zip to dict
-        abbs = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'G', 'dx']
-        data_in = dict(zip(abbs, vals))
+        data_in = dict(zip(ABBS, vals))
         # object instance
         object = MainClass(data_in)
         # triangulation estimation
