@@ -3,7 +3,7 @@
 __author__ = "Christopher Hahne"
 __email__ = "inbox@christopherhahne.de"
 __license__ = """
-Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
+Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,7 +23,8 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 import cgi, cgitb
 import sys, csv, datetime, os.path
 sys.path.append(os.path.abspath('../..'))
-from plenoptisign import MainClass
+from plenoptisign.mainclass import MainClass
+from plenoptisign import DEC_P
 
 def cgi_read():
 
@@ -38,41 +39,39 @@ def cgi_read():
     return data
 
 
-def main():
+def cgi_main():
 
     # read input from cgi field storage
     data = cgi_read()
 
     # construct object
-    object = MainClass(data)
+    obj = MainClass(data)
 
     # compute light field geometry
-    ret_refo = object.refo()
-    ret_tria = object.tria()
+    ret_refo = obj.refo()
+    ret_tria = obj.tria()
     if not (ret_refo or ret_tria):
         raise AssertionError('Calculation failed.')
 
     # convert distances to string while adding metric unit under consideration of infinity
-    dec_place = 4  # number of decimals
-    str_dist = str(round(object.d, dec_place)) + ' mm' if not "inf" in str(object.d) else "infinity"
-    str_d_p = str(round(object.d_p, dec_place)) + ' mm' if not "inf" in str(object.d_p) else "infinity"
-    str_d_m = str(round(object.d_m, dec_place)) + ' mm' if not "inf" in str(object.d_m) else "infinity"
-    str_dof = str(round(object.dof, dec_place)) + ' mm' if not "inf" in str(object.dof) else "infinity"
-    str_base = str(round(object.B, dec_place)) + ' mm' if not "inf" in str(object.B) else "infinity"
-    str_phi = str(round(object.phi, dec_place)) + ' deg'
-    str_tria = str(round(object.Z, dec_place)) + ' mm' if not "inf" in str(object.Z) else "infinity"
-    console_msg = object.console_msg
+    str_dist = str(round(obj.d, DEC_P)) + ' mm' if not "inf" in str(obj.d) else "infinity"
+    str_d_p = str(round(obj.d_p, DEC_P)) + ' mm' if not "inf" in str(obj.d_p) else "infinity"
+    str_d_m = str(round(obj.d_m, DEC_P)) + ' mm' if not "inf" in str(obj.d_m) else "infinity"
+    str_dof = str(round(obj.dof, DEC_P)) + ' mm' if not "inf" in str(obj.dof) else "infinity"
+    str_base = str(round(obj.B, DEC_P)) + ' mm' if not "inf" in str(obj.B) else "infinity"
+    str_phi = str(round(obj.phi, DEC_P)) + ' deg'
+    str_tria = str(round(obj.Z, DEC_P)) + ' mm' if not "inf" in str(obj.Z) else "infinity"
+    console_msg = obj.console_msg
 
     # save data to csv file
     t = 'Timestamp: {:%Y-%b-%d %H:%M:%S}'.format(datetime.datetime.now())
-    input_params = [object._pp, object._fs, object._hh, object._pm, object._dA, object._fU, object._HH, object._df, object._D, object._a, object._M, object._G, object._dx]
-    output_params = [str_dist, str_dof, str_base, str_phi, str_tria, console_msg]
+    input = [obj.pp, obj.fs, obj.hh, obj.pm, obj.dA, obj.fU, obj.HH, obj.df, obj.D, obj.a, obj.M, obj.G, obj.dx]
+    output = [str_dist, str_dof, str_base, str_phi, str_tria, console_msg]
     with open('data.csv', 'a') as csvfile:
-        spamwriter = csv.writer(csvfile, delimiter=' ',
-                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         spamwriter.writerow(t)
-        spamwriter.writerow(input_params)
-        spamwriter.writerow(output_params)
+        spamwriter.writerow(input)
+        spamwriter.writerow(output)
         spamwriter.writerow(console_msg)
         spamwriter.writerow('')
         csvfile.close()
@@ -151,6 +150,6 @@ def main():
 
 if __name__ == "__main__":
     try:
-        sys.exit(main())
+        sys.exit(cgi_main())
     except Exception as e:
         print(e)

@@ -3,7 +3,7 @@
 __author__ = "Christopher Hahne"
 __email__ = "inbox@christopherhahne.de"
 __license__ = """
-Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
+Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,136 +20,123 @@ Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-import numpy as np
+from numpy import arange, ones, zeros, ceil
 
 class Mixin:
 
-    def plt_refo(self, plane_th=.5, ray_th=.5, fontsize=11):
+    def plt_refo(self, ax, plane_th=.5, ray_th=.5, fontsize=11):
         ''' plots the distance and depth of field to a plane computationally focused based on a standard plenoptic camera '''
-
-        try:
-            import matplotlib.pyplot as plt
-        except ImportError:
-            raise ImportError('Please install matplotlib package.')
 
         # ensure refo method runs in advance
         self.refo()
 
-        plot_lim = 5000  # set 5 meter as maximum plot distance
-        if self.d_p > 0 and self.d_p != float('Inf'):
-            large_val = self.d_p
-        elif self.d_m > 0 and self.d_m < plot_lim:
-            large_val = self.d_m
-        else:
-            large_val = plot_lim
+        # set maximum plot distance
+        z_max = self.d_p if self.d_m > 0 and self.d_p != float('Inf') else 5000 # either furthest plane or 5m
+        z_max += z_max/10 # add 10% space to max distance
 
-        xmax = np.round(large_val+large_val/10)
-
-        ax = plt.figure(figsize=(9, 5)).add_subplot(111)
-        plt.title('Cross-sectional refocusing plot')
-        plt.xlabel('$z_U$ [mm]'), plt.ylabel('$(u,s)$ [mm]')
+        ax.set_title('Cross-sectional refocusing plot')
+        ax.set_xlabel('$z_U$ [mm]'), ax.set_ylabel('$(u,s)$ [mm]')
 
         # optical axis
-        plt.plot((0, xmax), (0, 0), linestyle='--', linewidth=plane_th, color='k')
+        ax.plot((0, z_max), (0, 0), linestyle='--', linewidth=plane_th, color='k')
 
         # main lens principal planes
-        plt.plot((self._fs+self._hh+self._bU, self._fs+self._hh+self._bU), (-self._D/10, self._D/10), linestyle='--', linewidth=plane_th, color='k')
-        plt.plot((self._fs+self._hh+self._bU+self._HH, self._fs+self._hh+self._bU+self._HH), (-self._D/10, self._D/10), linestyle='--', linewidth=plane_th, color='k')
-        ax.text(self._fs+self._hh+self._bU+2, self._D/12+1, r'$H_{2U}$', fontsize=fontsize)
-        ax.text(self._fs+self._hh+self._bU+self._HH+2, self._D/12+1, r'$H_{1U}$', fontsize=fontsize)
+        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU), (-self.D/10, self.D/10), 'k--', linewidth=plane_th)
+        ax.plot((self.fs+self.hh+self.bU+self.HH, self.fs+self.hh+self.bU+self.HH), (-self.D/10, self.D/10), 'k--', linewidth=plane_th)
+        ax.text(self.fs+self.hh+self.bU+2, self.D/12+1, r'$H_{2U}$', fontsize=fontsize)
+        ax.text(self.fs+self.hh+self.bU+self.HH+2, self.D/12+1, r'$H_{1U}$', fontsize=fontsize)
 
         # main lens focal point
-        plt.plot((self._fs+self._hh+self._bU+self._HH+self._fU, self._fs+self._hh+self._bU+self._HH+self._fU), (-self._D/100, self._D/100), linestyle='-', linewidth=plane_th, color='k')
-        ax.text(self._fs+self._hh+self._bU+self._HH+self._fU, -self._D/50, r'$F_U$', fontsize=fontsize)
+        ax.plot((self.fs+self.hh+self.bU+self.HH+self.fU, self.fs+self.hh+self.bU+self.HH+self.fU), (-self.D/100, self.D/100), 'k-', linewidth=plane_th)
+        ax.text(self.fs+self.hh+self.bU+self.HH+self.fU, -self.D/50, r'$F_U$', fontsize=fontsize)
 
         # micro lens grid
-        lens_y = np.arange(-self._sc*self._pm+self._pm/2, self._sc*self._pm+self._pm/2, self._pm)
-        lens_f = np.arange(-self._sc*self._pm, self._sc*self._pm, self._pm)
-        lens_x = (self._fs+self._hh) * np.ones(len(lens_y))
-        plt.plot(lens_x, lens_y, linestyle='', marker='+', linewidth=plane_th, color='k') # micro lens borders
-        plt.plot(lens_x, lens_f, linestyle='', marker='.', linewidth=plane_th, color='k') # micro optical axis
-        plt.plot((self._fs, self._fs), (self._sc*self._pm, -self._sc*self._pm), linestyle='-', linewidth=plane_th, color='k')
-        plt.plot((self._fs+self._hh, self._fs+self._hh), (self._sc*self._pm, -self._sc*self._pm), linestyle='-', linewidth=plane_th, color='k')
+        lens_y = arange(-self._sc*self.pm+self.pm/2, self._sc*self.pm+self.pm/2, self.pm)
+        lens_f = arange(-self._sc*self.pm, self._sc*self.pm, self.pm)
+        lens_x = (self.fs+self.hh) * ones(len(lens_y))
+        ax.plot(lens_x, lens_y, linestyle='', marker='+', linewidth=plane_th, color='k') # micro lens borders
+        ax.plot(lens_x, lens_f, linestyle='', marker='.', linewidth=plane_th, color='k') # micro optical axis
+        ax.plot((self.fs, self.fs), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
+        ax.plot((self.fs+self.hh, self.fs+self.hh), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
 
         # sensor plane
-        plt.plot((0, 0), (self._sc*self._pm, -self._sc*self._pm), linestyle='-', linewidth=plane_th, color='k')
-        pixel_y0 = np.arange(self._uc[0]-self._pp/2-np.ceil(self._pm/self._pp)/2*self._pp,
-                             self._uc[0]+self._pp/2+np.ceil(self._pm/self._pp)/2*self._pp, self._pp)
-        pixel_y2 = np.arange(self._uc[1]-self._pp/2-np.ceil(self._pm/self._pp)/2*self._pp,
-                             self._uc[1]+self._pp/2+np.ceil(self._pm/self._pp)/2*self._pp, self._pp)
-        pixel_x = np.zeros(len(pixel_y0))
-        plt.plot(pixel_x, pixel_y0, linestyle='', marker='+', color='k')  # pixel borders 1
-        plt.plot(pixel_x, pixel_y2, linestyle='', marker='+', color='k')  # pixel borders 2
+        ax.plot((0, 0), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
+        pixel_y0 = arange(self._uc[0]-self.pp/2-ceil(self.pm/self.pp)/2*self.pp,
+                             self._uc[0]+self.pp/2+ceil(self.pm/self.pp)/2*self.pp, self.pp)
+        pixel_y2 = arange(self._uc[1]-self.pp/2-ceil(self.pm/self.pp)/2*self.pp,
+                             self._uc[1]+self.pp/2+ceil(self.pm/self.pp)/2*self.pp, self.pp)
+        pixel_x0 = zeros(len(pixel_y0))
+        pixel_x2 = zeros(len(pixel_y2))
+        ax.plot(pixel_x0, pixel_y0, linestyle='', marker='+', color='k')  # pixel borders 1
+        ax.plot(pixel_x2, pixel_y2, linestyle='', marker='+', color='k')  # pixel borders 2
 
         # intersection planes
-        plt.plot((self.d, self.d), (self._D/10, -self._D/10), linestyle='-', linewidth=plane_th, color='c')
-        plt.plot((self.d_p, self.d_p), (self._D/10, -self._D/10), linestyle='-', linewidth=plane_th, color='k')
-        plt.plot((self.d_m, self.d_m), (self._D/10, -self._D/10), linestyle='-', linewidth=plane_th, color='r')
-        ax.text(self.d+5, self._D/12+1, r'$d_a$', fontsize=fontsize, color='c')
-        ax.text(self.d_p+5, self._D/12+1, r'$d_{a+}$', fontsize=fontsize, color='k')
-        ax.text(self.d_m+5, self._D/12+1, r'$d_{a-}$', fontsize=fontsize, color='r')
+        ax.plot((self.d, self.d), (self.D/10, -self.D/10), 'c-', linewidth=plane_th)
+        ax.plot((self.d_p, self.d_p), (self.D/10, -self.D/10), 'k-', linewidth=plane_th)
+        ax.plot((self.d_m, self.d_m), (self.D/10, -self.D/10), 'r-', linewidth=plane_th)
+        ax.text(self.d+5, self.D/12+1, r'$d_a$', fontsize=fontsize, color='c')
+        ax.text(self.d_p+5, self.D/12+1, r'$d_{a+}$', fontsize=fontsize, color='k')
+        ax.text(self.d_m+5, self.D/12+1, r'$d_{a-}$', fontsize=fontsize, color='r')
 
         # ray plots
         # chief rays connceting micro and main lens centres
-        plt.plot((self._fs + self._hh, self._dA), (self._s[0], 0), linestyle='-', linewidth=ray_th, color='y')
-        plt.plot((self._fs + self._hh, self._dA), (self._s[1], 0), linestyle='-', linewidth=ray_th, color='y')
+        ax.plot((self.fs + self.hh, self.dA), (self._s[0], 0), linestyle='-', linewidth=ray_th, color='y')
+        ax.plot((self.fs + self.hh, self.dA), (self._s[1], 0), linestyle='-', linewidth=ray_th, color='y')
 
         # micro lens image side ray
-        plt.plot((0, self._fs), (self._u[0], self._s[0]), linestyle='-', linewidth=ray_th, color='b')
-        plt.plot((0, self._fs), (self._u[1], self._s[1]), linestyle='-', linewidth=ray_th, color='g')
+        ax.plot((0, self.fs), (self._u[0], self._s[0]), linestyle='-', linewidth=ray_th, color='b')
+        ax.plot((0, self.fs), (self._u[1], self._s[1]), linestyle='-', linewidth=ray_th, color='g')
 
-        # micro lens aux ray
-        plt.plot((self._fs, self._fs+self._hh), (self._s[0], self._s[0]), linestyle='--', linewidth=ray_th, color='b')
-        plt.plot((self._fs, self._fs+self._hh), (self._s[1], self._s[1]), linestyle='--', linewidth=ray_th, color='g')
+        # micro lensax aux ray
+        ax.plot((self.fs, self.fs+self.hh), (self._s[0], self._s[0]), linestyle='--', linewidth=ray_th, color='b')
+        ax.plot((self.fs, self.fs+self.hh), (self._s[1], self._s[1]), linestyle='--', linewidth=ray_th, color='g')
 
-        # main lens image side ray
-        plt.plot((self._fs+self._hh, self._fs+self._hh+self._bU), (self._s[0], self._Uij[0]), linestyle='-', linewidth=ray_th, color='b')
-        plt.plot((self._fs+self._hh, self._fs+self._hh+self._bU), (self._s[1], self._Uij[1]), linestyle='-', linewidth=ray_th, color='g')
+        # main lens image axside ray,
+        ax.plot((self.fs+self.hh, self.fs+self.hh+self.bU), (self._s[0], self._Uij[0]), 'b-', linewidth=ray_th)
+        ax.plot((self.fs+self.hh, self.fs+self.hh+self.bU), (self._s[1], self._Uij[1]), 'g-', linewidth=ray_th)
 
         # principal plane aux ray
-        plt.plot((self._fs+self._hh+self._bU, self._fs+self._hh+self._bU+self._HH), (self._Uij[0], self._Uij[0]), linestyle='--', linewidth=ray_th, color='b')
-        plt.plot((self._fs+self._hh+self._bU, self._fs+self._hh+self._bU+self._HH), (self._Uij[1], self._Uij[1]), linestyle='--', linewidth=ray_th, color='g')
+        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU+self.HH), (self._Uij[0], self._Uij[0]), 'b--', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU+self.HH), (self._Uij[1], self._Uij[1]), 'g--', linewidth=ray_th)
 
         # focal aux ray
-        plt.plot((self._fs+self._hh+self._bU+self._HH, self._fs+self._hh+self._bU+self._HH+self._fU), (0, self._Fij[0]), linestyle='--', linewidth=ray_th, color='b')
-        plt.plot((self._fs+self._hh+self._bU+self._HH, self._fs+self._hh+self._bU+self._HH+self._fU), (0, self._Fij[1]), linestyle='--', linewidth=ray_th, color='g')
+        ax.plot((self.fs+self.hh+self.bU+self.HH, self.fs+self.hh+self.bU+self.HH+self.fU), (0, self._Fij[0]), 'b--', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU+self.HH, self.fs+self.hh+self.bU+self.HH+self.fU), (0, self._Fij[1]), 'g--', linewidth=ray_th)
 
         # object space ray
-        ray_length = self.d # xmax
-        plt.plot((self._fs+self._hh+self._bU+self._HH, ray_length), (self._Uij[0], 0), linestyle='-', linewidth=ray_th, color='b')
-        plt.plot((self._fs+self._hh+self._bU+self._HH, ray_length), (self._Uij[1], 0), linestyle='-', linewidth=ray_th, color='g')
+        ray_length = self.d # z_max
+        ax.plot((self.fs+self.hh+self.bU+self.HH, ray_length), (self._Uij[0], 0), 'b-', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU+self.HH, ray_length), (self._Uij[1], 0), 'g-', linewidth=ray_th)
 
         # DoF rays
         # micro lens image side ray
-        plt.plot((0, self._fs), (self._uU[0], self._sU[0]), linestyle='-', linewidth=ray_th, color='k')
-        plt.plot((0, self._fs), (self._uL[0], self._sL[0]), linestyle='-', linewidth=ray_th, color='r')
-        plt.plot((0, self._fs), (self._uU[1], self._sU[1]), linestyle='-', linewidth=ray_th, color='r')
-        plt.plot((0, self._fs), (self._uL[1], self._sL[1]), linestyle='-', linewidth=ray_th, color='k')
+        ax.plot((0, self.fs), (self._uU[0], self._sU[0]), 'k-', linewidth=ray_th)
+        ax.plot((0, self.fs), (self._uL[0], self._sL[0]), 'r-', linewidth=ray_th)
+        ax.plot((0, self.fs), (self._uU[1], self._sU[1]), 'r-', linewidth=ray_th)
+        ax.plot((0, self.fs), (self._uL[1], self._sL[1]), 'k-', linewidth=ray_th)
 
         # micro lens aux ray
-        plt.plot((self._fs, self._fs+self._hh), (self._sU[0], self._sU[0]), linestyle='--', linewidth=ray_th, color='k')
-        plt.plot((self._fs, self._fs+self._hh), (self._sL[0], self._sL[0]), linestyle='--', linewidth=ray_th, color='r')
-        plt.plot((self._fs, self._fs+self._hh), (self._sU[1], self._sU[1]), linestyle='--', linewidth=ray_th, color='r')
-        plt.plot((self._fs, self._fs+self._hh), (self._sL[1], self._sL[1]), linestyle='--', linewidth=ray_th, color='k')
+        ax.plot((self.fs, self.fs+self.hh), (self._sU[0], self._sU[0]), 'k--', linewidth=ray_th)
+        ax.plot((self.fs, self.fs+self.hh), (self._sL[0], self._sL[0]), 'r--', linewidth=ray_th)
+        ax.plot((self.fs, self.fs+self.hh), (self._sU[1], self._sU[1]), 'r--', linewidth=ray_th)
+        ax.plot((self.fs, self.fs+self.hh), (self._sL[1], self._sL[1]), 'k--', linewidth=ray_th)
 
         # DoF main lens image side rays
-        plt.plot((self._fs+self._hh, self._fs+self._hh+self._bU), (self._sU[0], self._UijU[0]), linestyle='-', linewidth=ray_th, color='k') #mij0U*self._bU+self._s[0]+self._pm-m0U*self._fs-mij0U*self._hh
-        plt.plot((self._fs+self._hh, self._fs+self._hh+self._bU), (self._sL[0], self._UijL[0]), linestyle='-', linewidth=ray_th, color='r')
-        plt.plot((self._fs+self._hh, self._fs+self._hh+self._bU), (self._sU[1], self._UijU[1]), linestyle='-', linewidth=ray_th, color='r')
-        plt.plot((self._fs+self._hh, self._fs+self._hh+self._bU), (self._sL[1], self._UijL[1]), linestyle='-', linewidth=ray_th, color='k')
+        ax.plot((self.fs+self.hh, self.fs+self.hh+self.bU), (self._sU[0], self._UijU[0]), 'k-', linewidth=ray_th)
+        ax.plot((self.fs+self.hh, self.fs+self.hh+self.bU), (self._sL[0], self._UijL[0]), 'r-', linewidth=ray_th)
+        ax.plot((self.fs+self.hh, self.fs+self.hh+self.bU), (self._sU[1], self._UijU[1]), 'r-', linewidth=ray_th)
+        ax.plot((self.fs+self.hh, self.fs+self.hh+self.bU), (self._sL[1], self._UijL[1]), 'k-', linewidth=ray_th)
 
         # DoF principal plane aux ray
-        plt.plot((self._fs+self._hh+self._bU, self._fs+self._hh+self._bU+self._HH), (self._UijU[0], self._UijU[0]), linestyle='--', linewidth=ray_th, color='k')
-        plt.plot((self._fs+self._hh+self._bU, self._fs+self._hh+self._bU+self._HH), (self._UijL[0], self._UijL[0]), linestyle='--', linewidth=ray_th, color='r')
-        plt.plot((self._fs+self._hh+self._bU, self._fs+self._hh+self._bU+self._HH), (self._UijU[1], self._UijU[1]), linestyle='--', linewidth=ray_th, color='r')
-        plt.plot((self._fs+self._hh+self._bU, self._fs+self._hh+self._bU+self._HH), (self._UijL[1], self._UijL[1]), linestyle='--', linewidth=ray_th, color='k')
+        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU+self.HH), (self._UijU[0], self._UijU[0]), 'k--', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU+self.HH), (self._UijL[0], self._UijL[0]), 'r--', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU+self.HH), (self._UijU[1], self._UijU[1]), 'r--', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU+self.HH), (self._UijL[1], self._UijL[1]), 'k--', linewidth=ray_th)
 
         # DoF main object side rays
-        plt.plot((self._fs+self._hh+self._bU+self._HH, self.d_p), (self._UijU[0], 0), linestyle='-', linewidth=ray_th, color='k')
-        plt.plot((self._fs+self._hh+self._bU+self._HH, self.d_m), (self._UijL[0], 0), linestyle='-', linewidth=ray_th, color='r')
-        plt.plot((self._fs+self._hh+self._bU+self._HH, self.d_m), (self._UijU[1], 0), linestyle='-', linewidth=ray_th, color='r')
-        plt.plot((self._fs+self._hh+self._bU+self._HH, self.d_p), (self._UijL[1], 0), linestyle='-', linewidth=ray_th, color='k')
+        ax.plot((self.fs+self.hh+self.bU+self.HH, self.d_p), (self._UijU[0], 0), 'k-', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU+self.HH, self.d_m), (self._UijL[0], 0), 'r-', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU+self.HH, self.d_m), (self._UijU[1], 0), 'r-', linewidth=ray_th)
+        ax.plot((self.fs+self.hh+self.bU+self.HH, self.d_p), (self._UijL[1], 0), 'k-', linewidth=ray_th)
 
-        plt.show()
-
-        return True
+        return ax

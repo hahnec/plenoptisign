@@ -1,6 +1,29 @@
+#!/usr/bin/env python
+
+__author__ = "Christopher Hahne"
+__email__ = "inbox@christopherhahne.de"
+__license__ = """
+Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+
 import unittest
 from ddt import ddt, data, unpack
-from plenoptisign import MainClass, ABBS
+from plenoptisign.mainclass import MainClass
+from plenoptisign import ABBS, DEC_P
 
 @ddt
 class TestSPC(unittest.TestCase):
@@ -20,9 +43,8 @@ class TestSPC(unittest.TestCase):
         # refocusing estimation
         object.refo()
         # data readout
-        dec_place = 4
-        data_out = [round(float(object.d), dec_place), round(float(object.d_p), dec_place), round(float(object.d_m), dec_place),
-                    round(float(object.dof), dec_place)]
+        data_out = [round(float(object.d), DEC_P), round(float(object.d_p), DEC_P), round(float(object.d_m), DEC_P),
+                    round(float(object.dof), DEC_P)]
         # assertion
         self.assertEqual(data_out, data_exp)
     
@@ -39,8 +61,7 @@ class TestSPC(unittest.TestCase):
         # triangulation estimation
         object.tria()
         # data readout
-        dec_place = 4
-        data_out = [round(float(object.B), dec_place), round(float(object.phi), dec_place), round(float(object.Z), dec_place)]
+        data_out = [round(float(object.B), DEC_P), round(float(object.phi), DEC_P), round(float(object.Z), DEC_P)]
         # assertion
         self.assertEqual(data_out, data_exp)
 

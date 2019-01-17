@@ -3,7 +3,7 @@
 __author__ = "Christopher Hahne"
 __email__ = "inbox@christopherhahne.de"
 __license__ = """
-Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
+Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,60 +20,53 @@ Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-import numpy as np
+from numpy import array, degrees, tan, arctan, equal, round, transpose, radians
 from .solver import solve_sle
+from . import PlenoptisignError
 
 class Mixin:
 
     def tria(self):
         ''' computes depth plane distance, virtual camera orientation and baseline of a standard plenoptic camera '''
 
-        # image distance handling
-        if self._df == 'Inf':
-            self._bU = self._fU                       # image distance at focal plane
-        elif self._df <= self._fU:
-            self._bU = float('Inf')                   # image distance at infinity
-        elif self._df > self._fU:
-            self._bU = self._fU
-            self._aU = self._df - self._fU - self._HH
-            while self._bU != (1/self._fU-1/self._aU)**-1:
-                self._bU = (1/self._fU-1/self._aU)**-1    # calculate paraxial image distance
-                self._aU = self._df - self._bU - self._HH
-
-        # variable initialization
-        self._u, self._mij, self._Uij, self._qij = [np.zeros(2) for _ in range(4)]
+        # compute main lens image distance
+        self.compute_bU()
 
         # ray geometry calculation
         j = 1
-        s = j * self._pm
-        mc = -(s / self._dA)
-        uc = -mc * self._fs + s
-        self._u[0] = uc + self._pp * self._G
-        self._mij[0] = -self._pp * self._G / self._fs
-        self._mij[1] = (s - self._u[0]) / self._fs
-        self._Uij[0] = self._mij[0] * self._bU
-        self._Uij[1] = self._mij[1] * self._bU + s
-        self._qij[0] = (self._mij[0] * self._fU - self._Uij[0]) / self._fU
-        self._qij[1] = (self._mij[1] * self._fU - self._Uij[1]) / self._fU
+        s = j * self.pm
+        mc = -(s / self.dA)
+        uc = -mc * self.fs + s
+        self._u[0] = uc + self.pp * self.G
+        self._mij[0] = -self.pp * self.G / self.fs
+        self._mij[1] = (s - self._u[0]) / self.fs
+        for k in range(2):
+            self._Uij[k] = self._mij[k] * self.bU + s*k
+            self._qij[k] = (self._mij[k] * self.fU - self._Uij[k]) / self.fU
 
         # locate object side related virtual camera position
-        self._intersect, self.B = solve_sle(np.array([[-self._qij[1], 1], [-self._qij[0], 1]]),
-                                            np.array([self._Uij[1], self._Uij[0]]))
+        self._intersect, self.B = solve_sle(array([[-self._qij[0], 1], [-self._qij[1], 1]]),
+                                            array([self._Uij[0], self._Uij[1]]))
         # orientation of virtual camera
-        self.phi = np.degrees(np.arctan(self._qij[0]))
-        
+        self.phi = degrees(arctan(self._qij[0]))
+
         # longitudinal entrance pupil position
-        self._ent_pup_pos = self._bU + self._HH + self._intersect
+        self._ent_pup_pos = self.bU + self.HH + self._intersect
 
         # validate baseline approach (for debug purposes)
         B_alt = self._qij[0] * self._intersect + self._Uij[0]
-        if not (np.equal(np.round(self.B), np.round(B_alt))):
-            raise AssertionError('Baseline validation not successful.')
+        if not (equal(round(self.B), round(B_alt))):
+            raise PlenoptisignError('Baseline validation failed')
 
         # triangulation
-        b_new = self._bU
+        b_new = self.bU
         self._pp_new = (-self._qij[1] * b_new + self.B) - (-self._qij[0] * b_new + self.B)
-        dx_new = np.transpose(self._dx) * self._pp_new
-        self.Z = self.B * b_new / (dx_new + b_new * -np.tan(np.radians(self.phi))) if self._dx != 0 or self.phi != 0 else float('inf')
+        dx_new = transpose(self.dx) * self._pp_new
+
+        # is depth plane at infinity?
+        if self.bU <= self.fU and self.dx <= 0:
+            self.Z = float('inf')
+        elif self.bU >= self.fU:
+            self.Z = self.B * b_new / (dx_new + b_new * -tan(radians(self.phi)))
 
         return True

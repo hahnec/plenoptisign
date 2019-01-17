@@ -3,7 +3,7 @@
 __author__ = "Christopher Hahne"
 __email__ = "inbox@christopherhahne.de"
 __license__ = """
-Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
+Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,8 +20,19 @@ Copyright (c) 2017 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-import sys, getopt
-from plenoptisign import MainClass, VALS, ABBS, EXPR, __version__
+from sys import exit, version_info, argv
+from getopt import getopt, GetoptError
+from matplotlib.pyplot import figure
+from mpl_toolkits.mplot3d import Axes3D
+
+try:
+    from Tkinter import mainloop
+except ImportError:
+    from tkinter import mainloop
+
+from plenoptisign import VALS, ABBS, EXPR, DEC_P, __version__
+from plenoptisign.mainclass import MainClass
+from plenoptisign.gui import PlenoptisignApp
 
 def usage():
 
@@ -31,6 +42,7 @@ def usage():
     print("-r, --refo               Refocusing results only flag")
     print("-t, --tria               Triangulation results only flag")
     print("-p, --plot               Plot paraxial rays flag")
+    print("-g, --gui                Open graphical user interface")
     print("-h, --help               Print this help message.")
     print("")
 
@@ -43,17 +55,17 @@ def parse_options(argv):
     plot_opt = False
 
     try:
-        opts, args = getopt.getopt(argv, ":hrtp", ["help", "refo", "tria", "plot"])
+        opts, args = getopt(argv, ":hrtpg", ["help", "refo", "tria", "plot", "gui"])
 
-    except getopt.GetoptError:
+    except GetoptError:
         usage()
-        sys.exit(2)
+        exit(2)
 
     if opts:
         for opt, arg in opts:
             if opt in ("-h", "--help"):
                 usage()
-                sys.exit()
+                exit()
             if opt in ("-r", "--refo"):
                 refo_opt = True
                 tria_opt = False
@@ -62,12 +74,15 @@ def parse_options(argv):
                 tria_opt = True
             if opt in ("-p", "--plot"):
                 plot_opt = True
+            if opt in ("-g", "--gui"):
+                MainWindow = PlenoptisignApp(None)
+                MainWindow.mainloop()
 
     return refo_opt, tria_opt, plot_opt
 
 def cmd_read():
 
-    py3 = sys.version_info[0] > 2  # boolean for Python version > 2
+    py3 = version_info[0] > 2  # boolean for Python version > 2
     data = dict(zip(ABBS, VALS))
     name_dict = dict(zip(ABBS, EXPR))
 
@@ -90,30 +105,29 @@ def cmd_read():
 def main():
 
     # parse options
-    refo_opt, tria_opt, plot_opt = parse_options(sys.argv[1:])
+    refo_opt, tria_opt, plot_opt = parse_options(argv[1:])
 
     # read input from command line only if cgi field storage empty
     data = cmd_read()
 
     # construct object
-    object = MainClass(data)
+    obj = MainClass(data)
 
     # compute light field geometry
-    ret_refo = object.refo() if refo_opt else False
-    ret_tria = object.tria() if tria_opt else False
+    ret_refo = obj.refo() if refo_opt else False
+    ret_tria = obj.tria() if tria_opt else False
     if not (ret_refo or ret_tria):
         raise AssertionError('Calculation failed.')
 
     # convert distances to string while adding metric unit under consideration of infinity
-    dec_place = 4  # number of decimals
-    str_dist = str(round(object.d, dec_place)) + ' mm' if not "inf" in str(object.d) else "infinity"
-    str_d_p = str(round(object.d_p, dec_place)) + ' mm' if not "inf" in str(object.d_p) else "infinity"
-    str_d_m = str(round(object.d_m, dec_place)) + ' mm' if not "inf" in str(object.d_m) else "infinity"
-    str_dof = str(round(object.dof, dec_place)) + ' mm' if not "inf" in str(object.dof) else "infinity"
-    str_base = str(round(object.B, dec_place)) + ' mm' if not "inf" in str(object.B) else "infinity"
-    str_phi = str(round(object.phi, dec_place)) + ' deg'
-    str_tria = str(round(object.Z, dec_place)) + ' mm' if not "inf" in str(object.Z) else "infinity"
-    console_msg = object.console_msg
+    str_dist = str(round(obj.d, DEC_P)) + ' mm' if not "inf" in str(obj.d) else "infinity"
+    str_d_p = str(round(obj.d_p, DEC_P)) + ' mm' if not "inf" in str(obj.d_p) else "infinity"
+    str_d_m = str(round(obj.d_m, DEC_P)) + ' mm' if not "inf" in str(obj.d_m) else "infinity"
+    str_dof = str(round(obj.dof, DEC_P)) + ' mm' if not "inf" in str(obj.dof) else "infinity"
+    str_base = str(round(obj.B, DEC_P)) + ' mm' if not "inf" in str(obj.B) else "infinity"
+    str_phi = str(round(obj.phi, DEC_P)) + ' deg'
+    str_tria = str(round(obj.Z, DEC_P)) + ' mm' if not "inf" in str(obj.Z) else "infinity"
+    console_msg = obj.console_msg
 
     # output
     if ret_refo:
@@ -131,15 +145,31 @@ def main():
             print("%s \n" % msg)
     if plot_opt:
         if ret_refo:
-            object.plt_refo(plane_th=.5, ray_th=.5)
-            object.plt_3d(type='refo')
+            fig = figure(figsize=(9, 5))
+            ax = fig.gca()
+            obj.plt_refo(ax, plane_th=.5, ray_th=.5)
+            fig.show()
+            mainloop()
+            fig = figure(figsize=(9, 5))
+            ax = Axes3D(fig)
+            obj.plt_3d(ax, dep_type=0)
+            fig.show()
+            mainloop()
         if ret_tria:
-            object.plt_tria(plane_th=.5, ray_th=.5)
-            object.plt_3d(type='tria')
+            fig = figure(figsize=(9, 5))
+            ax = fig.gca()
+            obj.plt_tria(ax, plane_th=.5, ray_th=.5)
+            fig.show()
+            mainloop()
+            fig = figure(figsize=(9, 5))
+            ax = Axes3D(fig)
+            obj.plt_3d(ax, dep_type=1)
+            fig.show()
+            mainloop()
 
 
 if __name__ == "__main__":
     try:
-        sys.exit(main())
+        exit(main())
     except Exception as e:
         print(e)

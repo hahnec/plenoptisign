@@ -6,6 +6,8 @@ Light field geometry estimator for a Standard Plenoptic Camera (SPC).
 
 With this python module, a pair of lightfield rays is treated as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions that project perspective views captured by an SPC.
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 Usage instructions
 ===================
 
@@ -15,7 +17,13 @@ Use the package from the command line tool by
 
 * installing with ``$ sudo python setup.py install``
 
-* running the program ``$ plenoptisign``
+* running the program ``$ plenoptisign`` with optional arguments
+
+    * -r, --refo: Refocusing results only flag
+    * -t, --tria: Triangulation results only flag
+    * -p, --plot: Plot paraxial rays flag
+    * -g, --gui: Open graphical user interface
+    * -h, --help: Print help message
 
 * unit testing (optional) ``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
 

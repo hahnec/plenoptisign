@@ -3,7 +3,7 @@
 __author__ = "Christopher Hahne"
 __email__ = "inbox@christopherhahne.de"
 __license__ = """
-Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
+Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,31 +20,30 @@ Copyright (c) 2018 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+from numpy import array, meshgrid, ones
 
 class Mixin:
 
-    def plt_3d(self, iter_range=[0, 5], sen_dims=np.array([24.048, 36.072]), type='tria'):
+    def plt_3d(self, plt3d, iter_range=[5, 0], sen_dims=array([24.048, 36.072]), dep_type=False):
 
         x, y, z = ([] for _ in range(3))
+        depth_types = ('refo', 'tria')
 
         try:
-            for el in range(*iter_range):
+            for el in range(iter_range[0], iter_range[1], -1):  # range(*iter_range, -1)
 
-                # compute distances
-                if type == 'refo':
-                    self._a = el
-                    self.refo()
-                    z.append(float(self.d))
-                if type == 'tria':
-                    self._dx = el
+                # compute distances depending on depth types
+                if dep_type:
+                    self.dx = el
                     self.tria()
                     z.append(float(self.Z))
+                else:
+                    self.a = el
+                    self.refo()
+                    z.append(float(self.d))
 
                 # compute field of view
-                yy, xx = sen_dims/self._bU*z[-1]
+                yy, xx = sen_dims/self.bU*z[-1]
                 x.append(xx)
                 y.append(yy)
 
@@ -55,42 +54,43 @@ class Mixin:
         z_max= max(z) if max(z) != float('inf') else self.non_inf_max(z)
         max_dist = z_max + z_max/10
 
-        # start plottingy
-        plt3d = Axes3D(plt.figure(figsize=(9, 5)))
+        # perspective view (tbd: do only once at initialization)
         plt3d.view_init(elev=30, azim=-120)
+
+        # start plotting axis matter
         plt3d.set_xlabel('z [mm]')
         plt3d.set_ylabel('x [mm]')
         plt3d.set_zlabel('y [mm]')
-        plt.title('3-D ' + type + ' plot')
+        plt3d.set_title('3-D ' + depth_types[dep_type] + ' plot')
 
         # plot camera axis and sensor
         plt3d.scatter(0, 0, 0, s=20, color='k')
         plt3d.plot([0, max_dist], [0, 0], [0, 0], 'k--')
-        yy, xx = np.meshgrid((-sen_dims[0]/2, sen_dims[0]/2), (-sen_dims[1]/2, sen_dims[1]/2))
-        plt3d.plot_surface(-self._bU*np.ones(xx.shape), xx, yy, color='k', alpha=.8)
+        yy, xx = meshgrid((-sen_dims[0]/2, sen_dims[0]/2), (-sen_dims[1]/2, sen_dims[1]/2))
+        plt3d.plot_surface(-self.bU*ones(xx.shape), xx, yy, color='k', alpha=.8)
 
         # plot the depth planes
         for i in range(len(z)):
             if z[i] != float('inf'):
-                yy, xx = np.meshgrid((-y[i]/2, y[i]/2), (-x[i]/2, x[i]/2))
-                zz = z[i]*np.ones(xx.shape)
+                yy, xx = meshgrid((-y[i]/2, y[i]/2), (-x[i]/2, x[i]/2))
+                zz = z[i]*ones(xx.shape)
                 plt3d.plot_surface(zz, xx, yy, color='r', alpha=.5) # depth plane
                 plt3d.scatter([z[i]], [0], [0], s=20, color='r') # plane-axis intersection
 
                 # plot marker
-                num_str = str(range(*iter_range)[i])
-                label_str = "$d_"+num_str+"$" if type == 'refo' else "$Z_{("+str(self._G)+', '+num_str+")}$"
+                num_str = str(range(iter_range[0], iter_range[1], -1)[i])
+                label_str = "$d_"+num_str+"$" if dep_type else "$Z_{("+str(self.G)+', '+num_str+")}$"
                 plt3d.text(z[i], x[i]/2, y[i]/2, s=label_str, fontsize=18, family='sans-serif')
 
         # plot field of view lines
         x_hw = self.non_inf_max(x)/2
         y_hw = self.non_inf_max(y)/2
-        plt3d.plot([-self._bU, z_max], [-sen_dims[1]/2, x_hw], [-sen_dims[0]/2, y_hw], 'r-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self._bU, z_max], [-sen_dims[1]/2, x_hw], [sen_dims[0]/2, -y_hw], 'r-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self._bU, z_max], [sen_dims[1]/2, -x_hw], [-sen_dims[0]/2, y_hw], 'r-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self._bU, z_max], [sen_dims[1]/2, -x_hw], [sen_dims[0]/2, -y_hw], 'r-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, x_hw], [-sen_dims[0]/2, y_hw], 'k-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, x_hw], [sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [sen_dims[1]/2, -x_hw], [-sen_dims[0]/2, y_hw], 'k-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [sen_dims[1]/2, -x_hw], [sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=.5)
 
-        plt.show()
+        return plt3d
 
     @staticmethod
     def non_inf_max(input):

@@ -25,9 +25,11 @@ try:
 except ImportError:
     import Tkinter as tk
 
+from sys import exit
+from plenoptisign import PX, PY, BTN_W
 
-# make object for config window
-class ConWin(tk.Frame):
+# make object for plot window
+class CmdWin(tk.Frame):
 
     def __init__(self, parent):
 
@@ -35,10 +37,18 @@ class ConWin(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.parent = parent
 
-        # output message box
-        msg_lab = tk.Label(master=self, text="Console:")
-        msg_lab.grid(row=0, column=0, padx=0, pady=0)
-        self.msg_box = tk.Label(master=self, text='Ready')
-        self.msg_box.grid(row=0, column=1, rowspan=2, columnspan=2, padx=0, pady=0, sticky='NSWE')
+        # run button
+        run_btn = tk.Button(self, text="Run", width=int(BTN_W/2), command=self.parent.run)
+        run_btn.grid(row=0, column=0, padx=PX, pady=PY)
 
-        self.columnconfigure(1, weight=5)
+        # micro image button
+        mie_btn = tk.Button(master=self, text='Estimate M', width=BTN_W, command=self.parent.mie)
+        mie_btn.grid(row=0, column=1, padx=PX, pady=PY)
+
+        # save button
+        sav_btn = tk.Button(self, text="Save config", width=BTN_W, command=self.parent.save_cfg)
+        sav_btn.grid(row=0, column=2, padx=PX, pady=PY)
+
+        # quit button
+        qit_btn = tk.Button(master=self, text='Quit', width=int(BTN_W/2), command=exit)
+        qit_btn.grid(row=0, column=3, padx=PX, pady=PY)
