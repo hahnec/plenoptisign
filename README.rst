@@ -1,10 +1,6 @@
-===============
-Plenoptisign
-===============
-
-Light field geometry estimator for a Standard Plenoptic Camera (SPC).
-
-With this python module, a pair of lightfield rays is treated as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions that project perspective views captured by an SPC.
+=======================
+Plenoptisign |plenopic|
+=======================
 
 .. image:: https://img.shields.io/github/release-pre/hahnec/plenoptisign.svg?style=flat-square
     :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
@@ -24,7 +20,15 @@ With this python module, a pair of lightfield rays is treated as a system of lin
 
 .. image:: https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?style=flat-square
     :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
-    :alt: Downloads total
+    :alt: Downloads
+
+.. |plenopic| image:: /gui/misc/circlecompass_1055093.png
+    :scale: 20 %
+    :alt: Logo
+
+Light field geometry estimator for a Standard Plenoptic Camera (SPC).
+
+With this python module, a pair of lightfield rays is treated as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions that project perspective views captured by an SPC.
 
 Usage instructions
 ===================
