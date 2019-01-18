@@ -7,9 +7,15 @@
 # csv results
 *.csv
 
+# json results
+*.json
+
 # setuptools distribution folder
 /dist/
 /build/
+
+# pyinstaller files
+*.spec
 
 # PyCharm settings
 /.idea/
