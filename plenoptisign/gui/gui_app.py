@@ -25,9 +25,9 @@ try:
 except ImportError:
     import Tkinter as tk
 
-from sys import platform
-from os import getcwd
-from os.path import join
+from os.path import join, abspath
+from tempfile import mkstemp
+#from sys import platform
 
 # local python files
 from plenoptisign import __version__, ABBS, PF, DEC_P
@@ -37,6 +37,15 @@ from plenoptisign.gui.cfg_win import CfgWin
 from plenoptisign.gui.plt_win import PltWin
 from plenoptisign.gui.cmd_win import CmdWin
 from plenoptisign.gui.con_win import ConWin
+
+ICON = (b'\x00\x00\x01\x00\x01\x00\x10\x10\x00\x00\x01\x00\x08\x00h\x05\x00\x00'
+        b'\x16\x00\x00\x00(\x00\x00\x00\x10\x00\x00\x00 \x00\x00\x00\x01\x00'
+        b'\x08\x00\x00\x00\x00\x00@\x05\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+        b'\x00\x01\x00\x00\x00\x01') + b'\x00'*1282 + b'\xff'*64
+
+_, ICON_PATH = mkstemp()
+with open(ICON_PATH, 'wb') as icon_file:
+    icon_file.write(ICON)
 
 # object for application window
 class PlenoptisignApp(tk.Tk):
@@ -50,8 +59,9 @@ class PlenoptisignApp(tk.Tk):
         self.wm_title("Plenoptisign-"+__version__)
 
         # icon handling
-        if platform == 'win32':
-            self.iconbitmap(join(getcwd(), 'misc', 'circlecompass_1055093.icns'))
+        self.iconbitmap(default=ICON_PATH)
+        #if platform == 'win32':
+            #self.iconbitmap(join(abspath('.'), 'circlecompass_1055093.ico'))
 
         # initialize parameters
         self.cfg = Config()
@@ -117,6 +127,10 @@ class PlenoptisignApp(tk.Tk):
 
         self.con_win.msg_box.config(text='Save settings ...')
 
+        # update results (if changes were made)
+        self.run()
+
+        # read parameters
         for i, key in enumerate(ABBS):
             self.cfg.params[key] = float(self.cfg_win.entries[i].get())
 
@@ -129,6 +143,9 @@ class PlenoptisignApp(tk.Tk):
 
 
 if __name__ == "__main__":
-
-    MainWin = PlenoptisignApp(None)
-    MainWin.mainloop()
+    try:
+        MainWin = PlenoptisignApp(None)
+        MainWin.mainloop()
+    except Exception as e:
+        print(e)
+        input()

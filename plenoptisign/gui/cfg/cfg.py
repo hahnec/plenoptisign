@@ -21,8 +21,7 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import json
-from os.path import join
-from os import getcwd
+from os.path import join, abspath
 
 # local python files
 from plenoptisign import ABBS, VALS
@@ -32,6 +31,7 @@ class Config(object):
     def __init__(self):
 
         self.params = {}
+        self.dir_path = abspath('.')
 
         try:
             self.read_json()
@@ -42,11 +42,10 @@ class Config(object):
 
         return None
 
-
     def read_json(self, fp=None):
 
         if not fp:
-            fp = join(getcwd(), 'cfg', 'cfg.json')
+            fp = join(self.dir_path, 'cfg.json')#join(getcwd(), 'cfg', 'cfg.json')
 
         with open(fp, 'r') as f:
             self.params.update(json.load(f))
@@ -56,7 +55,7 @@ class Config(object):
     def write_json(self, fp=None):
 
         if not fp:
-            fp = join(getcwd(), 'cfg', 'cfg.json')
+            fp = join(self.dir_path, 'cfg.json')#join(getcwd(), 'cfg', 'cfg.json')
         try:
             with open(fp, 'w') as f:
                 json.dump(self.params, f, sort_keys=True, indent=4)
