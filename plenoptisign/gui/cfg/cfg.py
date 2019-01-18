@@ -21,7 +21,9 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import json
-from os.path import join, abspath
+from os.path import join, dirname, abspath, isdir
+from os import makedirs, getcwd
+from errno import EEXIST
 
 # local python files
 from plenoptisign import ABBS, VALS
@@ -31,7 +33,7 @@ class Config(object):
     def __init__(self):
 
         self.params = {}
-        self.dir_path = abspath('.')
+        self.dir_path = join(abspath('.'), 'cfg')
 
         try:
             self.read_json()
@@ -57,6 +59,8 @@ class Config(object):
         if not fp:
             fp = join(self.dir_path, 'cfg.json')#join(getcwd(), 'cfg', 'cfg.json')
         try:
+            print(self.dir_path)
+            self.mkdir_p(self.dir_path)
             with open(fp, 'w') as f:
                 json.dump(self.params, f, sort_keys=True, indent=4)
         except PermissionError as e:
@@ -68,5 +72,17 @@ class Config(object):
     def default_values(self):
 
         self.params = dict(zip(ABBS, VALS))
+
+        return True
+
+    @staticmethod
+    def mkdir_p(path):
+        try:
+            makedirs(path)
+        except OSError as exc:  # Python >2.5
+            if exc.errno == EEXIST and isdir(path):
+                pass
+            else:
+                raise
 
         return True
