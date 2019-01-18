@@ -4,7 +4,7 @@
 
 Light field geometry estimator for a Standard Plenoptic Camera (SPC).
 
-With this python module, a pair of lightfield rays is treated as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions for perspective projections captured by an SPC.
+This software treats a pair of lightfield rays as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions for perspective projections captured by an SPC.
 
 |release| |license| |code| |repo| |downloads|
 
