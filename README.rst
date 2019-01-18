@@ -23,6 +23,7 @@ Plenoptisign |logo|
     :alt: Downloads
 
 .. |logo| image:: https://github.com/hahnec/plenoptisign/blob/develop/plenoptisign/gui/misc/circlecompass_1055093.png
+    :scale: 15 %
     :alt: Logo
 
 Light field geometry estimator for a Standard Plenoptic Camera (SPC).
