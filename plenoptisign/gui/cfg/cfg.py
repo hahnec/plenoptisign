@@ -21,8 +21,8 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import json
-from os.path import join, dirname, abspath, isdir
-from os import makedirs, getcwd
+from os.path import join, abspath, isdir
+from os import makedirs
 from errno import EEXIST
 
 # local python files
@@ -47,7 +47,7 @@ class Config(object):
     def read_json(self, fp=None):
 
         if not fp:
-            fp = join(self.dir_path, 'cfg.json')#join(getcwd(), 'cfg', 'cfg.json')
+            fp = join(self.dir_path, 'cfg.json')
 
         with open(fp, 'r') as f:
             self.params.update(json.load(f))
@@ -57,7 +57,7 @@ class Config(object):
     def write_json(self, fp=None):
 
         if not fp:
-            fp = join(self.dir_path, 'cfg.json')#join(getcwd(), 'cfg', 'cfg.json')
+            fp = join(self.dir_path, 'cfg.json')
         try:
             print(self.dir_path)
             self.mkdir_p(self.dir_path)
