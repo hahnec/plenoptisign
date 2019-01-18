@@ -2,34 +2,11 @@
 |logo| Plenoptisign
 ===================
 
-.. image:: https://img.shields.io/github/release-pre/hahnec/plenoptisign.svg?style=flat-square
-    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
-    :alt: Pre-release
-
-.. image:: https://img.shields.io/github/license/hahnec/plenoptisign.svg?style=flat-square
-    :target: https://www.gnu.org/licenses/gpl-3.0.en.html
-    :alt: License
-
-.. image:: https://img.shields.io/github/languages/code-size/hahnec/plenoptisign.svg?style=flat-square
-    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
-    :alt: Code size
-
-.. image:: https://img.shields.io/github/repo-size/hahnec/plenoptisign.svg?style=flat-square
-    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
-    :alt: Repo size
-
-.. image:: https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?style=flat-square
-    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
-    :alt: Downloads
-
-.. |logo| image:: https://github.com/hahnec/plenoptisign/blob/develop/plenoptisign/gui/misc/circlecompass_1055093.png
-    :height: 36px
-    :scale: 15 %
-    :alt: Logo
-
 Light field geometry estimator for a Standard Plenoptic Camera (SPC).
 
 With this python module, a pair of lightfield rays is treated as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions for perspective projections captured by an SPC.
+
+|release| |license| |code| |repo| |downloads|
 
 Usage instructions
 ===================
@@ -78,3 +55,28 @@ If you find this work helpful, please cite the following publications:
 * `Refocusing distance of a standard plenoptic camera <https://doi.org/10.1364/OE.24.021521>`__, *OpticsExpress*, `[BibTeX] <http://www.plenoptic.info/bibtex/HAHNE-OPEX.2016.bib>`__
 
 * `Baseline and triangulation geometry in a standard plenoptic camera <https://www.plenoptic.info/IJCV_Hahne17_final.pdf>`__, *Int. J. of Comp. Vis.*, `[BibTeX] <http://plenoptic.info/bibtex/HAHNE-IJCV.2017.bib>`__
+
+.. Image substitutions
+
+.. |release| image:: https://img.shields.io/github/release-pre/hahnec/plenoptisign.svg?style=flat-square
+    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
+    :alt: Pre-release
+
+.. |license| image:: https://img.shields.io/github/license/hahnec/plenoptisign.svg?style=flat-square
+    :target: https://www.gnu.org/licenses/gpl-3.0.en.html
+    :alt: License
+
+.. |code| image:: https://img.shields.io/github/languages/code-size/hahnec/plenoptisign.svg?style=flat-square
+    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
+    :alt: Code size
+
+.. |repo| image:: https://img.shields.io/github/repo-size/hahnec/plenoptisign.svg?style=flat-square
+    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
+    :alt: Repo size
+
+.. |downloads| image:: https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?style=flat-square
+    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
+    :alt: Downloads
+
+.. |logo| image:: https://github.com/hahnec/plenoptisign/blob/develop/plenoptisign/gui/misc/circlecompass_1055093_24x24.png
+    :alt: Logo
