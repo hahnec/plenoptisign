@@ -1,5 +1,5 @@
 =======================
-Plenoptisign |plenopic|
+Plenoptisign |logo|
 =======================
 
 .. image:: https://img.shields.io/github/release-pre/hahnec/plenoptisign.svg?style=flat-square
@@ -22,8 +22,7 @@ Plenoptisign |plenopic|
     :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
     :alt: Downloads
 
-.. |plenopic| image:: /gui/misc/circlecompass_1055093.png
-    :scale: 20 %
+.. |logo| image:: https://github.com/hahnec/plenoptisign/blob/develop/plenoptisign/gui/misc/circlecompass_1055093.png
     :alt: Logo
 
 Light field geometry estimator for a Standard Plenoptic Camera (SPC).
