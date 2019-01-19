@@ -58,9 +58,9 @@ If you find this work helpful, please cite the following publications:
 
 .. Image substitutions
 
-.. |release| image:: https://img.shields.io/github/release-pre/hahnec/plenoptisign.svg?style=flat-square
-    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v0.4.0-alpha/plenoptisign.zip
-    :alt: Pre-release
+.. |release| image:: https://img.shields.io/github/release/hahnec/plenoptisign.svg?style=flat-square
+    :target: http://www.github.com/hahnec/plenoptisign/releases/download/v1.0.0-beta/plenoptisign.zip
+    :alt: Release
 
 .. |license| image:: https://img.shields.io/github/license/hahnec/plenoptisign.svg?style=flat-square
     :target: https://www.gnu.org/licenses/gpl-3.0.en.html
