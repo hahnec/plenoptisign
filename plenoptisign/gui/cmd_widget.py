@@ -25,9 +25,13 @@ try:
 except ImportError:
     import Tkinter as tk
 
+from sys import exit
+import webbrowser
 
-# make object for config window
-class ConWin(tk.Frame):
+from plenoptisign import PX, PY, BTN_W
+
+# make object for plot widget
+class CmdWidget(tk.Frame):
 
     def __init__(self, parent):
 
@@ -35,10 +39,22 @@ class ConWin(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.parent = parent
 
-        # output message box
-        msg_lab = tk.Label(master=self, text="Console:")
-        msg_lab.grid(row=0, column=0, padx=0, pady=0)
-        self.msg_box = tk.Label(master=self, text='Ready')
-        self.msg_box.grid(row=0, column=1, rowspan=2, columnspan=2, padx=0, pady=0, sticky='NSWE')
+        # run button
+        run_btn = tk.Button(self, text="Update", width=int(BTN_W), command=self.parent.run)
+        run_btn.grid(row=0, column=0, padx=PX, pady=PY)
 
-        self.columnconfigure(1, weight=5)
+        # save button
+        sav_btn = tk.Button(self, text="Save config", width=BTN_W, command=self.parent.save_cfg)
+        sav_btn.grid(row=0, column=1, padx=PX, pady=PY)
+
+        # load button
+        lod_btn = tk.Button(self, text="Load config", width=BTN_W, command=self.parent.load_cfg)
+        lod_btn.grid(row=0, column=2, padx=PX, pady=PY)
+
+        # about button
+        abt_btn = tk.Button(master=self, text='About', width=int(BTN_W), command=self.parent.open_abt_win)
+        abt_btn.grid(row=1, column=1, padx=PX, pady=PY)
+
+        # quit button
+        qit_btn = tk.Button(master=self, text='Quit', width=int(BTN_W), command=exit)
+        qit_btn.grid(row=1, column=2, padx=PX, pady=PY)

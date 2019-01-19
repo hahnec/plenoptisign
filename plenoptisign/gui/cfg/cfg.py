@@ -27,6 +27,7 @@ from errno import EEXIST
 
 # local python files
 from plenoptisign import ABBS, VALS
+from ... import PlenoptisignError
 
 class Config(object):
 
@@ -38,7 +39,7 @@ class Config(object):
         try:
             self.read_json()
             if not self.params.keys():
-                raise Exception('Config file could not be loaded. Default values will be used instead.')
+                raise PlenoptisignError('Config file could not be loaded')
         except:
             self.default_values()
 
@@ -50,7 +51,11 @@ class Config(object):
             fp = join(self.dir_path, 'cfg.json')
 
         with open(fp, 'r') as f:
-            self.params.update(json.load(f))
+            json_data = json.load(f)#self.params.update(json.load(f))
+
+        # transfer parameters to config object
+        for key in json_data:
+            self.params[key] = float(json_data[key])
 
         return True
 
@@ -59,13 +64,13 @@ class Config(object):
         if not fp:
             fp = join(self.dir_path, 'cfg.json')
         try:
-            print(self.dir_path)
+            # create config folder (if not already present)
             self.mkdir_p(self.dir_path)
+            # write config file
             with open(fp, 'w') as f:
                 json.dump(self.params, f, sort_keys=True, indent=4)
-        except PermissionError as e:
-            print(e)
-            print('\n\nGrant permission to write to the config file '+fp)
+        except PermissionError:
+            raise PlenoptisignError('\n\nGrant permission to write to the config file '+fp)
 
         return True
 

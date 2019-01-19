@@ -22,27 +22,30 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 try:
     import tkinter as tk
+    from tkinter.filedialog import askopenfilename
 except ImportError:
     import Tkinter as tk
+    from tkFileDialog import askopenfilename
 
-from os.path import join, abspath
 from tempfile import mkstemp
-#from sys import platform
+from sys import platform
+from os.path import normpath
 
 # local python files
 from plenoptisign import __version__, ABBS, PF, DEC_P
 from plenoptisign.mainclass import MainClass
 from plenoptisign.gui.cfg import Config
-from plenoptisign.gui.cfg_win import CfgWin
-from plenoptisign.gui.plt_win import PltWin
-from plenoptisign.gui.cmd_win import CmdWin
-from plenoptisign.gui.con_win import ConWin
+from plenoptisign.gui.cfg_widget import CfgWidget
+from plenoptisign.gui.plt_widget import PltWidget
+from plenoptisign.gui.cmd_widget import CmdWidget
+from plenoptisign.gui.con_widget import ConWidget
+from plenoptisign.gui.abt_widget import AbtWidget
 
+# generate blank icon on windows
 ICON = (b'\x00\x00\x01\x00\x01\x00\x10\x10\x00\x00\x01\x00\x08\x00h\x05\x00\x00'
         b'\x16\x00\x00\x00(\x00\x00\x00\x10\x00\x00\x00 \x00\x00\x00\x01\x00'
         b'\x08\x00\x00\x00\x00\x00@\x05\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
         b'\x00\x01\x00\x00\x00\x01') + b'\x00'*1282 + b'\xff'*64
-
 _, ICON_PATH = mkstemp()
 with open(ICON_PATH, 'wb') as icon_file:
     icon_file.write(ICON)
@@ -59,54 +62,53 @@ class PlenoptisignApp(tk.Tk):
         self.wm_title("Plenoptisign-"+__version__)
 
         # icon handling
-        self.iconbitmap(default=ICON_PATH)
-        #if platform == 'win32':
-            #self.iconbitmap(join(abspath('.'), 'circlecompass_1055093.ico'))
+        if platform == 'win32':
+            self.iconbitmap(default=ICON_PATH)
 
         # initialize parameters
         self.cfg = Config()
 
-        # instantiate plot window widget as object
-        self.plt_win = PltWin(self)
-        self.plt_win.grid(row=0, column=0, rowspan=2, padx=PF, pady=PF)
+        # instantiate plot widget as object
+        self.plt_wid = PltWidget(self)
+        self.plt_wid.grid(row=0, column=0, rowspan=2, padx=PF, pady=PF)
 
-        # instantiate config window widget as object
-        self.cfg_win = CfgWin(self)
-        self.cfg_win.grid(row=0, column=1, padx=PF, pady=PF, sticky='NSWE')
+        # instantiate config widget as object
+        self.cfg_wid = CfgWidget(self)
+        self.cfg_wid.grid(row=0, column=1, padx=PF, pady=PF, sticky='NSWE')
 
-        # instantiate command window widget as object
-        self.con_win = ConWin(self)
-        self.con_win.grid(row=1, column=1, padx=PF, pady=PF, sticky='NSWE')
+        # instantiate command widget as object
+        self.con_wid = ConWidget(self)
+        self.con_wid.grid(row=1, column=1, padx=PF, pady=PF, sticky='NSWE')
 
-        # instantiate command window widget as object
-        self.cmd_win = CmdWin(self)
-        self.cmd_win.grid(row=2, column=1, padx=PF, pady=PF)
+        # instantiate command widget as object
+        self.cmd_wid = CmdWidget(self)
+        self.cmd_wid.grid(row=2, column=1, padx=PF, pady=PF)
 
         # enable tkinter resizing
         self.resizable(True, False)
 
+        # update results in GUI
         self.run()
 
         return None
 
-
     def run(self):
 
-        # get parameter data from GUI
-        data = dict(zip(ABBS, [float(entry.get()) for entry in self.cfg_win.entries]))
+        # fetch parameter data from GUI
+        self.data = dict(zip(ABBS, [float(entry.get()) for entry in self.cfg_wid.entries]))
 
         # construct object
-        self.obj = MainClass(data)
+        self.obj = MainClass(self.data)
 
         # compute light field geometry
         self.obj.refo()
         self.obj.tria()
 
         # update widgets
-        self.cfg_win.refresh()
-        self.plt_win.refresh()
+        self.cfg_wid.refresh()
+        self.plt_wid.refresh()
 
-        self.con_win.msg_box.config(text=self.obj.console_msg)
+        self.con_wid.msg_box.config(text=self.obj.console_msg)
 
         return True
 
@@ -118,34 +120,67 @@ class PlenoptisignApp(tk.Tk):
         # pass estimated micro image size to entry in GUI
         tk_var = tk.StringVar()
         tk_var.set(str(round(self.obj.M, DEC_P)))
-        self.cfg_win.entries[10].config(textvariable=tk_var)
+        self.cfg_wid.entries[10].config(textvariable=tk_var)
+
+        # update results in GUI
+        self.run()
 
         return True
 
     def save_cfg(self):
-        ''' overwrite config settings '''
+        ''' overwrite config file settings '''
 
-        self.con_win.msg_box.config(text='Save settings ...')
+        self.con_wid.msg_box.config(text='Save settings ...')
 
-        # update results (if changes were made)
+        # update results in GUI
         self.run()
 
-        # read parameters
+        # transfer parameters from GUI to config object
         for i, key in enumerate(ABBS):
-            self.cfg.params[key] = float(self.cfg_win.entries[i].get())
+            self.cfg.params[key] = float(self.cfg_wid.entries[i].get())
 
-        # write parameters to hard drive
+        # write parameters from config object to hard drive
         self.cfg.write_json()
 
-        self.con_win.msg_box.config(text='Config saved!')
+        self.con_wid.msg_box.config(text='Config saved')
 
         return True
 
+    def load_cfg(self):
+        ''' load config file settings '''
+
+        # open window to select config file
+        cfn_win = tk.Tk()
+        cfn_win.withdraw()
+        cfn = normpath(askopenfilename(parent=cfn_win, title="Select file", filetypes=[("Config files", "*.json")]))
+
+        if cfn != '.':
+
+            self.con_wid.msg_box.config(text='Load settings ...')
+
+            # read parameters from hard drive to config object
+            self.cfg.read_json(fp=cfn)
+
+            # transfer parameters from config object to GUI
+            for i, key in enumerate(ABBS):
+                tk_var = tk.StringVar()
+                tk_var.set(str(self.cfg.params[key]))
+                self.cfg_wid.entries[i].config(textvariable=tk_var)
+
+            # update results in GUI
+            self.run()
+
+            self.con_wid.msg_box.config(text='Config loaded')
+
+        return True
+
+    def open_abt_win(self):
+
+        # instantiate about window widget as object
+        AbtWidget()
+
 
 if __name__ == "__main__":
-    try:
-        MainWin = PlenoptisignApp(None)
-        MainWin.mainloop()
-    except Exception as e:
-        print(e)
-        input()
+
+    MainWin = PlenoptisignApp(None)
+    MainWin.mainloop()
