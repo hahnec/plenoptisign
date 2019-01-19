@@ -20,18 +20,19 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-from numpy import array, meshgrid, ones
+from numpy import array, meshgrid, ones, arange
 
 class Mixin:
 
-    def plt_3d(self, plt3d, iter_range=[5, 0], sen_dims=array([24.048, 36.072]), dep_type=False):
+    def plt_3d(self, plt3d, amin, sen_dims=array([24.048, 36.072]), dep_type=False):
 
         x, y, z = ([] for _ in range(3))
         depth_types = ('refo', 'tria')
+        iter_range = [amin, amin+5]
+        planes = arange(iter_range[0], iter_range[1], 1)[::-1]
 
         try:
-            for el in range(iter_range[0], iter_range[1], -1):  # range(*iter_range, -1)
-
+            for el in planes:
                 # compute distances depending on depth types
                 if dep_type:
                     self.dx = el
@@ -51,8 +52,8 @@ class Mixin:
             raise e
 
         # determine maximum plot distance
-        z_max= max(z) if max(z) != float('inf') else self.non_inf_max(z)
-        max_dist = z_max + z_max/10
+        z_max = max(z) if max(z) != float('inf') else self.non_inf_max(z)
+        max_dist = z_max*1.1
 
         # perspective view (tbd: do only once at initialization)
         plt3d.view_init(elev=30, azim=-120)
@@ -78,8 +79,8 @@ class Mixin:
                 plt3d.scatter([z[i]], [0], [0], s=20, color='r') # plane-axis intersection
 
                 # plot marker
-                num_str = str(range(iter_range[0], iter_range[1], -1)[i])
-                label_str = "$d_"+num_str+"$" if dep_type else "$Z_{("+str(self.G)+', '+num_str+")}$"
+                num_str = str(round(planes[i],1))
+                label_str = "$d_{"+num_str+"}$" if dep_type else "$Z_{("+str(self.G)+', '+num_str+")}$"
                 plt3d.text(z[i], x[i]/2, y[i]/2, s=label_str, fontsize=18, family='sans-serif')
 
         # plot field of view lines

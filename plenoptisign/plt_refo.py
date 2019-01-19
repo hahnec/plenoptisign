@@ -41,14 +41,14 @@ class Mixin:
         ax.plot((0, z_max), (0, 0), linestyle='--', linewidth=plane_th, color='k')
 
         # main lens principal planes
-        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU), (-self.D/10, self.D/10), 'k--', linewidth=plane_th)
-        ax.plot((self.fs+self.hh+self.bU+self.HH, self.fs+self.hh+self.bU+self.HH), (-self.D/10, self.D/10), 'k--', linewidth=plane_th)
-        ax.text(self.fs+self.hh+self.bU+2, self.D/12+1, r'$H_{2U}$', fontsize=fontsize)
-        ax.text(self.fs+self.hh+self.bU+self.HH+2, self.D/12+1, r'$H_{1U}$', fontsize=fontsize)
+        ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU), (self._UijU[0], -self._UijU[0]), 'k--', linewidth=plane_th)
+        ax.plot((self.fs+self.hh+self.bU+self.HH, self.fs+self.hh+self.bU+self.HH), (self._UijU[0], -self._UijU[0]), 'k--', linewidth=plane_th)
+        ax.text(self.fs+self.hh+self.bU+2, -self._UijU[0]*.5, r'$H_{2U}$', fontsize=fontsize)
+        ax.text(self.fs+self.hh+self.bU+self.HH+2, -self._UijU[0]*.5, r'$H_{1U}$', fontsize=fontsize)
 
         # main lens focal point
-        ax.plot((self.fs+self.hh+self.bU+self.HH+self.fU, self.fs+self.hh+self.bU+self.HH+self.fU), (-self.D/100, self.D/100), 'k-', linewidth=plane_th)
-        ax.text(self.fs+self.hh+self.bU+self.HH+self.fU, -self.D/50, r'$F_U$', fontsize=fontsize)
+        ax.plot((self.fs+self.hh+self.bU+self.HH+self.fU, self.fs+self.hh+self.bU+self.HH+self.fU), (self._Uij[0]/50, -self._Uij[0]/50), 'k-', linewidth=plane_th)
+        ax.text(self.fs+self.hh+self.bU+self.HH+self.fU, self._UijU[0]*.15, r'$F_U$', fontsize=fontsize)
 
         # micro lens grid
         lens_y = arange(-self._sc*self.pm+self.pm/2, self._sc*self.pm+self.pm/2, self.pm)
@@ -71,15 +71,15 @@ class Mixin:
         ax.plot(pixel_x2, pixel_y2, linestyle='', marker='+', color='k')  # pixel borders 2
 
         # intersection planes
-        ax.plot((self.d, self.d), (self.D/10, -self.D/10), 'c-', linewidth=plane_th)
-        ax.plot((self.d_p, self.d_p), (self.D/10, -self.D/10), 'k-', linewidth=plane_th)
-        ax.plot((self.d_m, self.d_m), (self.D/10, -self.D/10), 'r-', linewidth=plane_th)
-        ax.text(self.d+5, self.D/12+1, r'$d_a$', fontsize=fontsize, color='c')
-        ax.text(self.d_p+5, self.D/12+1, r'$d_{a+}$', fontsize=fontsize, color='k')
-        ax.text(self.d_m+5, self.D/12+1, r'$d_{a-}$', fontsize=fontsize, color='r')
+        ax.plot((self.d, self.d), (self._UijU[0], -self._UijU[0]), 'c-', linewidth=plane_th)
+        ax.plot((self.d_p, self.d_p), (self._UijU[0], -self._UijU[0]), 'k-', linewidth=plane_th)
+        ax.plot((self.d_m, self.d_m), (self._UijU[0], -self._UijU[0]), 'r-', linewidth=plane_th)
+        ax.text(self.d+5, -self._UijU[0]*.9, r'$d_a$', fontsize=fontsize, color='c')
+        ax.text(self.d_p+5, -self._UijU[0]*.9, r'$d_{a+}$', fontsize=fontsize, color='k')
+        ax.text(self.d_m+5, -self._UijU[0]*.9, r'$d_{a-}$', fontsize=fontsize, color='r')
 
         # ray plots
-        # chief rays connceting micro and main lens centres
+        # chief rays connecting micro and main lens centres
         ax.plot((self.fs + self.hh, self.dA), (self._s[0], 0), linestyle='-', linewidth=ray_th, color='y')
         ax.plot((self.fs + self.hh, self.dA), (self._s[1], 0), linestyle='-', linewidth=ray_th, color='y')
 
@@ -87,11 +87,11 @@ class Mixin:
         ax.plot((0, self.fs), (self._u[0], self._s[0]), linestyle='-', linewidth=ray_th, color='b')
         ax.plot((0, self.fs), (self._u[1], self._s[1]), linestyle='-', linewidth=ray_th, color='g')
 
-        # micro lensax aux ray
+        # micro lens aux ray
         ax.plot((self.fs, self.fs+self.hh), (self._s[0], self._s[0]), linestyle='--', linewidth=ray_th, color='b')
         ax.plot((self.fs, self.fs+self.hh), (self._s[1], self._s[1]), linestyle='--', linewidth=ray_th, color='g')
 
-        # main lens image axside ray,
+        # main lens image side ray
         ax.plot((self.fs+self.hh, self.fs+self.hh+self.bU), (self._s[0], self._Uij[0]), 'b-', linewidth=ray_th)
         ax.plot((self.fs+self.hh, self.fs+self.hh+self.bU), (self._s[1], self._Uij[1]), 'g-', linewidth=ray_th)
 

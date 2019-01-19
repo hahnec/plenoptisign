@@ -24,11 +24,13 @@ __version__ = '1.0.0'
 
 VALS = [.009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'inf', 16., 1.0, 13., -6, 1]  # default values
 ABBS = ['pp', 'fs', 'hh', 'pm', 'dA', 'fU', 'HH', 'df', 'f_num', 'a', 'M', 'G', 'dx']
-EXPR = ['pixel pitch [mm]', 'micro lens focal length [mm]', 'micro lens principal plane distance [mm]',
-        'micro lens pitch [mm]', 'exit pupil distance [mm]', 'main lens focal length [mm]',
-        'main lens principal plane distance [mm]', 'main lens focus distance [mm]', 'F-number', 'shift parameter [px]',
-        'micro image resolution [px]', 'virtual camera gap', 'disparity [px]']
-RSLT = ['refoc. distance d', 'depth of field DoF', 'narrow DoF border', 'far DoF border', 'baseline B', 'tilt angle Phi', 'tria. distance Z']
+EXPR = ['Pixel Pitch [mm]', 'Micro Lens Focal Length [mm]', 'Micro Lens Principal Plane Distance [mm]',
+        'Micro Lens Pitch [mm]', 'Exit Pupil Distance [mm]', 'Main Lens Focal Length [mm]',
+        'Main Lens Principal Plane Distance [mm]', 'Main Lens Focus Distance [mm]', 'F-number', 'Shift Parameter [px]',
+        'Micro Image Resolution [px]', 'Virtual Camera Gap', 'Disparity [px]']
+RSLT = ['Refoc. Distance', 'Depth of Field', 'Narrow DoF Border', 'Far DoF Border', 'Baseline', 'Tilt Angle', 'tria. distance']
+RSYM = ["$$d_a$$", "$$DoF$$", "$$d_{a-}$$", "$$d_{a+}$$", "$$B$$", "$$\Phi$$", "$$Z$$"]
+ESYM = ['$p_p$', '$f_s$', '$H_..$', '$p_m$', "$d_{A'}$", '$f_U$', '$H_{1U}H_{2U}$', '$d_f$', '$F#$', '$a$', '$M$', '$G$', '$\delta x$']
 UNTS = [' mm', ' mm', ' mm', ' mm', ' mm', ' deg', ' mm']
 
 # GUI dimensions
@@ -37,7 +39,7 @@ PF = 10 # frame margin width
 PX = 10 # horizontal margin width
 PY = 10 # horizontal margin width
 BTN_W = 12
-MSG_W = 140
+MSG_W = 180
 DEC_P = 4
 
 class PlenoptisignError(Exception):

@@ -43,14 +43,14 @@ class Mixin:
         # main lens principal planes
         H2 = self.fs + self.hh + self.bU
         H1 = self.fs + self.hh + self.bU + self.HH
-        ax.plot((H2, H2), (-self.D / 10, self.D / 10), linestyle='--', linewidth=plane_th, color='k')
-        ax.plot((H1, H1), (-self.D / 10, self.D / 10), linestyle='--', linewidth=plane_th, color='k')
+        ax.plot((H2, H2), (self._Uij[0], -self._Uij[0]), linestyle='--', linewidth=plane_th, color='k')
+        ax.plot((H1, H1), (self._Uij[0], -self._Uij[0]), linestyle='--', linewidth=plane_th, color='k')
         ax.text(H2 + 2, self.D / 12 + 1, r'$H_{2U}$', fontsize=fontsize)
         ax.text(H1 + 2, self.D / 12 + 1, r'$H_{1U}$', fontsize=fontsize)
 
         # main lens focal point
-        ax.plot((H1 + self.fU, H1 + self.fU), (-self.D/100, self.D/100), 'k-', linewidth=plane_th)
-        ax.text(H1 + self.fU, -self.D / 50, r'$F_U$', fontsize=fontsize)
+        ax.plot((H1 + self.fU, H1 + self.fU), (self._Uij[0]/50, -self._Uij[0]/50), 'k-', linewidth=plane_th)
+        ax.text(H1 + self.fU, self._UijU[0]*.15, r'$F_U$', fontsize=fontsize)
 
         # micro lens grid
         lens_y = arange(-self._sc * self.pm + self.pm / 2, self._sc * self.pm + self.pm / 2, self.pm)
@@ -65,14 +65,14 @@ class Mixin:
         ax.plot((0, 0), (self._sc * self.pm, -self._sc * self.pm), linestyle='-', linewidth=plane_th, color='k')
 
         # exit and entrance pupil plane
-        ax.plot((self.dA, self.dA), (-self.D / 10, self.D / 10), linestyle='--', linewidth=plane_th, color='k')
-        ax.plot((self._ent_pup_pos, self._ent_pup_pos), (-self.D/10, self.D/10), 'k--', linewidth=plane_th)
+        ax.plot((self.dA, self.dA), (self._Uij[0], -self._Uij[0]), linestyle='--', linewidth=plane_th, color='k')
+        ax.plot((self._ent_pup_pos, self._ent_pup_pos), (self._Uij[0], -self._Uij[0]), 'k--', linewidth=plane_th)
         ax.text(self.dA + 2, self.D / 12 + 1, r"$d_{A'}$", fontsize=fontsize)
         ax.text(self._ent_pup_pos + 2, self.D / 12 + 1, r"$d_{A''}$", fontsize=fontsize)
 
         # intersection planes
-        ax.plot((self.Z, self.Z), (self.D / 10, -self.D / 10), linestyle='-', linewidth=plane_th, color='r')
-        ax.text(self.Z + self.Z/100, self.D / 12 + 1, r"$\Delta x="+str(self.dx)+"$", color='r', fontsize=fontsize)
+        ax.plot((self.Z, self.Z), (self._Uij[0], -self._Uij[0]), linestyle='-', linewidth=plane_th, color='r')
+        ax.text(self.Z + self.Z/100, self._Uij[0]*.8, r"$\Delta x="+str(self.dx)+"$", color='r', fontsize=fontsize)
 
         # ray plots
 
@@ -101,6 +101,6 @@ class Mixin:
         ax.plot((self._ent_pup_pos, self.Z), (0, 0), linestyle='--', linewidth=ray_th, color='r')
 
         # baseline
-        ax.text(self._ent_pup_pos-100, self._Uij[0]+self._Uij[0]/10, r"$B_{"+str(self.G)+"}$", color='r', fontsize=fontsize)
+        ax.text(self._ent_pup_pos-100, self._Uij[0]*1.1, r"$B_{"+str(self.G)+"}$", color='r', fontsize=fontsize)
 
         return ax
