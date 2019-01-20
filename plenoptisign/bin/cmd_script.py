@@ -152,7 +152,7 @@ def main():
             mainloop()
             fig = figure(figsize=(9, 5))
             ax = Axes3D(fig)
-            obj.plt_3d(ax, dep_type=0)
+            obj.plt_3d(ax, amin=obj.a, dep_type=0)
             fig.show()
             mainloop()
         if ret_tria:
@@ -163,7 +163,7 @@ def main():
             mainloop()
             fig = figure(figsize=(9, 5))
             ax = Axes3D(fig)
-            obj.plt_3d(ax, dep_type=1)
+            obj.plt_3d(ax, amin=obj.dx, dep_type=1)
             fig.show()
             mainloop()
 
