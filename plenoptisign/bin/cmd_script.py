@@ -39,11 +39,11 @@ def usage():
     print("\nplenoptisign v" + __version__ + " is a light field geometry estimator written by C. Hahne")
     print("Usage: plenoptisign <options>\n")
     print("Options:")
-    print("-r, --refo               Refocusing results only flag")
-    print("-t, --tria               Triangulation results only flag")
-    print("-p, --plot               Plot paraxial rays flag")
-    print("-g, --gui                Open graphical user interface")
-    print("-h, --help               Print this help message.")
+    print("-g, --gui                open graphical user interface")
+    print("-p, --plot               plot paraxial rays")
+    print("-r, --refo               refocusing results only")
+    print("-t, --tria               triangulation results only")
+    print("-h, --help               print this help message.")
     print("")
 
 
