@@ -42,6 +42,9 @@ BTN_W = 12
 MSG_W = 180
 DEC_P = 4
 
+# plot dimensions
+FIG_SIZE = (8, 5)
+
 class PlenoptisignError(Exception):
     def __init__(self, *args, **kwargs):
         Exception.__init__(self, *args, **kwargs)

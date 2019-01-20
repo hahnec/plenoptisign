@@ -29,7 +29,7 @@ try:
 except ImportError:
     import Tkinter as tk
 
-from plenoptisign import BTN_W
+from plenoptisign import BTN_W, FIG_SIZE
 
 # make object for plot widget
 class PltWidget(tk.Frame):
@@ -41,7 +41,7 @@ class PltWidget(tk.Frame):
         self.parent = parent
 
         # figure init
-        self.fig = Figure(figsize=(8, 5))
+        self.fig = Figure(figsize=FIG_SIZE)
         self.ax = self.fig.gca()
 
         # a tk.DrawingArea
