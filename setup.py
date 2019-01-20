@@ -17,7 +17,7 @@ OPTIONS = {
     "optimize": 2,
     "iconfile":'plenoptisign/gui/misc/circlecompass_1055093.icns',
     "excludes": ['pillow', 'Image'],
-    "plist": dict(NSHumanReadableCopyright='2018 Christopher Hahne')# CFBundleShortVersionString='0.1.0'
+    "plist": dict(NSHumanReadableCopyright='2018 Christopher Hahne')
 }
 
 if platform == 'darwin':
@@ -30,7 +30,7 @@ if platform == 'darwin':
  )
 elif platform == 'win32':
  extra_options = dict(
-     setup_requires=['py2exe'],
+     setup_requires=[],
      app=APP,
      data_files=DATA_FILES,
  )
