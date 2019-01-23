@@ -20,14 +20,16 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from mpl_toolkits.mplot3d import Axes3D
 
 try:
     import tkinter as tk
+    from matplotlib.backends.backend_tkagg import NavigationToolbar2Tk
 except ImportError:
     import Tkinter as tk
+    from matplotlib.backends.backend_tkagg import NavigationToolbar2TkAgg as NavigationToolbar2Tk
 
 from plenoptisign import BTN_W, FIG_SIZE
 
