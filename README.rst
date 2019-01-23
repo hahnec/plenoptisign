@@ -17,8 +17,9 @@ Installation
     2. extract the archive to obtain the executable
 
 * **command-line**:
-    1. download the source_, e.g. using ``$ git clone https://github.com/hahnec/plenoptisign.git``
-    2. install with ``$ python setup.py install`` from the source_ directory
+    1. download the source_ using ``$ git clone https://github.com/hahnec/plenoptisign.git``
+    2. go to the root directory ``$ cd plenoptisign``
+    3. install with ``$ python setup.py install`` from the root directory
 
 * **CGI server**:
     1. download the source_
