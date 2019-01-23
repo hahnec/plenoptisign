@@ -32,7 +32,7 @@ elif platform == 'win32':
  extra_options = dict(
      setup_requires=[],
      app=APP,
-     data_files=DATA_FILES,
+     data_files=[],
  )
 else:
  extra_options = dict(
