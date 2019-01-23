@@ -25,9 +25,6 @@ try:
 except ImportError:
     import Tkinter as tk
 
-from sys import exit
-import webbrowser
-
 from plenoptisign import PX, PY, BTN_W
 
 # make object for plot widget
@@ -56,5 +53,5 @@ class CmdWidget(tk.Frame):
         abt_btn.grid(row=1, column=1, padx=PX, pady=PY)
 
         # quit button
-        qit_btn = tk.Button(master=self, text='Quit', width=int(BTN_W), command=exit)
+        qit_btn = tk.Button(master=self, text='Quit', width=int(BTN_W), command=self.parent.quit_app)
         qit_btn.grid(row=1, column=2, padx=PX, pady=PY)

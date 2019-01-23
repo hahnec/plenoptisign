@@ -28,7 +28,7 @@ except ImportError:
     from tkFileDialog import askopenfilename
 
 from tempfile import mkstemp
-from sys import platform
+from sys import platform, exit
 from os.path import normpath
 
 # local python files
@@ -175,9 +175,21 @@ class PlenoptisignApp(tk.Tk):
         return True
 
     def open_abt_win(self):
+        ''' open about window '''
 
-        # instantiate about window widget as object
+        # instantiate about widget as object
         AbtWidget()
+
+        return True
+
+    def quit_app(self):
+        ''' quit app '''
+
+        # destroy tkinter object
+        self.destroy()
+        exit()
+
+        return True
 
 
 if __name__ == "__main__":
