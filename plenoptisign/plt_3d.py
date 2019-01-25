@@ -24,10 +24,21 @@ from numpy import array, meshgrid, ones, arange
 
 class Mixin:
 
+    def plt_3d_init(self, plt3d):
+
+        # perspective view init
+        plt3d.view_init(elev=30, azim=-120)
+
+        # start plotting axis matter
+        plt3d.set_xlabel('z [mm]')
+        plt3d.set_ylabel('x [mm]')
+        plt3d.set_zlabel('y [mm]')
+
+        return True
+
     def plt_3d(self, plt3d, amin, sen_dims=array([24.048, 36.072]), dep_type=False):
 
         x, y, z = ([] for _ in range(3))
-        depth_types = ('refo', 'tria')
         iter_range = [amin, amin+5]
         planes = arange(iter_range[0], iter_range[1], 1)[::-1]
 
@@ -55,14 +66,7 @@ class Mixin:
         z_max = max(z) if max(z) != float('inf') else self.non_inf_max(z)
         max_dist = z_max*1.1
 
-        # perspective view (tbd: do only once at initialization)
-        plt3d.view_init(elev=30, azim=-120)
-
-        # start plotting axis matter
-        plt3d.set_xlabel('z [mm]')
-        plt3d.set_ylabel('x [mm]')
-        plt3d.set_zlabel('y [mm]')
-        plt3d.set_title('3-D ' + depth_types[dep_type] + ' plot')
+        plt3d.set_title('3-D ' + ('refo', 'tria')[dep_type] + ' plot')
 
         # plot camera axis and sensor
         plt3d.scatter(0, 0, 0, s=20, color='k')

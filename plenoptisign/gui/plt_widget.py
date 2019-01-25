@@ -102,3 +102,4 @@ class PltWidget(tk.Frame):
             self.ax = self.fig.gca()
         else:
             self.ax = Axes3D(self.fig)
+            self.parent.obj.plt_3d_init(self.ax)

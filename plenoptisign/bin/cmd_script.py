@@ -52,7 +52,7 @@ def parse_options(argv):
     # default settings
     refo_opt = True
     tria_opt = True
-    plot_opt = False
+    plot_opt = True
 
     try:
         opts, args = getopt(argv, ":hrtpg", ["help", "refo", "tria", "plot", "gui"])
@@ -152,6 +152,7 @@ def main():
             mainloop()
             fig = figure(figsize=FIG_SIZE)
             ax = Axes3D(fig)
+            obj.plt_3d_init(ax)
             obj.plt_3d(ax, amin=obj.a, dep_type=0)
             fig.show()
             mainloop()
@@ -163,6 +164,7 @@ def main():
             mainloop()
             fig = figure(figsize=FIG_SIZE)
             ax = Axes3D(fig)
+            obj.plt_3d_init(ax)
             obj.plt_3d(ax, amin=obj.dx, dep_type=1)
             fig.show()
             mainloop()
