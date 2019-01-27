@@ -23,6 +23,9 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 # external libs
 from numpy import array, meshgrid, ones, arange
 
+# local python files
+from . import PlenoptisignError
+
 class Mixin:
 
     def plt_3d_init(self, plt3d):
@@ -63,7 +66,7 @@ class Mixin:
                 y.append(yy)
 
         except TypeError as e:
-            raise e
+            raise PlenoptisignError(e)
 
         # determine maximum plot distance
         z_max = max(z) if max(z) != float('inf') else self.non_inf_max(z)
