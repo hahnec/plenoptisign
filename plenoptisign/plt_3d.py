@@ -20,11 +20,13 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
+# external libs
 from numpy import array, meshgrid, ones, arange
 
 class Mixin:
 
     def plt_3d_init(self, plt3d):
+        ''' set initial parameters for 3D plot '''
 
         # perspective view init
         plt3d.view_init(elev=30, azim=-120)
@@ -37,6 +39,7 @@ class Mixin:
         return True
 
     def plt_3d(self, plt3d, amin, sen_dims=array([24.048, 36.072]), dep_type=False):
+        ''' draw depth planes for Axes3D class instance based on respective provided method (refo or tria) '''
 
         x, y, z = ([] for _ in range(3))
         iter_range = [amin, amin+5]
@@ -99,6 +102,7 @@ class Mixin:
 
     @staticmethod
     def non_inf_max(input):
+        ''' get maximum value in input list without consideration of infinity '''
 
         try:
             max_val = max([x for x in input if x != float('inf')])
