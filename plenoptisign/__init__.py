@@ -34,13 +34,13 @@ ESYM = ['$p_p$', '$f_s$', '$H_..$', '$p_m$', "$d_{A'}$", '$f_U$', '$H_{1U}H_{2U}
 UNTS = [' mm', ' mm', ' mm', ' mm', ' mm', ' deg', ' mm']
 
 # GUI dimensions
-SW = 8  # spinbox width
-PF = 10 # frame margin width
-PX = 10 # horizontal margin width
-PY = 10 # horizontal margin width
-BTN_W = 12
-MSG_W = 180
-DEC_P = 4
+SW = 8          # spinbox width
+PF = 10         # frame margin width
+PX = 10         # horizontal margin width
+PY = 10         # horizontal margin width
+BTN_W = 12      # button width
+MSG_W = 180     # message width
+DEC_P = 4       # fractional digits
 
 # plot dimensions
 FIG_SIZE = (8, 5)
