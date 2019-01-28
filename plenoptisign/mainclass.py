@@ -26,7 +26,7 @@ from . import plt_refo
 from . import plt_tria
 from . import plt_3d
 
-from numpy import zeros
+import numpy as np
 
 
 class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.Mixin):
@@ -58,19 +58,19 @@ class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.M
 
         # variables used for plot functions
         self._sc = 0
-        self._uc = zeros(2)  # micro image centers (MICs)
-        self._u = zeros(2)  # micro image ray positions
-        self._s = zeros(2)  # micro lens positions
-        self._mij = zeros(2)  # image side ray slopes
-        self._Uij = zeros(2)  # intersections at the main lens
-        self._Fij = zeros(2)  # intersections at the main lens' focal plane
-        self._qij = zeros(2)  # object side ray slopes
-        self._uU = zeros(2)
-        self._uL = zeros(2)
-        self._sU = zeros(2)
-        self._sL = zeros(2)
-        self._UijU = zeros(2)
-        self._UijL = zeros(2)
+        self._uc = np.zeros(2)  # micro image centers (MICs)
+        self._u = np.zeros(2)  # micro image ray positions
+        self._s = np.zeros(2)  # micro lens positions
+        self._mij = np.zeros(2)  # image side ray slopes
+        self._Uij = np.zeros(2)  # intersections at the main lens
+        self._Fij = np.zeros(2)  # intersections at the main lens' focal plane
+        self._qij = np.zeros(2)  # object side ray slopes
+        self._uU = np.zeros(2)
+        self._uL = np.zeros(2)
+        self._sU = np.zeros(2)
+        self._sL = np.zeros(2)
+        self._UijU = np.zeros(2)
+        self._UijL = np.zeros(2)
 
         # console message initialization
         self.console_msg = ""

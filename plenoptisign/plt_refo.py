@@ -20,7 +20,7 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-from numpy import arange, ones, zeros, ceil
+import numpy as np
 
 class Mixin:
 
@@ -51,9 +51,9 @@ class Mixin:
         ax.text(self.fs+self.hh+self.bU+self.HH+self.fU, self._UijU[0]*.15, r'$F_U$', fontsize=fontsize)
 
         # micro lens grid
-        lens_y = arange(-self._sc*self.pm+self.pm/2, self._sc*self.pm+self.pm/2, self.pm)
-        lens_f = arange(-self._sc*self.pm, self._sc*self.pm, self.pm)
-        lens_x = (self.fs+self.hh) * ones(len(lens_y))
+        lens_y = np.arange(-self._sc*self.pm+self.pm/2, self._sc*self.pm+self.pm/2, self.pm)
+        lens_f = np.arange(-self._sc*self.pm, self._sc*self.pm, self.pm)
+        lens_x = (self.fs+self.hh) * np.ones(len(lens_y))
         ax.plot(lens_x, lens_y, linestyle='', marker='+', linewidth=plane_th, color='k') # micro lens borders
         ax.plot(lens_x, lens_f, linestyle='', marker='.', linewidth=plane_th, color='k') # micro optical axis
         ax.plot((self.fs, self.fs), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
@@ -61,12 +61,12 @@ class Mixin:
 
         # sensor plane
         ax.plot((0, 0), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
-        pixel_y0 = arange(self._uc[0]-self.pp/2-ceil(self.pm/self.pp)/2*self.pp,
-                             self._uc[0]+self.pp/2+ceil(self.pm/self.pp)/2*self.pp, self.pp)
-        pixel_y2 = arange(self._uc[1]-self.pp/2-ceil(self.pm/self.pp)/2*self.pp,
-                             self._uc[1]+self.pp/2+ceil(self.pm/self.pp)/2*self.pp, self.pp)
-        pixel_x0 = zeros(len(pixel_y0))
-        pixel_x2 = zeros(len(pixel_y2))
+        pixel_y0 = np.arange(self._uc[0]-self.pp/2-np.ceil(self.pm/self.pp)/2*self.pp,
+                             self._uc[0]+self.pp/2+np.ceil(self.pm/self.pp)/2*self.pp, self.pp)
+        pixel_y2 = np.arange(self._uc[1]-self.pp/2-np.ceil(self.pm/self.pp)/2*self.pp,
+                             self._uc[1]+self.pp/2+np.ceil(self.pm/self.pp)/2*self.pp, self.pp)
+        pixel_x0 = np.zeros(len(pixel_y0))
+        pixel_x2 = np.zeros(len(pixel_y2))
         ax.plot(pixel_x0, pixel_y0, linestyle='', marker='+', color='k')  # pixel borders 1
         ax.plot(pixel_x2, pixel_y2, linestyle='', marker='+', color='k')  # pixel borders 2
 

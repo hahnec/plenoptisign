@@ -20,7 +20,7 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-from numpy import arange, ones
+import numpy as np
 
 class Mixin:
 
@@ -53,9 +53,9 @@ class Mixin:
         ax.text(H1 + self.fU, self._UijU[0]*.15, r'$F_U$', fontsize=fontsize)
 
         # micro lens grid
-        lens_y = arange(-self._sc * self.pm + self.pm / 2, self._sc * self.pm + self.pm / 2, self.pm)
-        lens_f = arange(-self._sc * self.pm, self._sc * self.pm, self.pm)
-        lens_x = (self.fs + self.hh) * ones(len(lens_y))
+        lens_y = np.arange(-self._sc * self.pm + self.pm / 2, self._sc * self.pm + self.pm / 2, self.pm)
+        lens_f = np.arange(-self._sc * self.pm, self._sc * self.pm, self.pm)
+        lens_x = (self.fs + self.hh) * np.ones(len(lens_y))
         ax.plot(lens_x, lens_y, linestyle='', marker='+', linewidth=plane_th, color='k')  # micro lens borders
         ax.plot(lens_x, lens_f, linestyle='', marker='.', linewidth=plane_th, color='k')  # micro optical axis
         ax.plot((self.fs, self.fs), (self._sc * self.pm, -self._sc * self.pm), 'k-', linewidth=plane_th)

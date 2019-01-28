@@ -20,9 +20,9 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-from numpy import array, degrees, tan, arctan, equal, round, transpose, radians
+import numpy as np
 from .solver import solve_sle
-from . import PlenoptisignError
+from . import PlenoptisignError, DEC_P
 
 class Mixin:
 
@@ -45,28 +45,28 @@ class Mixin:
             self._qij[k] = (self._mij[k] * self.fU - self._Uij[k]) / self.fU
 
         # locate object side related virtual camera position
-        self._intersect, self.B = solve_sle(array([[-self._qij[0], 1], [-self._qij[1], 1]]),
-                                            array([self._Uij[0], self._Uij[1]]))
+        self._intersect, self.B = solve_sle(np.array([[-self._qij[0], 1], [-self._qij[1], 1]]),
+                                            np.array([self._Uij[0], self._Uij[1]]))
         # orientation of virtual camera
-        self.phi = degrees(arctan(self._qij[0]))
+        self.phi = np.degrees(np.arctan(self._qij[0]))
 
         # longitudinal entrance pupil position
         self._ent_pup_pos = self.bU + self.HH + self._intersect
 
         # validate baseline approach (for debug purposes)
         B_alt = self._qij[0] * self._intersect + self._Uij[0]
-        if not (equal(round(self.B), round(B_alt))):
+        if not (np.equal(round(self.B, DEC_P), round(B_alt, DEC_P))):
             raise PlenoptisignError('Baseline validation failed')
 
         # triangulation
         b_new = self.bU
         self._pp_new = (-self._qij[1] * b_new + self.B) - (-self._qij[0] * b_new + self.B)
-        dx_new = transpose(self.dx) * self._pp_new
+        dx_new = np.transpose(self.dx) * self._pp_new
 
         # is depth plane at infinity?
         if self.bU <= self.fU and self.dx <= 0:
             self.Z = float('inf')
         elif self.bU >= self.fU:
-            self.Z = self.B * b_new / (dx_new + b_new * -tan(radians(self.phi)))
+            self.Z = self.B * b_new / (dx_new + b_new * -np.tan(np.radians(self.phi)))
 
         return True

@@ -26,9 +26,9 @@ from matplotlib.pyplot import figure
 from mpl_toolkits.mplot3d import Axes3D
 
 try:
-    from Tkinter import mainloop
+    import Tkinter as tk
 except ImportError:
-    from tkinter import mainloop
+    import tkinter as tk
 
 from plenoptisign import VALS, ABBS, EXPR, DEC_P, FIG_SIZE, __version__
 from plenoptisign.mainclass import MainClass
@@ -149,25 +149,25 @@ def main():
             ax = fig.gca()
             obj.plt_refo(ax, plane_th=.5, ray_th=.5)
             fig.show()
-            mainloop()
+            tk.mainloop()
             fig = figure(figsize=FIG_SIZE)
             ax = Axes3D(fig)
             obj.plt_3d_init(ax)
             obj.plt_3d(ax, amin=obj.a, dep_type=0)
             fig.show()
-            mainloop()
+            tk.mainloop()
         if ret_tria:
             fig = figure(figsize=FIG_SIZE)
             ax = fig.gca()
             obj.plt_tria(ax, plane_th=.5, ray_th=.5)
             fig.show()
-            mainloop()
+            tk.mainloop()
             fig = figure(figsize=FIG_SIZE)
             ax = Axes3D(fig)
             obj.plt_3d_init(ax)
             obj.plt_3d(ax, amin=obj.dx, dep_type=1)
             fig.show()
-            mainloop()
+            tk.mainloop()
 
 
 if __name__ == "__main__":

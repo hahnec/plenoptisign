@@ -20,9 +20,9 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-from numpy import zeros, array, equal, round
+import numpy as np
 from .solver import solve_sle
-from . import PlenoptisignError
+from . import PlenoptisignError, DEC_P
 
 class Mixin:
 
@@ -30,7 +30,7 @@ class Mixin:
         ''' computes the distance and depth of field of a plane that is computationally focused based on a standard plenoptic camera '''
 
         # local variable initialization
-        j, i, mc, mij, qij, mU, mL, mijU, mijL, FijL, FijU, qijU, qijL, d_n, d_p_n, d_m_n = [zeros(2) for _ in range(16)]
+        j, i, mc, mij, qij, mU, mL, mijU, mijL, FijL, FijU, qijU, qijL, d_n, d_p_n, d_m_n = [np.zeros(2) for _ in range(16)]
 
         # compute main lens image distance
         self.compute_bU()
@@ -47,7 +47,7 @@ class Mixin:
 
         # align intersection to be as paraxial as possible
         c = (self.M-1)/2
-        j[0] = -round(self.a*(self.M-1)/2)
+        j[0] = -np.round(self.a*(self.M-1)/2, DEC_P)
         j[1] = self.a*(self.M-1)+j[0]
 
         # set starting positions for micro lens s and pixel u
@@ -80,9 +80,9 @@ class Mixin:
             qijL[k] = (FijL[k]-self._UijL[k])/self.fU
 
         # ray intersections behind image sensor
-        b_new = self.bU-solve_sle(array([[-mij[0], 1], [-mij[1], 1]]), array([self._s[0], self._s[1]]))[0]
-        b_new_m = self.bU-solve_sle(array([[-mijL[0], 1], [-mijU[1], 1]]), array([self._sL[0], self._sU[1]]))[0]
-        b_new_p = self.bU-solve_sle(array([[-mijU[0], 1], [-mijL[1], 1]]), array([self._sU[0], self._sL[1]]))[0]
+        b_new = self.bU-solve_sle(np.array([[-mij[0], 1], [-mij[1], 1]]), np.array([self._s[0], self._s[1]]))[0]
+        b_new_m = self.bU-solve_sle(np.array([[-mijL[0], 1], [-mijU[1], 1]]), np.array([self._sL[0], self._sU[1]]))[0]
+        b_new_p = self.bU-solve_sle(np.array([[-mijU[0], 1], [-mijL[1], 1]]), np.array([self._sU[0], self._sL[1]]))[0]
 
         # is refocused object plane not at infinity?
         if self.bU >= self.fU and b_new > self.fU:
@@ -92,12 +92,12 @@ class Mixin:
             d_m_n = (1/self.fU-1/b_new_m)**-1+self.bU+self.HH
 
             # solve for ray intersections in object space to obtain distances and DoF
-            self.d = solve_sle(array([[-qij[0], 1], [-qij[1], 1]]), array([self._Uij[0], self._Uij[1]]))[0]\
-                                +self.bU+self.HH
-            self.d_p = solve_sle(array([[-qijU[0], 1], [-qijL[1], 1]]), array([self._UijU[0], self._UijL[1]]))[0]\
-                                +self.bU+self.HH
-            self.d_m = solve_sle(array([[-qijL[0], 1], [-qijU[1], 1]]), array([self._UijL[0], self._UijU[1]]))[0]\
-                                +self.bU+self.HH
+            self.d = solve_sle(np.array([[-qij[0], 1], [-qij[1], 1]]), np.array([self._Uij[0], self._Uij[1]]))[0]\
+                                + self.bU+self.HH
+            self.d_p = solve_sle(np.array([[-qijU[0], 1], [-qijL[1], 1]]), np.array([self._UijU[0], self._UijL[1]]))[0]\
+                                + self.bU+self.HH
+            self.d_m = solve_sle(np.array([[-qijL[0], 1], [-qijU[1], 1]]), np.array([self._UijL[0], self._UijU[1]]))[0]\
+                                + self.bU+self.HH
             self.dof = self.d_p-self.d_m
 
             # is far depth of field border at infinity?
@@ -118,8 +118,8 @@ class Mixin:
                 d_m_n = float('Inf')
                 self.dof = float('Inf')
             else:
-                self.d_m = solve_sle(array([[-qijL[0], 1], [-qijU[1], 1]]),
-                                     array([self._UijL[0], self._UijU[1]]))[0]+self.bU+self.HH
+                self.d_m = solve_sle(np.array([[-qijL[0], 1], [-qijU[1], 1]]),
+                                     np.array([self._UijL[0], self._UijU[1]]))[0]+self.bU+self.HH
                 d_m_n = (1/self.fU-1/b_new_m)**-1+self.bU+self.HH
                 self.dof = self.d_p-self.d_m
         # is refocused object plane beyond infinity?
@@ -137,8 +137,8 @@ class Mixin:
                 d_m_n = float('Inf')
                 self.dof = float('Inf')
             else:
-                self.d_m = solve_sle(array([[-qijL[0], 1], [-qijU[1], 1]]),
-                                     array([self._UijL[0], self._UijU[1]]))[0]+self.bU+self.HH
+                self.d_m = solve_sle(np.array([[-qijL[0], 1], [-qijU[1], 1]]),
+                                     np.array([self._UijL[0], self._UijU[1]]))[0]+self.bU+self.HH
                 d_m_n = (1/self.fU-1/b_new_m)**-1+self.bU+self.HH
                 self.dof = self.d_p-self.d_m
             # is farther depth of field border at infinity? (redundant since central plane already at infinity)
@@ -151,12 +151,14 @@ class Mixin:
                 d_m_n = float('Inf')
                 self.dof = float('Inf')
             else:
-                self.d_p = solve_sle(array([[-qijU[0], 1], [-qijL[1], 1]]),
-                                     array([self._UijU[0], self._UijL[1]]))[0]+self.bU+self.HH
+                self.d_p = solve_sle(np.array([[-qijU[0], 1], [-qijL[1], 1]]),
+                                     np.array([self._UijU[0], self._UijL[1]]))[0]+self.bU+self.HH
                 d_p_n = (1/self.fU-1/b_new_p)**-1+self.bU+self.HH
 
         # comparison of image and object side approach (for debugging purposes)
-        if not (equal(round(d_n), round(self.d)) or equal(round(d_p_n), round(self.d_p)) or equal(round(d_m_n), round(self.d_m))):
+        if not (np.equal(round(d_n, DEC_P), round(self.d, DEC_P)) or
+                np.equal(round(d_p_n, DEC_P), round(self.d_p, DEC_P)) or
+                np.equal(round(d_m_n, DEC_P), round(self.d_m, DEC_P))):
             raise PlenoptisignError('Results for object and image side intersections are different')
 
         return True

@@ -28,7 +28,7 @@ except ImportError:
     from tkFileDialog import askopenfilename
 
 from tempfile import mkstemp
-from sys import platform, exit
+import sys
 from os.path import normpath
 
 # local python files
@@ -62,7 +62,7 @@ class PlenoptisignApp(tk.Tk):
         self.wm_title("Plenoptisign-"+__version__)
 
         # icon handling
-        if platform == 'win32':
+        if sys.platform == 'win32':
             self.iconbitmap(default=ICON_PATH)
 
         # initialize parameters
@@ -187,7 +187,7 @@ class PlenoptisignApp(tk.Tk):
 
         # destroy tkinter object
         self.destroy()
-        exit()
+        sys.exit()
 
         return True
 

@@ -21,9 +21,8 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 """
 
 import json
-from os.path import join, abspath, isdir
-from os import makedirs
-from errno import EEXIST
+import os
+import errno
 
 # local python files
 from plenoptisign import ABBS, VALS
@@ -34,7 +33,7 @@ class Config(object):
     def __init__(self):
 
         self.params = {}
-        self.dir_path = join(abspath('.'), 'cfg')
+        self.dir_path = os.path.join(os.path.abspath('.'), 'cfg')
 
         try:
             self.read_json()
@@ -48,7 +47,7 @@ class Config(object):
     def read_json(self, fp=None):
 
         if not fp:
-            fp = join(self.dir_path, 'cfg.json')
+            fp = os.path.join(self.dir_path, 'cfg.json')
 
         with open(fp, 'r') as f:
             json_data = json.load(f)#self.params.update(json.load(f))
@@ -62,7 +61,7 @@ class Config(object):
     def write_json(self, fp=None):
 
         if not fp:
-            fp = join(self.dir_path, 'cfg.json')
+            fp = os.path.join(self.dir_path, 'cfg.json')
         try:
             # create config folder (if not already present)
             self.mkdir_p(self.dir_path)
@@ -83,9 +82,9 @@ class Config(object):
     @staticmethod
     def mkdir_p(path):
         try:
-            makedirs(path)
+            os.makedirs(path)
         except OSError as exc:  # Python >2.5
-            if exc.errno == EEXIST and isdir(path):
+            if exc.errno == errno.EEXIST and os.path.isdir(path):
                 pass
             else:
                 raise
