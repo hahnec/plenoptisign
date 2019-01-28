@@ -37,8 +37,12 @@ class Config(object):
 
         try:
             self.read_json()
+            # test if config parameters present
             if not self.params.keys():
                 raise PlenoptisignError('Config file could not be loaded')
+            # number of values in loaded config is supposed to equal config constants specified in the tool
+            if not len(self.params.keys()) == len(ABBS):
+                raise PlenoptisignError('Config file corrupted')
         except:
             self.default_values()
 
