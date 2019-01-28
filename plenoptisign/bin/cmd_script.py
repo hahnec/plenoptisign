@@ -33,6 +33,7 @@ except ImportError:
 from plenoptisign import VALS, ABBS, EXPR, DEC_P, FIG_SIZE, __version__
 from plenoptisign.mainclass import MainClass
 from plenoptisign.gui import PlenoptisignApp
+from plenoptisign import PlenoptisignError
 
 def usage():
 
@@ -174,4 +175,4 @@ if __name__ == "__main__":
     try:
         exit(main())
     except Exception as e:
-        print(e)
+        PlenoptisignError(e)

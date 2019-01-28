@@ -32,7 +32,7 @@ import sys
 from os.path import normpath
 
 # local python files
-from plenoptisign import __version__, ABBS, PF, DEC_P
+from plenoptisign import __version__, ABBS, PF, DEC_P, PlenoptisignError
 from plenoptisign.mainclass import MainClass
 from plenoptisign.gui.cfg import Config
 from plenoptisign.gui.cfg_widget import CfgWidget
@@ -193,6 +193,8 @@ class PlenoptisignApp(tk.Tk):
 
 
 if __name__ == "__main__":
-
-    MainWin = PlenoptisignApp(None)
-    MainWin.mainloop()
+    try:
+        MainWin = PlenoptisignApp(None)
+        MainWin.mainloop()
+    except Exception as e:
+        PlenoptisignError(e)

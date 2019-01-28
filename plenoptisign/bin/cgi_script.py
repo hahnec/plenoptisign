@@ -24,7 +24,7 @@ import cgi, cgitb
 import sys, csv, datetime, os.path
 sys.path.append(os.path.abspath('../..'))
 from plenoptisign.mainclass import MainClass
-from plenoptisign import DEC_P
+from plenoptisign import PlenoptisignError, DEC_P
 
 def cgi_read():
 
@@ -152,4 +152,4 @@ if __name__ == "__main__":
     try:
         sys.exit(cgi_main())
     except Exception as e:
-        print(e)
+        PlenoptisignError(e)
