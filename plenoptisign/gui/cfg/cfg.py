@@ -46,7 +46,6 @@ class Config(object):
         except:
             self.default_values()
 
-        return None
 
     def read_json(self, fp=None):
 
@@ -72,7 +71,7 @@ class Config(object):
             # write config file
             with open(fp, 'w') as f:
                 json.dump(self.params, f, sort_keys=True, indent=4)
-        except PermissionError:
+        except IOError:
             raise PlenoptisignError('\n\nGrant permission to write to the config file '+fp)
 
         return True
