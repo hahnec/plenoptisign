@@ -28,7 +28,7 @@ def solve_sle(A, b):
     if is_square(A):
         A_inv = np.linalg.inv(A)
     else:
-        A_inv = pseudo_inv(A)
+        A_inv = np.linalg.pinv(A)
 
     return np.dot(A_inv, b)
 
@@ -36,8 +36,3 @@ def is_square(A):
     ''' check if matrix is square'''
 
     return all(len(row) == len(A) for row in A)
-
-def pseudo_inv(A):
-    ''' compute pseudo inverse '''
-
-    return np.dot(np.transpose(A), np.inv(np.dot(A, np.transpose(A))))
