@@ -90,8 +90,6 @@ class PlenoptisignApp(tk.Tk):
         # update results in GUI
         self.run()
 
-        return None
-
     def run(self):
 
         # fetch parameter data from GUI
@@ -115,7 +113,7 @@ class PlenoptisignApp(tk.Tk):
     def mie(self):
 
         # compute micro image size
-        self.obj.get_mic_img_size()
+        self.obj.compute_mic_img_size()
 
         # pass estimated micro image size to entry in GUI
         tk_var = tk.StringVar()
@@ -188,8 +186,6 @@ class PlenoptisignApp(tk.Tk):
         # destroy tkinter object
         self.destroy()
         sys.exit()
-
-        return True
 
 
 if __name__ == "__main__":

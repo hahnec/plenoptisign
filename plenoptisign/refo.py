@@ -33,7 +33,7 @@ class Mixin:
         j, i, mc, mij, qij, mU, mL, mijU, mijL, FijL, FijU, qijU, qijL, d_n, d_p_n, d_m_n = [np.zeros(2) for _ in range(16)]
 
         # compute main lens image distance
-        self.compute_bU()
+        self.compute_img_dist()
 
         # (s,u) coordinates for the intersecting rays
         smax = 2*self.M+1

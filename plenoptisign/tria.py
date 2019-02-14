@@ -30,7 +30,7 @@ class Mixin:
         ''' computes depth plane distance, virtual camera orientation and baseline of a standard plenoptic camera '''
 
         # compute main lens image distance
-        self.compute_bU()
+        self.compute_img_dist()
 
         # ray geometry calculation
         j = 1
