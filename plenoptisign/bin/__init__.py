@@ -1,2 +1,2 @@
-from . import cmd_script
+from . import cli_script
 from . import cgi_script
