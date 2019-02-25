@@ -33,7 +33,7 @@ class AbtWidget(object):
     def __init__(self):
 
         # open about window
-        self.abt_widget = tk.Tk()
+        self.abt_widget = tk.Toplevel(padx=PX, pady=PY)
 
         # window title
         self.abt_widget.wm_title("About")
@@ -52,8 +52,6 @@ class AbtWidget(object):
 
         btn = tk.Button(self.abt_widget, text="Close", width=BTN_W, command=self.close)
         btn.grid(row=3, padx=PX, pady=PY)
-
-        tk.mainloop()
 
     def close(self):
         ''' close about window '''
