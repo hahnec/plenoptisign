@@ -86,8 +86,8 @@ class Mixin:
             if z[i] != float('inf'):
                 yy, xx = np.meshgrid((-y[i]/2, y[i]/2), (-x[i]/2, x[i]/2))
                 zz = z[i]*np.ones(xx.shape)
-                plt3d.plot_surface(zz, xx, yy, color='r', alpha=.5) # depth plane
-                plt3d.scatter([z[i]], [0], [0], s=20, color='r') # plane-axis intersection
+                plt3d.plot_surface(zz, xx, yy, color='r', alpha=.5)     # depth plane
+                plt3d.scatter([z[i]], [0], [0], s=20, color='r')        # plane-axis intersection
 
                 # plot marker
                 num_str = str(round(planes[i], 1))
@@ -97,16 +97,24 @@ class Mixin:
         # plot field of view lines
         x_hw = self.non_inf_max(x)/2
         y_hw = self.non_inf_max(y)/2
-        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, x_hw], [-sen_dims[0]/2, y_hw], 'k-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, x_hw], [sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self.bU, z_max], [sen_dims[1]/2, -x_hw], [-sen_dims[0]/2, y_hw], 'k-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self.bU, z_max], [sen_dims[1]/2, -x_hw], [sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, +x_hw], [-sen_dims[0]/2, +y_hw], 'k-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, +x_hw], [+sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [+sen_dims[1]/2, -x_hw], [-sen_dims[0]/2, +y_hw], 'k-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [+sen_dims[1]/2, -x_hw], [+sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=.5)
 
         return plt3d
 
     @staticmethod
     def non_inf_max(input):
-        ''' get maximum value in input list without consideration of infinity '''
+        ''' obtain maximum value from input list without consideration of infinity
+
+        :type input: list
+        :param input: list of real numbers
+
+        :type max_val: float
+        :return max_val: maximum value excluding infinity
+
+        '''
 
         try:
             max_val = max([x for x in input if x != float('inf')])

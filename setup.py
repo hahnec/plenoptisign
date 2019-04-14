@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 from plenoptisign import __version__
 from sys import platform # cross-platform
 
-
 APP = ['plenoptisign/gui/gui_app.py']
 DATA_FILES = [
         # ('subdir' , ['file_path'])
-        ('cfg', ['plenoptisign/gui/cfg/cfg.json'])
+        ('cfg', ['plenoptisign/gui/cfg/cfg.json']),
+        ('docs/build/html', ['docs/build/html/'])
 ]
 
 OPTIONS = {

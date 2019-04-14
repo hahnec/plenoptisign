@@ -74,9 +74,9 @@ class Mixin:
         ax.plot((self.d, self.d), (self._UijU[0], -self._UijU[0]), 'c-', linewidth=plane_th)
         ax.plot((self.d_p, self.d_p), (self._UijU[0], -self._UijU[0]), 'k-', linewidth=plane_th)
         ax.plot((self.d_m, self.d_m), (self._UijU[0], -self._UijU[0]), 'r-', linewidth=plane_th)
-        ax.text(self.d+5, -self._UijU[0]*.9, r'$d_a$', fontsize=fontsize, color='c')
+        ax.text(self.d+2, -self._UijU[0]*.9, r'$d_a$', fontsize=fontsize, color='c')
         ax.text(self.d_p+5, -self._UijU[0]*.9, r'$d_{a+}$', fontsize=fontsize, color='k')
-        ax.text(self.d_m+5, -self._UijU[0]*.9, r'$d_{a-}$', fontsize=fontsize, color='r')
+        ax.text(self.d_m-30, -self._UijU[0]*.9, r'$d_{a-}$', fontsize=fontsize, color='r')
 
         # ray plots
         # chief rays connecting micro and main lens centres

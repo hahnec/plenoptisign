@@ -23,7 +23,15 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 import numpy as np
 
 def solve_sle(A, b):
-    ''' function solver for system of linear equations '''
+    ''' algebraic function solver for a system of linear equations
+
+    :param A: :math:`nxm` matrix
+    :param b: :math:`nx1` column vector
+
+    :returns:
+        :return x: :math:`mx1` column vector
+
+    '''
 
     if is_square(A):
         A_inv = np.linalg.inv(A)

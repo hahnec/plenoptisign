@@ -45,7 +45,6 @@ class Config(object):
         except:
             self.default_values()
 
-
     def read_json(self, fp=None):
 
         if not fp:

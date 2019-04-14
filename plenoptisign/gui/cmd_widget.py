@@ -50,8 +50,8 @@ class CmdWidget(tk.Frame):
 
         # about button
         abt_btn = tk.Button(master=self, text='About', width=int(BTN_W), command=self.parent.open_abt_win)
-        abt_btn.grid(row=1, column=1, padx=PX, pady=PY)
+        abt_btn.grid(row=0, column=3, padx=PX, pady=PY)
 
         # quit button
         qit_btn = tk.Button(master=self, text='Quit', width=int(BTN_W), command=self.parent.quit_app)
-        qit_btn.grid(row=1, column=2, padx=PX, pady=PY)
+        qit_btn.grid(row=0, column=4, padx=PX, pady=PY)

@@ -33,9 +33,10 @@ from os.path import normpath
 
 # local python files
 from plenoptisign import __version__
-from plenoptisign.constants import ABBS, PF, DEC_P
+from plenoptisign.constants import ABBS, PF
 from plenoptisign.mainclass import MainClass
 from plenoptisign.gui.cfg import Config
+from plenoptisign.gui.men_widget import MenWidget
 from plenoptisign.gui.cfg_widget import CfgWidget
 from plenoptisign.gui.plt_widget import PltWidget
 from plenoptisign.gui.cmd_widget import CmdWidget
@@ -69,24 +70,34 @@ class PlenoptisignApp(tk.Tk):
         # initialize parameters
         self.cfg = Config()
 
+        # instantiate menu widget
+        self.men_wid = MenWidget(self)
+        self.men_wid.grid()
+
         # instantiate plot widget as object
         self.plt_wid = PltWidget(self)
-        self.plt_wid.grid(row=0, column=0, rowspan=2, padx=PF, pady=PF)
+        self.plt_wid.grid(row=0, column=0, padx=PF, pady=PF, sticky='NSWE')
 
         # instantiate config widget as object
         self.cfg_wid = CfgWidget(self)
-        self.cfg_wid.grid(row=0, column=1, padx=PF, pady=PF, sticky='NSWE')
-
-        # instantiate command widget as object
-        self.con_wid = ConWidget(self)
-        self.con_wid.grid(row=1, column=1, padx=PF, pady=PF, sticky='NSWE')
+        self.cfg_wid.grid(row=0, column=1, rowspan=3, padx=PF, pady=PF, sticky='NSWE')
 
         # instantiate command widget as object
         self.cmd_wid = CmdWidget(self)
-        self.cmd_wid.grid(row=2, column=1, padx=PF, pady=PF)
+        self.cmd_wid.grid(row=1, column=0, sticky='N')
+
+        # instantiate console widget as object
+        self.con_wid = ConWidget(self)
+        self.con_wid.grid(row=2, column=0, padx=PF, pady=PF, sticky='NSWE')
+
+        # about button in menu
+        self.createcommand('tkAboutDialog', self.open_abt_win)
 
         # enable tkinter resizing
         self.resizable(True, False)
+
+        # construct main class object
+        self.obj = MainClass()
 
         # update results in GUI
         self.run()
@@ -94,10 +105,7 @@ class PlenoptisignApp(tk.Tk):
     def run(self):
 
         # fetch parameter data from GUI
-        self.data = dict(zip(ABBS, [float(entry.get()) for entry in self.cfg_wid.entries]))
-
-        # construct object
-        self.obj = MainClass(self.data)
+        self.obj.data = dict(zip(ABBS, [float(entry.get()) for entry in self.cfg_wid.entries]))
 
         # compute light field geometry
         self.obj.refo()
@@ -108,21 +116,6 @@ class PlenoptisignApp(tk.Tk):
         self.plt_wid.refresh()
 
         self.con_wid.msg_box.config(text=self.obj.console_msg)
-
-        return True
-
-    def mie(self):
-
-        # compute micro image size
-        self.obj.compute_mic_img_size()
-
-        # pass estimated micro image size to entry in GUI
-        tk_var = tk.StringVar()
-        tk_var.set(str(round(self.obj.M, DEC_P)))
-        self.cfg_wid.entries[10].config(textvariable=tk_var)
-
-        # update results in GUI
-        self.run()
 
         return True
 
@@ -190,8 +183,6 @@ class PlenoptisignApp(tk.Tk):
 
 
 if __name__ == "__main__":
-    try:
-        MainWin = PlenoptisignApp(None)
-        MainWin.mainloop()
-    except Exception as e:
-        PlenoptisignError(e)
+
+    MainWin = PlenoptisignApp(None)
+    MainWin.mainloop()

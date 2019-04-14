@@ -30,34 +30,58 @@ import numpy as np
 
 
 class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.Mixin):
+    """ The MainClass is meant to store optical parameters and perform numerical lightfield geometry calculations
+
+    It is made of five Mixin classes which are laid off in separate files containing methods for distance retrieval.
+    The main methods to compute the plenoptic geometry are :func:`self.refo()` and :func:`self.tria()`.
+    The Mixin classes share the optical parameters which are initialized as seen in `__init__` below.
+
+    """
 
     def __init__(self, data=None):
-        # input variables from data dictionary (set default values to avoid errors)
-        self.pp = float(data['pp']) if 'pp' in data else .009           # pixel pitch
-        self.fs = float(data['fs']) if 'fs' in data else 2.75           # focal length of micro lens
-        self.hh = float(data['hh']) if 'hh' in data else .396           # principal plane separation of micro lens
-        self.pm = float(data['pm']) if 'pm' in data else .125           # micro lens pitch
-        self.dA = float(data['dA']) if 'dA' in data else 111.0324       # exit pupil distance
-        self.fU = float(data['fU']) if 'fU' in data else 193.2935       # focal length of objective lens
-        self.HH = float(data['HH']) if 'HH' in data else -65.5563       # principal plane spacing in objective lens
-        self.df = float(data['df']) if 'df' in data else float('inf')   # object distance
-        self.D = self.fU/float(data['f_num']) if 'f_num' in data else self.fU/16.   # main lens entrance pupil diameter
-        self.a = float(data['a']) if 'a' in data else 1.0               # iterative refocusing parameter
-        self.M = float(data['M']) if 'M' in data else 13.               # 1-D micro image diameter
-        self.G = float(data['G']) if 'G' in data else -6                # viewpoint gap
-        self.dx = float(data['dx']) if 'dx' in data else 1              # disparity value
+        """ Initialize plenoptic camera parameters
 
-        # output variables
-        self.d = 0      # refocusing distance
+            :param data: dictionary variable containing input parameters with the following keys
+
+            :keyword data['pp']: pixel pitch
+            :keyword data['fs']: focal length of micro lens
+            :keyword data['hh']: principal plane separation of micro lens
+            :keyword data['pm']: micro lens pitch
+            :keyword data['dA']: exit pupil distance
+            :keyword data['fU']: focal length of objective lens
+            :keyword data['HH']: principal plane spacing in objective lens
+            :keyword data['df']: object distance
+            :keyword data['f_num']: main lens entrance pupil diameter
+            :keyword data['a']: iterative refocusing parameter
+            :keyword data['M']: 1-D micro image diameter
+            :keyword data['G']: viewpoint gap
+            :keyword data['dx']: disparity value
+
+            :ivar self.d: refocusing distance
+            :ivar self.d_p: far depth of field border in refocusing
+            :ivar self.d_m: near depth of field border in refocusing
+            :ivar self.dof: depth of field
+            :ivar self.B: baseline at entrance pupil of the main lens
+            :ivar self.phi: tilt angle of virtual camera
+            :ivar self.Z: triangulation distance
+            :ivar self.bU: main lens image distance
+
+        """
+
+        # convert input data dictionary to class variables
+        self.data = data
+
+        # initialize output variables
+        self.d = 0      # refocusing distance:instance variable
         self.d_p = 0    # far depth of field border in refocusing
         self.d_m = 0    # near depth of field border in refocusing
         self.dof = 0    # depth of field
         self.B = 0      # baseline at entrance pupil of the main lens
         self.phi = 0    # tilt angle of virtual camera
         self.Z = 0      # triangulation distance
-        self.bU = None
+        self.bU = None  # main lens image distance
 
-        # variables used for plot functions
+        # initialize private variables
         self._sc = 0
         self._uc = np.zeros(2)   # micro image centers (MICs)
         self._u = np.zeros(2)    # micro image ray positions
@@ -76,13 +100,40 @@ class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.M
         # console message initialization
         self.console_msg = ""
 
+    @property
+    def data(self):
+        return self.data
+
+    @data.setter
+    def data(self, data):
+        # put data dictionary to class variables while setting default values to avoid errors
+
+        if data is not None:
+            self.pp = float(data['pp']) if 'pp' in data else .009           # pixel pitch
+            self.fs = float(data['fs']) if 'fs' in data else 2.75           # focal length of micro lens
+            self.hh = float(data['hh']) if 'hh' in data else .396           # principal plane separation of micro lens
+            self.pm = float(data['pm']) if 'pm' in data else .125           # micro lens pitch
+            self.dA = float(data['dA']) if 'dA' in data else 111.0324       # exit pupil distance
+            self.fU = float(data['fU']) if 'fU' in data else 193.2935       # focal length of objective lens
+            self.HH = float(data['HH']) if 'HH' in data else -65.5563       # principal plane spacing in objective lens
+            self.df = float(data['df']) if 'df' in data else float('inf')   # object distance
+            self.D = self.fU/float(data['f_num']) if 'f_num' in data else self.fU/16.   # main lens pupil diameter
+            self.a = float(data['a']) if 'a' in data else 1.0               # iterative refocusing parameter
+            self.M = float(data['M']) if 'M' in data else 13.9523           # 1-D micro image diameter
+            self.G = float(data['G']) if 'G' in data else -6                # viewpoint gap
+            self.dx = float(data['dx']) if 'dx' in data else 1              # disparity value
+
     def get_results(self):
-        ''' get list of results '''
+        ''' list of output variables in the following order
+
+            :returns: list(self.d, self.d_p, self.d_m, self.dof, self.B, self.phi, self.Z)
+
+        '''
 
         return list([self.d, self.d_p, self.d_m, self.dof, self.B, self.phi, self.Z])
 
     def compute_img_dist(self):
-        ''' compute main lens image distance self.bU based on focal length self.fU and focus distance self.df '''
+        """ iterative computation of main lens image distance **self.bU** based on focal length and focus distance """
 
         # is image distance at focal plane?
         if self.df == float('inf'):
@@ -111,5 +162,12 @@ class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.M
         ''' estimate micro image size '''
 
         self.M = (self.D*self.fs)/(self.fU*self.pp)
+
+        return True
+
+    def compute_pupil_size(self):
+        ''' estimate pupil size '''
+
+        self.D = (self.M*self.fU*self.pp)/self.fs
 
         return True
