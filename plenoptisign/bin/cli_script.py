@@ -30,10 +30,10 @@ try:
 except ImportError:
     import tkinter as tk
 
-from plenoptisign import VALS, ABBS, EXPR, DEC_P, FIG_SIZE, __version__
+from plenoptisign import __version__
 from plenoptisign.mainclass import MainClass
+from plenoptisign.constants import VALS, ABBS, EXPR, DEC_P, FIG_SIZE, PlenoptisignError
 from plenoptisign.gui import PlenoptisignApp
-from plenoptisign import PlenoptisignError
 
 def usage():
 

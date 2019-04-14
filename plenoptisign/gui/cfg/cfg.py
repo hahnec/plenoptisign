@@ -25,8 +25,7 @@ import os
 import errno
 
 # local python files
-from plenoptisign import ABBS, VALS
-from ... import PlenoptisignError
+from plenoptisign.constants import ABBS, VALS, PlenoptisignError
 
 class Config(object):
 

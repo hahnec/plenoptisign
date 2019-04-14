@@ -24,7 +24,8 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 import numpy as np
 
 # local python files
-from . import PlenoptisignError
+from . import constants as c
+
 
 class Mixin:
 
@@ -66,7 +67,7 @@ class Mixin:
                 y.append(yy)
 
         except TypeError as e:
-            raise PlenoptisignError(e)
+            raise c.PlenoptisignError(e)
 
         # determine maximum plot distance
         z_max = max(z) if max(z) != float('inf') else self.non_inf_max(z)

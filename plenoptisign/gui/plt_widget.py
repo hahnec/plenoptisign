@@ -31,7 +31,7 @@ except ImportError:
     import Tkinter as tk
     from matplotlib.backends.backend_tkagg import NavigationToolbar2TkAgg as NavigationToolbar2Tk
 
-from plenoptisign import BTN_W, FIG_SIZE
+from plenoptisign.constants import BTN_W, FIG_SIZE
 
 # make object for plot widget
 class PltWidget(tk.Frame):

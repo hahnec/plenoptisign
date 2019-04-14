@@ -22,7 +22,8 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 import numpy as np
 from .solver import solve_sle
-from . import PlenoptisignError, DEC_P
+from . import constants as c
+
 
 class Mixin:
 
@@ -55,8 +56,8 @@ class Mixin:
 
         # validate baseline approach (for debug purposes)
         B_alt = self._qij[0] * self._intersect + self._Uij[0]
-        if not (np.equal(round(self.B, DEC_P), round(B_alt, DEC_P))):
-            raise PlenoptisignError('Baseline validation failed')
+        if not (np.equal(round(self.B, c.DEC_P), round(B_alt, c.DEC_P))):
+            raise c.PlenoptisignError('Baseline validation failed')
 
         # triangulation
         b_new = self.bU

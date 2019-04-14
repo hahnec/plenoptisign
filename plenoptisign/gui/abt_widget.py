@@ -25,7 +25,8 @@ try:
 except ImportError:
     import Tkinter as tk
 
-from plenoptisign import __version__, BTN_W, PX, PY
+from plenoptisign import __version__
+from plenoptisign.constants import BTN_W, PX, PY
 
 # make object for config window
 class AbtWidget(object):

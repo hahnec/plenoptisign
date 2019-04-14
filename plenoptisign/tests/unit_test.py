@@ -23,7 +23,7 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 import unittest
 from ddt import ddt, data, unpack
 from plenoptisign.mainclass import MainClass
-from plenoptisign import ABBS, DEC_P
+from plenoptisign.constants import ABBS, DEC_P
 
 @ddt
 class TestSPC(unittest.TestCase):

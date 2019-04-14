@@ -26,7 +26,7 @@ except ImportError:
     import Tkinter as tk
 
 # local python files
-from plenoptisign import ABBS, EXPR, RSLT, UNTS, SW, PX, PY, MSG_W, DEC_P
+from plenoptisign.constants import ABBS, EXPR, RSLT, UNTS, SW, PX, PY, MSG_W, DEC_P, RSYM, ESYM
 
 # 'from', 'to' and 'increment' exponents for 'pp, fs, hh, pm, dA, fU, HH, df, f_num, a, M, G, dx' in that order
 SPIN_SET = ((1,-3), (2,-2), (2,-3), (3,-3), (3,-2), (3,-2), (3,-2), (5,2), (3,-1), (2,-1), (2,-1), (2,-1), (2,-1))

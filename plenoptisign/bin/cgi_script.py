@@ -24,7 +24,7 @@ import cgi, cgitb
 import sys, csv, datetime, os.path
 sys.path.append(os.path.abspath('../..'))
 from plenoptisign.mainclass import MainClass
-from plenoptisign import PlenoptisignError, DEC_P
+from plenoptisign.constants import PlenoptisignError, DEC_P
 
 def cgi_read():
 

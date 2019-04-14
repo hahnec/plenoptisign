@@ -25,7 +25,7 @@ try:
 except ImportError:
     import Tkinter as tk
 
-from plenoptisign import PX, PY, BTN_W
+from plenoptisign.constants import PX, PY, BTN_W
 
 # make object for plot widget
 class CmdWidget(tk.Frame):

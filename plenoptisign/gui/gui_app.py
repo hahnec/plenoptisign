@@ -32,7 +32,8 @@ import sys
 from os.path import normpath
 
 # local python files
-from plenoptisign import __version__, ABBS, PF, DEC_P, PlenoptisignError
+from plenoptisign import __version__
+from plenoptisign.constants import ABBS, PF, DEC_P
 from plenoptisign.mainclass import MainClass
 from plenoptisign.gui.cfg import Config
 from plenoptisign.gui.cfg_widget import CfgWidget
