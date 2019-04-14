@@ -91,7 +91,7 @@ class Mixin:
 
                 # plot marker
                 num_str = str(round(planes[i], 1))
-                label_str = "$d_{"+num_str+"}$" if dep_type else "$Z_{("+str(self.G)+', '+num_str+")}$"
+                label_str = "$Z_{("+str(self.G)+', '+num_str+")}$" if dep_type else "$d_{"+num_str+"}$"
                 plt3d.text(z[i], x[i]/2, y[i]/2, s=label_str, fontsize=18, family='sans-serif')
 
         # plot field of view lines
