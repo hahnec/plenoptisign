@@ -212,8 +212,7 @@ Further information
 
 .. |logo| image:: https://raw.githubusercontent.com/hahnec/plenoptisign/master/plenoptisign/gui/misc/circlecompass_1055093_24x24.png
 
-.. |gui| image:: ../../docs/img/screenshot_2d_refo.png
-    :alt: https://raw.githubusercontent.com/hahnec/plenoptisign/master/docs/img/screenshot_2d_refo.png"
+.. |gui| image:: https://raw.githubusercontent.com/hahnec/plenoptisign/develop/docs/img/screenshot_2d_refo.png
 
 .. Hyperlink aliases
 
