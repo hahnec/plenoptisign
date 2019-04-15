@@ -65,7 +65,7 @@ class PlenoptisignApp(tk.Tk):
 
         # icon handling
         if sys.platform == 'win32':
-            self.iconbitmap(default=ICON_PATH)
+            self.wm_iconbitmap(default=ICON_PATH)
 
         # initialize parameters
         self.cfg = Config()
