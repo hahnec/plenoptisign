@@ -77,23 +77,13 @@ class Mixin:
         # ray plots
 
         # virtual camera 1
-        ax.plot((self.fs + self.hh, H2), (0, self._Uij[0]), linestyle='-', linewidth=ray_th, color='b')
-        #ax.plot((self.fs + self.hh, H2), (self.pm, self._Uij[1]), linestyle='-', linewidth=ray_th, color='b')
-
-        ax.plot((H2, H1), (self._Uij[0], self._Uij[0]), linestyle='--', linewidth=ray_th, color='b')
-        #ax.plot((H2, H1), (self._Uij[1], self._Uij[1]), linestyle='--', linewidth=ray_th, color='b')
-
         ax.plot((H1, self._ent_pup_pos), (self._Uij[0], self.B), 'r--', linewidth=ray_th)
-        #ax.plot((H1, self._ent_pup_pos), (self._Uij[1], self._qij[1] * self._intersect + self._Uij[1]), 'b-', linewidth=ray_th)
-
-        ax.plot((H1, self.Z), (self._Uij[0], self._qij[0] * (self.Z + self._intersect) + self._Uij[0]), 'r--',linewidth=ray_th)
-        #ax.plot((H1, self.Z), (self._Uij[1], self._qij[1] * (self.Z + self._intersect) + self._Uij[1]), 'b-', linewidth=ray_th)
+        ax.plot((H1, self.Z), (self._Uij[0], self._qij[0]*(self.Z + self._intersect) + self._Uij[0]), 'r--',linewidth=ray_th)
         ax.plot((self._ent_pup_pos), (self.B), 'o', color='r', linewidth=.2)
 
         #virtual camera 2
         Uij_y = ((self.pm / self.dA) * H2 - self.pm)
         ax.plot((self.fs + self.hh, H2), (-self.pm, Uij_y), linestyle='-', linewidth=ray_th, color='y')
-
         ax.plot((H2, H1), (Uij_y, Uij_y), linestyle='--', linewidth=ray_th, color='y')
         ax.plot((H1, self.Z), (Uij_y, self._qij[0] * (self.Z + self._intersect) + self._Uij[0]), 'y-', linewidth=ray_th)
         ax.plot((H1, self._ent_pup_pos), (Uij_y, 0), linestyle='-', linewidth=ray_th, color='y')
