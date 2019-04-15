@@ -49,7 +49,7 @@ class CfgWidget(tk.Frame):
 
         # place scientific notations used throughout the author's publications
         for i, exp in enumerate(ESYM+[' ']+RSYM):
-            text = tk.Text(self, width=7, height=2, borderwidth=0, background=self.cget('background'), font=('', 10))
+            text = tk.Text(self, width=8, height=2, borderwidth=0, background=self.cget('background'), font=('', 10))
             text.tag_configure('ver_align', offset=-4)
             text.tag_configure('sub', offset=-8)
             if exp.__contains__('_'):
