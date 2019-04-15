@@ -88,7 +88,7 @@ class CfgWidget(tk.Frame):
                 # special treatment for micro image size 'M' to trigger f-number estimation
                 entry = tk.Spinbox(self, from_=-10**s[0], to=10**s[0], increment=10**s[1],
                                    textvariable=tk_params[key], width=SW, command=self.update_fnum)
-            entry.grid(row=i+1, column=2, sticky='NW', padx=PX)
+            entry.grid(row=i+1, column=2, sticky='W', padx=PX)
             self.entries.append(entry)
 
         # margin separating inputs from outputs
