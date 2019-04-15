@@ -12,7 +12,7 @@ RSLT = ['Refocusing Distance', 'Depth of Field', 'Narrow DoF Border', 'Far DoF B
         'Baseline', 'Tilt Angle', 'Triangulation Distance']
 ESYM = ['p_p', 'f_s', 'H_{1s}H_{2s}', 'p_m', "d_{A'}", 'f_U', 'H_{1U}H_{2U}', 'd_f', 'F#', 'a', 'M', 'G', 'Δx']
 RSYM = ["d_a", "DoF", "d_{a-}", "d_{a+}", "B_G", "Φ_G", "Z_{(G, ∆x)}"]
-UNTS = ['mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'a.u.', 'px', 'px', 'a.u.', 'px',
+UNTS = ['mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'a.u.', 'px', 'px', 'px', 'px',
         '', 'mm', 'mm', 'mm', 'mm', 'mm', 'deg', 'mm']
 
 # GUI dimensions
