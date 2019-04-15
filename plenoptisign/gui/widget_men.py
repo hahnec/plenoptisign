@@ -25,7 +25,7 @@ try:
 except ImportError:
     import Tkinter as tk
 
-from plenoptisign.gui.abt_widget import AbtWidget
+from plenoptisign.gui.widget_abt import AbtWidget
 
 import os
 

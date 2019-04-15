@@ -36,12 +36,12 @@ from plenoptisign import __version__
 from plenoptisign.constants import ABBS, PF
 from plenoptisign.mainclass import MainClass
 from plenoptisign.gui.cfg import Config
-from plenoptisign.gui.men_widget import MenWidget
-from plenoptisign.gui.cfg_widget import CfgWidget
-from plenoptisign.gui.plt_widget import PltWidget
-from plenoptisign.gui.cmd_widget import CmdWidget
-from plenoptisign.gui.con_widget import ConWidget
-from plenoptisign.gui.abt_widget import AbtWidget
+from plenoptisign.gui.widget_men import MenWidget
+from plenoptisign.gui.widget_cfg import CfgWidget
+from plenoptisign.gui.widget_plt import PltWidget
+from plenoptisign.gui.widget_cmd import CmdWidget
+from plenoptisign.gui.widget_con import ConWidget
+from plenoptisign.gui.widget_abt import AbtWidget
 
 # generate blank icon on windows
 ICON = (b'\x00\x00\x01\x00\x01\x00\x10\x10\x00\x00\x01\x00\x08\x00h\x05\x00\x00'
