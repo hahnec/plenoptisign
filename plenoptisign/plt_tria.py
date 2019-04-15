@@ -67,8 +67,8 @@ class Mixin:
         # exit and entrance pupil plane
         ax.plot((self.dA, self.dA), (self._Uij[0], -self._Uij[0]), linestyle='--', linewidth=plane_th, color='k')
         ax.plot((self._ent_pup_pos, self._ent_pup_pos), (self._Uij[0], -self._Uij[0]), 'k--', linewidth=plane_th)
-        ax.text(self.dA + 2, self.D / 12 + 1, r"$d_{A'}$", fontsize=fontsize)
-        ax.text(self._ent_pup_pos + 2, self.D / 12 + 1, r"$d_{A''}$", fontsize=fontsize)
+        ax.text(self.dA*1.1, -self.D / 3, r"$d_{A'}$", fontsize=fontsize)
+        ax.text(self._ent_pup_pos*1.1, -self.D / 3, r"$d_{A''}$", fontsize=fontsize)
 
         # intersection planes
         ax.plot((self.Z, self.Z), (self._Uij[0], -self._Uij[0]), linestyle='-', linewidth=plane_th, color='r')
@@ -83,12 +83,12 @@ class Mixin:
         ax.plot((H2, H1), (self._Uij[0], self._Uij[0]), linestyle='--', linewidth=ray_th, color='b')
         #ax.plot((H2, H1), (self._Uij[1], self._Uij[1]), linestyle='--', linewidth=ray_th, color='b')
 
-        ax.plot((H1, self._ent_pup_pos), (self._Uij[0], self._qij[0] * self._intersect + self._Uij[0]), 'r--', linewidth=ray_th)
+        ax.plot((H1, self._ent_pup_pos), (self._Uij[0], self.B), 'r--', linewidth=ray_th)
         #ax.plot((H1, self._ent_pup_pos), (self._Uij[1], self._qij[1] * self._intersect + self._Uij[1]), 'b-', linewidth=ray_th)
 
         ax.plot((H1, self.Z), (self._Uij[0], self._qij[0] * (self.Z + self._intersect) + self._Uij[0]), 'r--',linewidth=ray_th)
         #ax.plot((H1, self.Z), (self._Uij[1], self._qij[1] * (self.Z + self._intersect) + self._Uij[1]), 'b-', linewidth=ray_th)
-        ax.plot((self._ent_pup_pos), (self._qij[0] * self._intersect + self._Uij[0]), 'o', color='r', linewidth=.2)
+        ax.plot((self._ent_pup_pos), (self.B), 'o', color='r', linewidth=.2)
 
         #virtual camera 2
         Uij_y = ((self.pm / self.dA) * H2 - self.pm)
@@ -101,6 +101,7 @@ class Mixin:
         ax.plot((self._ent_pup_pos, self.Z), (0, 0), linestyle='--', linewidth=ray_th, color='r')
 
         # baseline
-        ax.text(self._ent_pup_pos-100, self._Uij[0]*1.1, r"$B_{"+str(self.G)+"}$", color='r', fontsize=fontsize)
+        ax.text(self._ent_pup_pos*.8, self.B*.5, r"$B_{"+str(self.G)+"}$", color='r', fontsize=fontsize)
+        ax.plot((self._ent_pup_pos, self._ent_pup_pos), (0, self.B), linestyle='-', linewidth=ray_th*2, color='r')
 
         return ax
