@@ -16,7 +16,7 @@ Click below for Plenoptisign's short README or full API documentation:
    :numbered:
 	
    readme
-   mainclass
+   apidoc
 
 .. Indices and tables
 .. ==================

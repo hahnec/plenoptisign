@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. API documentation" href="mainclass.html" />
+    <link rel="next" title="2. API documentation" href="apidoc.html" />
     <link rel="prev" title="Plenoptisign Reference Document" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -30,7 +30,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="mainclass.html" title="2. API documentation"
+          <a href="apidoc.html" title="2. API documentation"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Plenoptisign Reference Document"
@@ -68,7 +68,7 @@
   <p class="topless"><a href="index.html"
                         title="previous chapter">Plenoptisign Reference Document</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="mainclass.html"
+  <p class="topless"><a href="apidoc.html"
                         title="next chapter">2. API documentation</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -123,7 +123,7 @@
 </dl>
 </li>
 </ul>
-<p><img alt="https://raw.githubusercontent.com/hahnec/plenoptisign/master/docs/img/screenshot_2d_refo.png&quot;" src="_images/screenshot_2d_refo.png" /></p>
+<p><img alt="gui" src="https://raw.githubusercontent.com/hahnec/plenoptisign/develop/docs/img/screenshot_2d_refo.png" /></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Insightful description of the parameter terminology can be found in the author’s publications:</p>
@@ -264,7 +264,7 @@ As of version 1.1.0, the input and output parameters are defined as shown in the
 <td>virtual camera gap</td>
 </tr>
 <tr class="row-even"><td><span class="math notranslate nohighlight">\(\Delta x\)</span></td>
-<td>disparity</td>
+<td>triangulation disparity</td>
 </tr>
 </tbody>
 </table>
@@ -299,7 +299,7 @@ As of version 1.1.0, the input and output parameters are defined as shown in the
 <td>baseline</td>
 </tr>
 <tr class="row-odd"><td><span class="math notranslate nohighlight">\(\Phi_G\)</span></td>
-<td>tilt angle</td>
+<td>viewpoint tilt angle</td>
 </tr>
 <tr class="row-even"><td><span class="math notranslate nohighlight">\(Z_{(G, \Delta x)}\)</span></td>
 <td>triangulation distance</td>
@@ -326,6 +326,7 @@ As of version 1.1.0, the input and output parameters are defined as shown in the
 <li>increasing absolute virtual camera spacing <span class="math notranslate nohighlight">\(|G|\)</span></li>
 </ul>
 </div></blockquote>
+<p>It is worth noting that depth planes at <span class="math notranslate nohighlight">\(a=0\)</span> or <span class="math notranslate nohighlight">\(\Delta x=0\)</span> are located at the focusing distance <span class="math notranslate nohighlight">\(d_f\)</span>.</p>
 <p>In case of the <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/tag/v1.0.0-beta">app</a> version, graphical plots will be displayed supporting you in the decision making.</p>
 </div>
 </div>
@@ -333,16 +334,28 @@ As of version 1.1.0, the input and output parameters are defined as shown in the
 <h2>1.3. Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="contributors">
 <h3>1.3.1. Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><a class="reference external" href="http://www.christopherhahne.de/">Christopher Hahne</a></li>
-</ul>
+<p><a class="reference external" href="http://www.christopherhahne.de"><img alt="Photo" src="http://www.christopherhahne.de/images/about.jpg" style="width: 100px;" /></a></p>
+<p><a class="reference external" href="http://www.christopherhahne.de/">Christopher Hahne</a></p>
 </div>
 <div class="section" id="sponsors">
 <h3>1.3.2. Sponsors<a class="headerlink" href="#sponsors" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><a class="reference external" href="https://www.beds.ac.uk/research-ref/irac/about">IRAC at University of Bedfordshire</a></li>
-<li><a class="reference external" href="https://cordis.europa.eu/project/rcn/94148_en.html">7th Framework Programme under Grant EU-FP7 ICT-2010-248420</a></li>
-</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<table border="1" class="colwidths-given docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://cordis.europa.eu/project/rcn/94148_en.html"><img alt="7th Framework Programme" src="http://www.gsa.europa.eu/sites/default/files/Seventh_Framework_Programme_logo.png" style="width: 100px;" /></a></td>
+<td><a class="reference external" href="https://www.beds.ac.uk/"><img alt="University of Bedfordshire" src="https://3tkh0x1zl0mb1ta92c2mrvv2-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/LO_KukriGB_Universities_Bedfordshire.png" style="width: 70px;" /></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://cordis.europa.eu/project/rcn/94148_en.html">under Grant EU-FP7 ICT-2010-248420</a></td>
+<td><a class="reference external" href="https://www.beds.ac.uk/research-ref/irac/about">Institute for Research in Applicable Computing (IRAC)</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="further-information">
 <h3>1.3.3. Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h3>
@@ -369,7 +382,7 @@ As of version 1.1.0, the input and output parameters are defined as shown in the
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="mainclass.html" title="2. API documentation"
+          <a href="apidoc.html" title="2. API documentation"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Plenoptisign Reference Document"

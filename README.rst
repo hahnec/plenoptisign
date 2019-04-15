@@ -129,7 +129,7 @@ Optical parameters
    * - :math:`G`
      - virtual camera gap
    * - :math:`\Delta x`
-     - disparity
+     - triangulation disparity
 
 |
 
@@ -150,7 +150,7 @@ Optical parameters
    * - :math:`B_G`
      - baseline
    * - :math:`\Phi_G`
-     - tilt angle
+     - viewpoint tilt angle
    * - :math:`Z_{(G, \Delta x)}`
      - triangulation distance
 
@@ -169,6 +169,9 @@ and vice versa. Similarly, the baseline :math:`B_G`, a substantial triangulation
     * decreasing focusing distance :math:`d_f`
     * increasing absolute virtual camera spacing :math:`|G|`
 
+It is worth noting that depth planes at :math:`a=0` or :math:`\Delta x=0` are located at the focusing distance :math:`d_f`.
+
+
 In case of the app_ version, graphical plots will be displayed supporting you in the decision making.
 
 Credits
@@ -176,12 +179,22 @@ Credits
 
 Contributors
 ------------
-* `Christopher Hahne <http://www.christopherhahne.de/>`__
+
+|Hahne|
+
+`Christopher Hahne <http://www.christopherhahne.de/>`__
 
 Sponsors
 --------
-* `IRAC at University of Bedfordshire <https://www.beds.ac.uk/research-ref/irac/about>`__
-* `7th Framework Programme under Grant EU-FP7 ICT-2010-248420 <https://cordis.europa.eu/project/rcn/94148_en.html>`__
+|
+
+.. list-table::
+   :widths: 8 8
+
+   * - |EUFramework|
+     - |UoB|
+   * - `under Grant EU-FP7 ICT-2010-248420 <https://cordis.europa.eu/project/rcn/94148_en.html>`__
+     - `Institute for Research in Applicable Computing (IRAC) <https://www.beds.ac.uk/research-ref/irac/about>`__
 
 Further information
 -------------------
@@ -213,6 +226,21 @@ Further information
 .. |logo| image:: https://raw.githubusercontent.com/hahnec/plenoptisign/master/plenoptisign/gui/misc/circlecompass_1055093_24x24.png
 
 .. |gui| image:: https://raw.githubusercontent.com/hahnec/plenoptisign/develop/docs/img/screenshot_2d_refo.png
+
+.. |UoB| image:: https://3tkh0x1zl0mb1ta92c2mrvv2-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/LO_KukriGB_Universities_Bedfordshire.png
+    :width: 70 px
+    :target: https://www.beds.ac.uk/
+    :alt: University of Bedfordshire
+
+.. |EUFramework| image:: http://www.gsa.europa.eu/sites/default/files/Seventh_Framework_Programme_logo.png
+    :width: 100 px
+    :target: https://cordis.europa.eu/project/rcn/94148_en.html
+    :alt: 7th Framework Programme
+
+.. |Hahne| image:: http://www.christopherhahne.de/images/about.jpg
+    :width: 100 px
+    :target: http://www.christopherhahne.de
+    :alt: Photo
 
 .. Hyperlink aliases
 
