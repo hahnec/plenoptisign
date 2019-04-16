@@ -9,7 +9,7 @@ DATA_FILES = [
         # ('subdir' , ['file_path'])
         ('cfg', ['plenoptisign/gui/cfg/cfg.json']),
         ('misc', ['plenoptisign/gui/misc/circlecompass_1055093.ico']),
-        ('docs/build/html', ['docs/build/html/'])   # this comes last to exclude it for pyinstaller crashes
+        #('docs/build/html', ['docs/build/html/'])   # tbd: excluded as it causes app generation crashes
 ]
 
 OPTIONS = {
@@ -33,7 +33,7 @@ elif platform == 'win32':
  extra_options = dict(
      setup_requires=[],
      app=[],
-     data_files=DATA_FILES[:2],
+     data_files=DATA_FILES,
  )
 else:
  extra_options = dict(
