@@ -41,11 +41,11 @@ def cgi_read():
 
 def cgi_main():
 
-    # read input from cgi field storage
-    data = cgi_read()
-
     # construct object
-    obj = MainClass(data)
+    obj = MainClass()
+
+    # read input from cgi field storage
+    obj.data = cgi_read()
 
     # compute light field geometry
     ret_refo = obj.refo()
@@ -77,8 +77,8 @@ def cgi_main():
         csvfile.close()
 
     # HTML output
-    refo_opt = bool(data['refo']) if 'refo' in data else False
-    tria_opt = bool(data['tria']) if 'tria' in data else False
+    refo_opt = bool(obj.data['refo']) if 'refo' in obj.data else False
+    tria_opt = bool(obj.data['tria']) if 'tria' in obj.data else False
     if refo_opt or tria_opt:
         # HTML header
         print("Content-Type: text/html\n")

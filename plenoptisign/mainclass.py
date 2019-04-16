@@ -29,12 +29,19 @@ from . import plt_3d
 import numpy as np
 
 
-class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.Mixin):
+class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.Mixin, object):
     """ The MainClass is meant to store optical parameters and perform numerical lightfield geometry calculations
 
     It is made of five Mixin classes which are laid off in separate files containing methods for distance retrieval.
     The main methods to compute the plenoptic geometry are :func:`self.refo()` and :func:`self.tria()`.
     The Mixin classes share the optical parameters which are initialized as seen in `__init__` below.
+
+    Usage example::
+
+        >> obj = plenoptisign.MainClass()
+        >> obj.refo()
+        >> results = obj.get_results()
+        << print(results)
 
     """
 
@@ -69,7 +76,7 @@ class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.M
         """
 
         # convert input data dictionary to class variables
-        self.data = data
+        self.data = data if data is not None else dict()
 
         # initialize output variables
         self.d = 0      # refocusing distance:instance variable
@@ -105,23 +112,24 @@ class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.M
         return self.data
 
     @data.setter
-    def data(self, data):
+    def data(self, data=None):
         # put data dictionary to class variables while setting default values to avoid errors
 
-        if data is not None:
-            self.pp = float(data['pp']) if 'pp' in data else .009           # pixel pitch
-            self.fs = float(data['fs']) if 'fs' in data else 2.75           # focal length of micro lens
-            self.hh = float(data['hh']) if 'hh' in data else .396           # principal plane separation of micro lens
-            self.pm = float(data['pm']) if 'pm' in data else .125           # micro lens pitch
-            self.dA = float(data['dA']) if 'dA' in data else 111.0324       # exit pupil distance
-            self.fU = float(data['fU']) if 'fU' in data else 193.2935       # focal length of objective lens
-            self.HH = float(data['HH']) if 'HH' in data else -65.5563       # principal plane spacing in objective lens
-            self.df = float(data['df']) if 'df' in data else float('inf')   # object distance
-            self.D = self.fU/float(data['f_num']) if 'f_num' in data else self.fU/16.   # main lens pupil diameter
-            self.a = float(data['a']) if 'a' in data else 1.0               # iterative refocusing parameter
-            self.M = float(data['M']) if 'M' in data else 13.9523           # 1-D micro image diameter
-            self.G = float(data['G']) if 'G' in data else -6                # viewpoint gap
-            self.dx = float(data['dx']) if 'dx' in data else 1              # disparity value
+        data = data if data is not None else dict()
+
+        self.pp = float(data['pp']) if 'pp' in data else .009           # pixel pitch
+        self.fs = float(data['fs']) if 'fs' in data else 2.75           # focal length of micro lens
+        self.hh = float(data['hh']) if 'hh' in data else .396           # principal plane separation of micro lens
+        self.pm = float(data['pm']) if 'pm' in data else .125           # micro lens pitch
+        self.dA = float(data['dA']) if 'dA' in data else 111.0324       # exit pupil distance
+        self.fU = float(data['fU']) if 'fU' in data else 193.2935       # focal length of objective lens
+        self.HH = float(data['HH']) if 'HH' in data else -65.5563       # principal plane spacing in objective lens
+        self.df = float(data['df']) if 'df' in data else float('inf')   # object distance
+        self.D = self.fU/float(data['f_num']) if 'f_num' in data else self.fU/16.   # main lens pupil diameter
+        self.a = float(data['a']) if 'a' in data else 1.0               # iterative refocusing parameter
+        self.M = float(data['M']) if 'M' in data else 13.9523           # 1-D micro image diameter
+        self.G = float(data['G']) if 'G' in data else -6                # viewpoint gap
+        self.dx = float(data['dx']) if 'dx' in data else 1              # disparity value
 
     def get_results(self):
         ''' list of output variables in the following order

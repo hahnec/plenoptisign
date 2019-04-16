@@ -49,6 +49,7 @@ def parse_options(argv):
     refo_opt = True
     tria_opt = True
     plot_opt = True
+    opts = None
 
     try:
         opts, args = getopt(argv, ":hrtpg", ["help", "refo", "tria", "plot", "gui"])
@@ -103,11 +104,11 @@ def main():
     # parse options
     refo_opt, tria_opt, plot_opt = parse_options(argv[1:])
 
-    # read input from command line only if cgi field storage empty
-    data = cmd_read()
-
     # construct object
-    obj = MainClass(data)
+    obj = MainClass()
+
+    # read input from command line only if cgi field storage empty
+    obj.data = cmd_read()
 
     # compute light field geometry
     ret_refo = obj.refo() if refo_opt else False
