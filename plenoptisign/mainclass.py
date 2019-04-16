@@ -38,10 +38,11 @@ class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.M
 
     Usage example::
 
+        >> import plenoptisign
         >> obj = plenoptisign.MainClass()
         >> obj.refo()
         >> results = obj.get_results()
-        << print(results)
+        >> print(results)
 
     """
 
