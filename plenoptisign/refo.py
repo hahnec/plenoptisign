@@ -23,7 +23,6 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 import numpy as np
 from .solver import solve_sle
 from plenoptisign.constants import PlenoptisignError, DEC_P
-#from . import constants as c
 
 
 class Mixin:
