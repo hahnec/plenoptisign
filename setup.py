@@ -8,7 +8,8 @@ APP = ['plenoptisign/gui/gui_app.py']
 DATA_FILES = [
         # ('subdir' , ['file_path'])
         ('cfg', ['plenoptisign/gui/cfg/cfg.json']),
-        ('docs/build/html', ['docs/build/html/'])
+        ('docs/build/html', ['docs/build/html/index.html']),
+        ('misc', ['plenoptisign/gui/misc/circlecompass_1055093.ico'])
 ]
 
 OPTIONS = {

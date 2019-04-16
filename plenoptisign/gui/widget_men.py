@@ -76,14 +76,14 @@ class MenWidget(tk.Frame):
 
         # compose url
         if os.path.exists(os.path.join(cwd, REL_PATH)):
-            url = os.path.join(cwd, REL_PATH)
-        elif sys.platform == 'win32' and os.path.exists(os.path.join(sys._MEIPASS, REL_PATH)):
-            url = os.path.join(sys._MEIPASS, REL_PATH)
-        elif os.path.exists(os.path.join(os.path.dirname(os.path.dirname(cwd)))):
-            url = os.path.join(os.path.dirname(os.path.dirname(cwd)), REL_PATH)
+            url = "file:///" + os.path.join(cwd, REL_PATH)
+        elif hasattr(sys, '_MEIPASS') and os.path.exists(os.path.join(sys._MEIPASS, REL_PATH)):
+            url = "file:///" + os.path.join(sys._MEIPASS, REL_PATH)
+        elif os.path.exists(os.path.join(os.path.dirname(os.path.dirname(cwd)), REL_PATH)):
+            url = "file:///" + os.path.join(os.path.dirname(os.path.dirname(cwd)), REL_PATH)
         else:
-            url = 'https://raw.githubusercontent.com/hahnec/plenoptisign/develop/docs/build/html/index.html'
+            url = 'https://github.com/hahnec/plenoptisign/blob/master/README.rst'
 
             # open in a new tab, if possible
         import webbrowser
-        webbrowser.open("file:///"+url, new=2)
+        webbrowser.open(url, new=2)
