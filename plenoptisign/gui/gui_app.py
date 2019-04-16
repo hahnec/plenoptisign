@@ -29,7 +29,7 @@ except ImportError:
 
 from tempfile import mkstemp
 import sys
-from os.path import normpath
+import os
 
 # local python files
 from plenoptisign import __version__
@@ -65,6 +65,10 @@ class PlenoptisignApp(tk.Tk):
         # icon handling
         if sys.platform == 'win32':
             self.wm_iconbitmap(default=ICON_PATH)
+            cwd = sys._MEIPASS if hasattr(sys, '_MEIPASS') else os.getcwd()
+            fp = os.path.join(cwd, 'misc', 'circlecompass_1055093.ico')
+            fp = fp if os.path.exists(fp) else ICON_PATH
+            self.iconbitmap(fp)
 
         # initialize parameters
         self.cfg = Config()
@@ -143,7 +147,9 @@ class PlenoptisignApp(tk.Tk):
         # open window to select config file
         cfn_win = tk.Tk()
         cfn_win.withdraw()
-        cfn = normpath(askopenfilename(parent=cfn_win, title="Select file", filetypes=[("Config files", "*.json")]))
+        cfn = os.path.normpath(
+            askopenfilename(parent=cfn_win, title="Select file", filetypes=[("Config files", "*.json")])
+        )
 
         if cfn != '.':
 
