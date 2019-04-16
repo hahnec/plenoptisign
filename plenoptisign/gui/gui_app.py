@@ -41,7 +41,6 @@ from plenoptisign.gui.widget_cfg import CfgWidget
 from plenoptisign.gui.widget_plt import PltWidget
 from plenoptisign.gui.widget_cmd import CmdWidget
 from plenoptisign.gui.widget_con import ConWidget
-from plenoptisign.gui.widget_abt import AbtWidget
 
 # generate blank icon on windows
 ICON = (b'\x00\x00\x01\x00\x01\x00\x10\x10\x00\x00\x01\x00\x08\x00h\x05\x00\x00'
@@ -91,7 +90,7 @@ class PlenoptisignApp(tk.Tk):
         self.con_wid.grid(row=2, column=0, padx=PF, pady=PF, sticky='NSWE')
 
         # about button in menu
-        self.createcommand('tkAboutDialog', self.open_abt_win)
+        self.createcommand('tkAboutDialog', self.men_wid.open_about)
 
         # enable tkinter resizing
         self.resizable(True, False)
@@ -163,14 +162,6 @@ class PlenoptisignApp(tk.Tk):
             self.run()
 
             self.con_wid.msg_box.config(text='Config loaded')
-
-        return True
-
-    def open_abt_win(self):
-        ''' open about window '''
-
-        # instantiate about widget as object
-        AbtWidget()
 
         return True
 

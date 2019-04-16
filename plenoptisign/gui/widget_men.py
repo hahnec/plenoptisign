@@ -38,7 +38,7 @@ class MenWidget(tk.Frame):
         # inheritance
         tk.Frame.__init__(self, parent)
         self.parent = parent
-        self.parent.createcommand('tkAboutDialog', self.open_about_dialog)
+        self.parent.createcommand('tkAboutDialog', self.open_about)
 
         menubar = tk.Menu(self)
 
@@ -51,13 +51,13 @@ class MenWidget(tk.Frame):
         menubar.add_cascade(label="File", menu=filemenu)
 
         helpmenu = tk.Menu(menubar, tearoff=0)
-        helpmenu.add_command(label="About...", command=self.open_about_dialog)
+        helpmenu.add_command(label="About...", command=self.open_about)
         helpmenu.add_command(label="Help...", command=self.open_docs)
         menubar.add_cascade(label="Help", menu=helpmenu)
 
         self.parent.config(menu=menubar)
 
-    def open_about_dialog(self):
+    def open_about(self):
         ''' open about window '''
 
         # instantiate about widget

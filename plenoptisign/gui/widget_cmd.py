@@ -48,9 +48,9 @@ class CmdWidget(tk.Frame):
         lod_btn = tk.Button(self, text="Load config", width=BTN_W, command=self.parent.load_cfg)
         lod_btn.grid(row=0, column=2, padx=PX, pady=PY)
 
-        # about button
-        abt_btn = tk.Button(master=self, text='About', width=int(BTN_W), command=self.parent.open_abt_win)
-        abt_btn.grid(row=0, column=3, padx=PX, pady=PY)
+        # help button
+        hlp_btn = tk.Button(master=self, text='Help', width=int(BTN_W), command=self.parent.men_wid.open_docs)
+        hlp_btn.grid(row=0, column=3, padx=PX, pady=PY)
 
         # quit button
         qit_btn = tk.Button(master=self, text='Quit', width=int(BTN_W), command=self.parent.quit_app)
