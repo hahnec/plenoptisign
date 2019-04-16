@@ -22,13 +22,8 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 from sys import exit, version_info, argv
 from getopt import getopt, GetoptError
-from matplotlib.pyplot import figure
+from matplotlib.pyplot import figure, show
 from mpl_toolkits.mplot3d import Axes3D
-
-try:
-    import Tkinter as tk
-except ImportError:
-    import tkinter as tk
 
 from plenoptisign import __version__
 from plenoptisign.mainclass import MainClass
@@ -149,26 +144,22 @@ def main():
             fig = figure(figsize=FIG_SIZE)
             ax = fig.gca()
             obj.plt_refo(ax, plane_th=.5, ray_th=.5)
-            fig.show()
-            tk.mainloop()
+            show(block=True)
             fig = figure(figsize=FIG_SIZE)
             ax = Axes3D(fig)
             obj.plt_3d_init(ax)
             obj.plt_3d(ax, amin=obj.a, dep_type=0)
-            fig.show()
-            tk.mainloop()
+            show(block=True)
         if ret_tria:
             fig = figure(figsize=FIG_SIZE)
             ax = fig.gca()
             obj.plt_tria(ax, plane_th=.5, ray_th=.5)
-            fig.show()
-            tk.mainloop()
+            show(block=True)
             fig = figure(figsize=FIG_SIZE)
             ax = Axes3D(fig)
             obj.plt_3d_init(ax)
             obj.plt_3d(ax, amin=obj.dx, dep_type=1)
-            fig.show()
-            tk.mainloop()
+            show(block=True)
 
 
 if __name__ == "__main__":
