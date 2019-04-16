@@ -8,8 +8,8 @@ APP = ['plenoptisign/gui/gui_app.py']
 DATA_FILES = [
         # ('subdir' , ['file_path'])
         ('cfg', ['plenoptisign/gui/cfg/cfg.json']),
-        ('docs/build/html', ['docs/build/html/index.html']),
-        ('misc', ['plenoptisign/gui/misc/circlecompass_1055093.ico'])
+        ('misc', ['plenoptisign/gui/misc/circlecompass_1055093.ico']),
+        ('docs/build/html', ['docs/build/html/'])   # this comes last to exclude it for pyinstaller crashes
 ]
 
 OPTIONS = {
@@ -33,7 +33,7 @@ elif platform == 'win32':
  extra_options = dict(
      setup_requires=[],
      app=[],
-     data_files=DATA_FILES,
+     data_files=DATA_FILES[:2],
  )
 else:
  extra_options = dict(
