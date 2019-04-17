@@ -1,0 +1,240 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2. User Guide &#8212; Plenoptisign 1.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. API documentation" href="apidoc.html" />
+    <link rel="prev" title="1. Plenoptisign" href="readme.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="apidoc.html" title="3. API documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="readme.html" title="1. Plenoptisign"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Plenoptisign 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2. User Guide</a><ul>
+<li><a class="reference internal" href="#optical-parameters">2.1. Optical parameters</a></li>
+<li><a class="reference internal" href="#design-trends">2.2. Design trends</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="readme.html"
+                        title="previous chapter">1.  Plenoptisign</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="apidoc.html"
+                        title="next chapter">3. API documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/guide.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="user-guide">
+<h1>2. User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<hr class="docutils" />
+<p>Once Plenoptisign is ready for use (whether from <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/master.zip">source</a>, as an <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/tag/v1.0.0-beta">app</a> or <a class="reference external" href="http://www.plenoptic.info/pages/coding.html">CGI demo</a>), you will be provided with a default parameter set.
+You can start off varying these parameters as you like to see their impact on the light field geometry.
+As of version 1.1.0, the input and output parameters are defined as shown in the following.</p>
+<div class="section" id="optical-parameters">
+<h2>2.1. Optical parameters<a class="headerlink" href="#optical-parameters" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="colwidths-given docutils" id="id1">
+<caption><span class="caption-text">Input Parameters</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Notation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(p_p\)</span></td>
+<td>pixel pitch</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(f_s\)</span></td>
+<td>micro lens focal length</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(H_{1s}H_{2s}\)</span></td>
+<td>micro lens principal plane spacing</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(p_m\)</span></td>
+<td>micro lens pitch</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(d_{A'}\)</span></td>
+<td>exit pupil distance</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(f_U\)</span></td>
+<td>main lens focal length</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(H_{1U}H_{2U}\)</span></td>
+<td>main lens principal plane spacing</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(d_f\)</span></td>
+<td>main lens focusing distance</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(F\#\)</span></td>
+<td>F-number</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(a\)</span></td>
+<td>refocusing shift parameter</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(M\)</span></td>
+<td>micro image resolution</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(G\)</span></td>
+<td>virtual camera gap</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(\Delta x\)</span></td>
+<td>triangulation disparity</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<table border="1" class="colwidths-given docutils" id="id2">
+<caption><span class="caption-text">Geometry Results</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Notation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(d_a\)</span></td>
+<td>refocusing distance</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(DoF\)</span></td>
+<td>depth of field</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(d_{a-}\)</span></td>
+<td>narrow DoF border</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(d_{a+}\)</span></td>
+<td>narrow DoF border</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(B_G\)</span></td>
+<td>baseline</td>
+</tr>
+<tr class="row-odd"><td><span class="math notranslate nohighlight">\(\Phi_G\)</span></td>
+<td>viewpoint tilt angle</td>
+</tr>
+<tr class="row-even"><td><span class="math notranslate nohighlight">\(Z_{(G, \Delta x)}\)</span></td>
+<td>triangulation distance</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="design-trends">
+<h2>2.2. Design trends<a class="headerlink" href="#design-trends" title="Permalink to this headline">¶</a></h2>
+<p>Generally, it can be stated that the refocusing distance <span class="math notranslate nohighlight">\(d_a\)</span> and triangulation distance <span class="math notranslate nohighlight">\(Z_{(G, \Delta x)}\)</span>  drop with</p>
+<blockquote>
+<div><ul class="simple">
+<li>ascending shift parameter <span class="math notranslate nohighlight">\(a\)</span> or ascending disparity <span class="math notranslate nohighlight">\(\Delta x\)</span></li>
+<li>enlarging micro lens focal length <span class="math notranslate nohighlight">\(f_s\)</span></li>
+<li>reducing objective lens focal length <span class="math notranslate nohighlight">\(f_U\)</span></li>
+</ul>
+</div></blockquote>
+<p>and vice versa. Similarly, the baseline <span class="math notranslate nohighlight">\(B_G\)</span>, a substantial triangulation parameter, grows with</p>
+<blockquote>
+<div><ul class="simple">
+<li>larger main lens focal length <span class="math notranslate nohighlight">\(f_U\)</span></li>
+<li>shorter micro lens focal length <span class="math notranslate nohighlight">\(f_s\)</span></li>
+<li>decreasing focusing distance <span class="math notranslate nohighlight">\(d_f\)</span></li>
+<li>increasing absolute virtual camera spacing <span class="math notranslate nohighlight">\(|G|\)</span></li>
+</ul>
+</div></blockquote>
+<p>It is worth noting that depth planes at <span class="math notranslate nohighlight">\(a=0\)</span> or <span class="math notranslate nohighlight">\(\Delta x=0\)</span> are located at the focusing distance <span class="math notranslate nohighlight">\(d_f\)</span>.</p>
+<p>In case of the <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/tag/v1.0.0-beta">app</a> version, graphical plots will be displayed supporting you in the decision making.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="apidoc.html" title="3. API documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="readme.html" title="1. Plenoptisign"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Plenoptisign 1.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Christopher Hahne.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

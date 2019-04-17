@@ -28,7 +28,20 @@ from . import constants as c
 class Mixin:
 
     def tria(self):
-        ''' computes depth plane distance, virtual camera orientation and baseline of a standard plenoptic camera '''
+        ''' This method computes depth plane distance :math:`Z_{(G, \\Delta x)}`, virtual camera tilt :math:`\\Phi_G`
+        and baseline :math:`B_G` of a standard plenoptic camera. The instance variables that are mutated are as follows:
+
+        :param B: baseline at entrance pupil of the main lens
+        :param phi: tilt angle of virtual camera
+        :param Z: triangulation distance
+        :type B: float
+        :type phi: float
+        :type Z: float
+
+        :return: **True**
+        :rtype: bool
+
+        '''
 
         # compute main lens image distance
         self.compute_img_dist()

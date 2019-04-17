@@ -29,11 +29,23 @@ from . import constants as c
 
 class Mixin:
 
-    def plt_3d_init(self, plt3d):
-        ''' set initial parameters for 3D plot '''
+    def plt_3d_init(self, plt3d, elev=30, azim=120):
+        ''' This method initializes parameters for plots in 3-D space that only need to be set once.
+
+        :param plt3d: instance of matplotlib's Axes3D
+        :param elev: elevation angle for perspective in 3-D plot
+        :param azim: azimuth angle for perspective in 3-D plot
+        :type plt3d: :class:`~matplotlib:mpl_toolkits.mplot3d.axes3d.Axes3D`
+        :type elev: float
+        :type azim: float
+
+        :return: **True**
+        :rtype: bool
+
+        '''
 
         # perspective view init
-        plt3d.view_init(elev=30, azim=-120)
+        plt3d.view_init(elev, azim)
 
         # start plotting axis matter
         plt3d.set_xlabel('z [mm]')
@@ -43,7 +55,20 @@ class Mixin:
         return True
 
     def plt_3d(self, plt3d, amin, sen_dims=np.array([24.048, 36.072]), dep_type=False):
-        ''' draw depth planes for Axes3D class instance based on respective provided method (refo or tria) '''
+        ''' This method draws depth planes in 3-D space based on provided depth method (e.g. :func:`refo()`).
+
+        :param plt3d: instance of matplotlib's Axes3D
+        :param amin: minimum depth plane
+        :param sen_dims: sensor dimensions
+        :param dep_type: specified depth type, e.g. 'refo' or 'tria'
+        :type plt3d: :class:`~matplotlib:mpl_toolkits.mplot3d.axes3d.Axes3D`
+        :type amin: float
+        :type sen_dims: numpy.ndarray
+        :type dep_type: bool
+
+        :return: **plt3d**
+
+        '''
 
         x, y, z = ([] for _ in range(3))
         iter_range = [amin, amin+5]
@@ -106,13 +131,14 @@ class Mixin:
 
     @staticmethod
     def non_inf_max(input):
-        ''' obtain maximum value from input list without consideration of infinity
+        ''' This function computes the maximum value from an input list without consideration of infinity.
 
-        :type input: list
         :param input: list of real numbers
-
+        :param max_val: maximum value excluding infinity
+        :type input: list
         :type max_val: float
-        :return max_val: maximum value excluding infinity
+
+        :returns: **max_val**
 
         '''
 

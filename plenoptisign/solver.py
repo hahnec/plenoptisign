@@ -23,13 +23,19 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 import numpy as np
 
 def solve_sle(A, b):
-    ''' algebraic function solver for a system of linear equations
+    '''
+
+    This function is an algebraic function solver for a system of linear equations of the general form :math:`Ax=b`.
+    In this application, its purpose is to solve for intersecting ray functions.
 
     :param A: :math:`nxm` matrix
     :param b: :math:`nx1` column vector
+    :param x: :math:`mx1` column vector
+    :type A: :class:`~numpy:numpy.ndarray`
+    :type b: :class:`~numpy:numpy.ndarray`
+    :type x: :class:`~numpy:numpy.ndarray`
 
-    :returns:
-        :return x: :math:`mx1` column vector
+    :return: **x**
 
     '''
 

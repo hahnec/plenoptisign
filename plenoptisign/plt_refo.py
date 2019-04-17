@@ -25,7 +25,20 @@ import numpy as np
 class Mixin:
 
     def plt_refo(self, ax, plane_th=.5, ray_th=.5, fontsize=11):
-        ''' plots the distance and depth of field to a plane computationally focused based on a standard plenoptic camera '''
+        ''' This method draws the refocusing distance and depth of field limits in 2-D space based on :func:`refo()`.
+
+        :param ax: instance of matplotlib's Axes
+        :param plane_th: line thickness of depth plane
+        :param ray_th: line thickness of rays
+        :param fontsize: font size of scientific notations
+        :type ax: :class:`~matplotlib:matplotlib.axes.Axes`
+        :type plane_th: float
+        :type ray_th: float
+        :type fontsize: float
+
+        :return: **ax**
+
+        '''
 
         # ensure refo method runs in advance
         self.refo()

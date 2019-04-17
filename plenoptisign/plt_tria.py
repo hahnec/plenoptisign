@@ -25,7 +25,20 @@ import numpy as np
 class Mixin:
 
     def plt_tria(self, ax, plane_th=.5, ray_th=.5, fontsize=11):
-        ''' plot distance based on disparity, baseline and virtual camera orientation in a standard plenoptic camera '''
+        ''' This method draws the triangulation distance in 2-D space calculated from :func:`tria()`.
+
+        :param ax: instance of matplotlib's Axes
+        :param plane_th: line thickness of depth plane
+        :param ray_th: line thickness of rays
+        :param fontsize: font size of scientific notations
+        :type ax: :class:`~matplotlib:matplotlib.axes.Axes`
+        :type plane_th: float
+        :type ray_th: float
+        :type fontsize: float
+
+        :return: **ax**
+
+        '''
 
         # ensure refo method runs in advance
         self.tria()

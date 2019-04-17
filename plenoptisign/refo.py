@@ -28,7 +28,23 @@ from plenoptisign.constants import PlenoptisignError, DEC_P
 class Mixin:
 
     def refo(self):
-        ''' computes the distance and depth of field of a plane that is computationally focused based on a standard plenoptic camera '''
+        ''' This method computes the distance :math:`d_a` and depth of field limits :math:`d_{a\\pm }`
+        of a plane that is computationally focused based on a standard plenoptic camera. The instance variables that
+        are mutated are as follows
+
+        :param d: refocusing distance
+        :param d_p: far depth of field border in refocusing
+        :param d_m: near depth of field border in refocusing
+        :param dof: depth of field
+        :type d: float
+        :type d_p: float
+        :type d_m: float
+        :type dof: float
+
+        :return: **True**
+        :rtype: bool
+
+        '''
 
         # local variable initialization
         j, i, mc, mij, qij, mU, mL, mijU, mijL, FijL, FijU, qijU, qijL, d_n, d_p_n, d_m_n = [np.zeros(2) for _ in range(16)]
