@@ -116,7 +116,7 @@ Further information
 .. Image substitutions
 
 .. |release| image:: https://img.shields.io/github/release/hahnec/plenoptisign.svg?style=flat-square
-    :target: https://github.com/hahnec/plenoptisign/archive/v1.0.0-beta.zip
+    :target: https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip
     :alt: release
 
 .. |license| image:: https://img.shields.io/badge/License-GPL%20v3.0-orange.svg?style=flat-square
@@ -124,15 +124,15 @@ Further information
     :alt: License
 
 .. |code| image:: https://img.shields.io/github/languages/code-size/hahnec/plenoptisign.svg?style=flat-square
-    :target: https://github.com/hahnec/plenoptisign/archive/v1.0.0-beta.zip
+    :target: https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip
     :alt: Code size
 
 .. |repo| image:: https://img.shields.io/github/repo-size/hahnec/plenoptisign.svg?style=flat-square
-    :target: https://github.com/hahnec/plenoptisign/archive/v1.0.0-beta.zip
+    :target: https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip
     :alt: Repo size
 
 .. |downloads| image:: https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?style=flat-square
-    :target: https://github.com/hahnec/plenoptisign/archive/v1.0.0-beta.zip
+    :target: https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip
     :alt: Downloads
 
 .. |logo| image:: https://raw.githubusercontent.com/hahnec/plenoptisign/master/plenoptisign/gui/misc/circlecompass_1055093_24x24.png
@@ -154,9 +154,9 @@ Further information
 .. Hyperlink aliases
 
 .. _source: https://github.com/hahnec/plenoptisign/archive/master.zip
-.. _app: https://github.com/hahnec/plenoptisign/releases/tag/v1.0.0-beta
-.. _macOS: https://github.com/hahnec/plenoptisign/releases/download/v1.0.0-beta/plenoptisign_1.0.0_macOS.zip
-.. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.0.0-beta/plenoptisign_1.0.0_windows.zip
+.. _app: https://github.com/hahnec/plenoptisign/releases/tag/v1.1.0
+.. _macOS: https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_macOS.zip
+.. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_win.zip
 .. _Plenopticam: https://github.com/hahnec/plenopticam/
 .. _CGI demo: http://www.plenoptic.info/pages/coding.html
 
