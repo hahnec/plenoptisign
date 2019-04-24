@@ -8,7 +8,7 @@ This software treats a pair of lightfield rays as a system of linear functions w
 
 Check out Plenoptisign's partner project Plenopticam_ capable of rendering light field images from scratch.
 
-|release| |license| |code| |repo| |downloads|
+|release| |license| |code| |repo| |downloads| |zenodo|
 
 Installation
 ============
@@ -134,6 +134,9 @@ Further information
 .. |downloads| image:: https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?style=flat-square
     :target: https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip
     :alt: Downloads
+
+.. |zenodo| image:: https://zenodo.org/badge/126895033.svg
+    :target: https://zenodo.org/badge/latestdoi/126895033
 
 .. |logo| image:: https://raw.githubusercontent.com/hahnec/plenoptisign/master/plenoptisign/gui/misc/circlecompass_1055093_24x24.png
 
