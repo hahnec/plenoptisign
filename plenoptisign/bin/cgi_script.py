@@ -28,7 +28,8 @@ from plenoptisign.constants import PlenoptisignError, DEC_P
 
 def cgi_read():
 
-    cgitb.enable()  # for troubleshooting
+    # report errors in log file
+    cgitb.enable(display=0, logdir='.')
 
     # read from cgi field storage and convert to dict
     field_storage = cgi.FieldStorage()
