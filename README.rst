@@ -118,7 +118,7 @@ Further information
 .. Image substitutions
 
 .. |release| image:: https://img.shields.io/github/release/hahnec/plenoptisign.svg?style=flat-square
-    :target: https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip
+    :target: https://github.com/hahnec/plenoptisign/releases
     :alt: release
 
 .. |license| image:: https://img.shields.io/badge/License-GPL%20v3.0-orange.svg?style=flat-square
