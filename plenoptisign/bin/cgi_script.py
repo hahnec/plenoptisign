@@ -78,9 +78,7 @@ def cgi_main():
         csvfile.close()
 
     # HTML output
-    refo_opt = bool(obj.data['refo']) if 'refo' in obj.data else False
-    tria_opt = bool(obj.data['tria']) if 'tria' in obj.data else False
-    if refo_opt or tria_opt:
+    if bool(obj.refo_opt) or bool(obj.tria_opt):
         # HTML header
         print("Content-Type: text/html\n")
         print("<br />")
@@ -89,10 +87,10 @@ def cgi_main():
         print("<p>")
         print("<TABLE>")
 
-    if refo_opt:
+    if bool(obj.refo_opt):
         # refocusing output
         print("<TR>")
-        if tria_opt:
+        if bool(obj.tria_opt):
             print("<TD><b>Refocusing</b></TD>")
         else:
             print("<TD></TD>")
@@ -111,7 +109,7 @@ def cgi_main():
         print("<TD>far DoF border <i>d<sub style='line-height:0'>a+</sub></i>: </TD><TD>%s</TD>" % str_d_p)
         print("</TR>")
 
-    if refo_opt and tria_opt:
+    if bool(obj.refo_opt) and bool(obj.tria_opt):
         # blank space
         print("<TR>")
         print("<TD></TD>")
@@ -119,10 +117,10 @@ def cgi_main():
         print("<TD></TD>")
         print("</TR>")
 
-    if tria_opt:
+    if bool(obj.tria_opt):
         # triangulation output
         print("<TR>")
-        if refo_opt:
+        if bool(obj.refo_opt):
             print("<TD><b>Triangulation</b></TD>")
         else:
             print("<TD></TD>")
@@ -137,11 +135,11 @@ def cgi_main():
         print("<TD>tria. distance <i>Z<sub style='line-height:0'>G</sub></i>: </TD><TD>%s</TD>" % str_tria)
         print("</TR>")
 
-    if refo_opt or tria_opt:
+    if bool(obj.refo_opt) or bool(obj.tria_opt):
         print("</TABLE>")
         print("</p>")
         print("<br />")
-    if refo_opt and tria_opt:
+    if bool(obj.refo_opt) and bool(obj.tria_opt):
         # console handling
         if console_msg:
             print("Console output: <br \>")
