@@ -65,6 +65,8 @@ function getquerystring() {
     var M = form.M.value;
     var i = form.i.value;
     var dx = form.dx.value;
+	var refo = form.refo.value;
+    var tria = form.tria.value;
     qustr = 'pp=' + encodeURI(pp) + '&' +
             'fs=' + encodeURI(fs) + '&' +
             'pm=' + encodeURI(pm) + '&' +
@@ -75,8 +77,8 @@ function getquerystring() {
             'M=' + encodeURI(M) + '&' +
             'i=' + encodeURI(i) + '&' +
             'dx=' + encodeURI(dx) + '&' +
-            'refo=' + encodeURI('1') + '&' +
-            'tria=' + encodeURI('1'); // NOTE: no '?' before querystring
+            'refo=' + encodeURI(refo) + '&' +
+            'tria=' + encodeURI(tria); // NOTE: no '?' before querystring
     return qustr;
 }
 
