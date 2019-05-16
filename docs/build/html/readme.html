@@ -43,18 +43,19 @@
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">1.  Plenoptisign</a><ul>
-<li><a class="reference internal" href="#installation">1.1. Installation</a><ul>
-<li><a class="reference internal" href="#gui-based-executable">1.1.1. GUI-based executable</a></li>
-<li><a class="reference internal" href="#command-line-interface">1.1.2. Command-line interface</a></li>
-<li><a class="reference internal" href="#cgi-server">1.1.3. CGI server</a></li>
+<li><a class="reference internal" href="#description">1.1. Description</a></li>
+<li><a class="reference internal" href="#installation">1.2. Installation</a><ul>
+<li><a class="reference internal" href="#gui-based-executable">1.2.1. GUI-based executable</a></li>
+<li><a class="reference internal" href="#command-line-interface">1.2.2. Command-line interface</a></li>
+<li><a class="reference internal" href="#cgi-server">1.2.3. CGI server</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#credits">1.2. Credits</a><ul>
-<li><a class="reference internal" href="#contributors">1.2.1. Contributors</a></li>
-<li><a class="reference internal" href="#sponsors">1.2.2. Sponsors</a></li>
-<li><a class="reference internal" href="#further-information">1.2.3. Further information</a></li>
+<li><a class="reference internal" href="#credits">1.3. Credits</a><ul>
+<li><a class="reference internal" href="#contributors">1.3.1. Contributors</a></li>
+<li><a class="reference internal" href="#sponsors">1.3.2. Sponsors</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#further-information">1.4. Further information</a></li>
 </ul>
 </li>
 </ul>
@@ -94,19 +95,22 @@
             
   <div class="section" id="logo-plenoptisign">
 <h1>1. <img alt="logo" src="https://raw.githubusercontent.com/hahnec/plenoptisign/master/plenoptisign/gui/misc/circlecompass_1055093_24x24.png" /> Plenoptisign<a class="headerlink" href="#logo-plenoptisign" title="Permalink to this headline">¶</a></h1>
-<p>Light field geometry estimator for a Standard Plenoptic Camera (SPC)</p>
-<p>This software treats a pair of lightfield rays as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions for perspective views captured by an SPC.</p>
-<p>Check out Plenoptisign’s partner project <a class="reference external" href="https://github.com/hahnec/plenopticam/">Plenopticam</a> capable of rendering light field images from scratch.</p>
-<p><a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="release" src="https://img.shields.io/github/release/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img alt="License" src="https://img.shields.io/badge/License-GPL%20v3.0-orange.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Code size" src="https://img.shields.io/github/languages/code-size/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Repo size" src="https://img.shields.io/github/repo-size/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://zenodo.org/badge/latestdoi/126895033"><img alt="zenodo" src="https://zenodo.org/badge/126895033.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Downloads" src="https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?style=flat-square" /></a></p>
+<div class="section" id="description">
+<h2>1.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><em>Plenoptisign</em> is an open-source <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/">app</a> for geometry estimation of a light field captured by a Standard Plenoptic Camera (SPC).
+This software treats a pair of light field rays as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions of perspective views (so-called sub-aperture images).</p>
+<p><a class="reference external" href="https://github.com/hahnec/plenoptisign/releases"><img alt="release" src="https://img.shields.io/github/release/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img alt="License" src="https://img.shields.io/badge/License-GPL%20v3.0-orange.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Code size" src="https://img.shields.io/github/languages/code-size/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Repo size" src="https://img.shields.io/github/repo-size/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Downloads" src="https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?style=flat-square" /></a></p>
+<p><a class="reference external" href="https://zenodo.org/badge/latestdoi/126895033"><img alt="zenodo link" src="https://zenodo.org/badge/126895033.svg?style=flat-square" /></a></p>
+</div>
 <div class="section" id="installation">
-<h2>1.1. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>1.2. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="gui-based-executable">
-<h3>1.1.1. GUI-based executable<a class="headerlink" href="#gui-based-executable" title="Permalink to this headline">¶</a></h3>
+<h3>1.2.1. GUI-based executable<a class="headerlink" href="#gui-based-executable" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="first docutils">
 <dt><strong>Installation</strong>:</dt>
 <dd><ol class="first last arabic">
-<li>download as an <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/tag/v1.1.0">app</a> (for <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_macOS.zip">macOS</a> and <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_win.zip">Windows</a> only)</li>
+<li>download as an <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/">app</a> (for <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_macOS.zip">macOS</a> and <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_win.zip">Windows</a> only)</li>
 <li>extract the archive to obtain the executable</li>
 </ol>
 </dd>
@@ -114,7 +118,7 @@
 </li>
 <li><dl class="first docutils">
 <dt><strong>Usage</strong>:</dt>
-<dd>run extracted <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/tag/v1.1.0">app</a> (for <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_macOS.zip">macOS</a> and <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_win.zip">Windows</a> only)</dd>
+<dd>run extracted <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/">app</a> (for <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_macOS.zip">macOS</a> and <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_win.zip">Windows</a> only)</dd>
 </dl>
 </li>
 </ul>
@@ -130,7 +134,7 @@
 </div>
 </div>
 <div class="section" id="command-line-interface">
-<h3>1.1.2. Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h3>
+<h3>1.2.2. Command-line interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><dl class="first docutils">
 <dt><strong>Installation</strong>:</dt>
@@ -159,14 +163,14 @@
 </ul>
 </div>
 <div class="section" id="cgi-server">
-<h3>1.1.3. CGI server<a class="headerlink" href="#cgi-server" title="Permalink to this headline">¶</a></h3>
+<h3>1.2.3. CGI server<a class="headerlink" href="#cgi-server" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><dl class="first docutils">
 <dt><strong>Installation</strong>:</dt>
 <dd><ol class="first last arabic">
 <li><p class="first">download the <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/master.zip">source</a></p>
 </li>
-<li><p class="first">place the extracted <code class="docutils literal notranslate"><span class="pre">plenoptisign-master</span></code> folder on the ftp next to your <code class="docutils literal notranslate"><span class="pre">*.html</span></code> that you want to embed it in</p>
+<li><p class="first">place extracted <code class="docutils literal notranslate"><span class="pre">plenoptisign-master</span></code> folder on the ftp next to your <code class="docutils literal notranslate"><span class="pre">*.html</span></code> that you want to embed it in</p>
 </li>
 <li><p class="first">rename <code class="docutils literal notranslate"><span class="pre">plenoptisign-master</span></code> to <code class="docutils literal notranslate"><span class="pre">plenoptisign</span></code></p>
 </li>
@@ -201,14 +205,14 @@
 </div>
 </div>
 <div class="section" id="credits">
-<h2>1.2. Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
+<h2>1.3. Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="contributors">
-<h3>1.2.1. Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.1. Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
 <p><img src="http://www.christopherhahne.de/images/about.jpg" width="100px"></p>
 <p><a class="reference external" href="http://www.christopherhahne.de/">Christopher Hahne</a></p>
 </div>
 <div class="section" id="sponsors">
-<h3>1.2.2. Sponsors<a class="headerlink" href="#sponsors" title="Permalink to this headline">¶</a></h3>
+<h3>1.3.2. Sponsors<a class="headerlink" href="#sponsors" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -227,12 +231,13 @@
 </tbody>
 </table>
 </div>
+</div>
 <div class="section" id="further-information">
-<h3>1.2.3. Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h3>
+<h2>1.4. Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>check out Plenoptisign’s partner project <a class="reference external" href="https://github.com/hahnec/plenopticam/">Plenopticam</a> capable of rendering light field images from scratch.</li>
 <li>visit <a class="reference external" href="http://www.plenoptic.info">plenoptic.info</a> for technical details, animated figures and theoretical background</li>
 </ul>
-</div>
 </div>
 </div>
 

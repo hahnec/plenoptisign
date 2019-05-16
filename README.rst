@@ -2,21 +2,21 @@
 |logo| Plenoptisign
 ===================
 
-Light field geometry estimator for a Standard Plenoptic Camera (SPC)
+Description
+-----------
 
-This software treats a pair of lightfield rays as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions for perspective views captured by an SPC.
-
-Check out Plenoptisign's partner project Plenopticam_ capable of rendering light field images from scratch.
+*Plenoptisign* is an open-source app_ for geometry estimation of a light field captured by a Standard Plenoptic Camera (SPC).
+This software treats a pair of light field rays as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions of perspective views (so-called sub-aperture images).
 
 |release| |license| |code| |repo| |downloads|
 
 |zenodo|
 
 Installation
-============
+------------
 
 GUI-based executable
---------------------
+====================
 
 * **Installation**:
     1. download as an app_ (for macOS_ and Windows_ only)
@@ -38,7 +38,7 @@ GUI-based executable
 
 
 Command-line interface
-----------------------
+======================
 
 * **Installation**:
     1. download the source_ using ``$ git clone https://github.com/hahnec/plenoptisign.git``
@@ -59,11 +59,11 @@ Command-line interface
     unit testing: ``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
 
 CGI server
-----------
+==========
 
 * **Installation**:
     1. download the source_
-    2. place the extracted ``plenoptisign-master`` folder on the ftp next to your ``*.html`` that you want to embed it in
+    2. place extracted ``plenoptisign-master`` folder on the ftp next to your ``*.html`` that you want to embed it in
     3. rename ``plenoptisign-master`` to ``plenoptisign``
     4. include ``cgi.html`` into your ``*.html`` with ``includeCGI`` as the ``id`` of the desired ``div`` container
 
@@ -89,17 +89,17 @@ CGI server
 Tested on macOS 10.14.2 and Windows 10 w/ Python 2.7 & Python 3.6
 
 Credits
-=======
+-------
 
 Contributors
-------------
+============
 
 |Hahne|
 
 `Christopher Hahne <http://www.christopherhahne.de/>`__
 
 Sponsors
---------
+========
 |
 
 .. list-table::
@@ -113,6 +113,7 @@ Sponsors
 Further information
 -------------------
 
+* check out Plenoptisign's partner project Plenopticam_ capable of rendering light field images from scratch.
 * visit `plenoptic.info <http://www.plenoptic.info>`__ for technical details, animated figures and theoretical background
 
 .. Image substitutions
@@ -139,6 +140,7 @@ Further information
 
 .. |zenodo| image:: https://zenodo.org/badge/126895033.svg?style=flat-square
     :target: https://zenodo.org/badge/latestdoi/126895033
+    :alt: zenodo link
 
 .. |logo| image:: https://raw.githubusercontent.com/hahnec/plenoptisign/master/plenoptisign/gui/misc/circlecompass_1055093_24x24.png
 
@@ -159,7 +161,7 @@ Further information
 .. Hyperlink aliases
 
 .. _source: https://github.com/hahnec/plenoptisign/archive/master.zip
-.. _app: https://github.com/hahnec/plenoptisign/releases/tag/v1.1.0
+.. _app: https://github.com/hahnec/plenoptisign/releases/
 .. _macOS: https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_macOS.zip
 .. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_win.zip
 .. _Plenopticam: https://github.com/hahnec/plenopticam/
