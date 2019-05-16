@@ -169,4 +169,4 @@ Further information
 
 .. _Optics, Eugene Hecht:  https://www.pearson.com/us/higher-education/program/Hecht-Optics-5th-Edition/PGM45350.html
 .. _Refocusing distance of a standard plenoptic camera: https://doi.org/10.1364/OE.24.021521
-.. _Baseline and triangulation geometry in a standard plenoptic camera: https://www.plenoptic.info/IJCV_Hahne17_final.pdf
+.. _Baseline and triangulation geometry in a standard plenoptic camera: http://www.plenoptic.info/files/IJCV_Hahne17_final.pdf
