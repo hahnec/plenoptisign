@@ -10,10 +10,10 @@ EXPR = ['Pixel Pitch', 'Micro Lens Focal Length', 'Micro Lens Principal Plane Sp
         'Micro Lens Pitch', 'Exit Pupil Distance', 'Main Lens Focal Length',
         'Main Lens Principal Plane Spacing', 'Main Lens Focusing Distance', 'F-number',
         'Shift Parameter', 'Micro Image Resolution', 'Virtual Camera Gap', 'Disparity']
-RSLT = ['Refocusing Distance', 'Depth of Field', 'Narrow DoF Border', 'Far DoF Border',
+RSLT = ['Refocusing Distance', 'Depth of Field', 'Far DoF Border', 'Narrow DoF Border',
         'Baseline', 'Tilt Angle', 'Triangulation Distance']
 ESYM = ['p_p', 'f_s', 'H_{1s}H_{2s}', 'p_m', "d_{A'}", 'f_U', 'H_{1U}H_{2U}', 'd_f', 'F#', 'a', 'M', 'G', 'Δx']
-RSYM = ["d_a", "DoF", "d_{a-}", "d_{a+}", "B_G", "Φ_G", "Z_{(G, ∆x)}"]
+RSYM = ["d_a", "DoF", "d_{a+}", "d_{a-}", "B_G", "Φ_G", "Z_{(G, ∆x)}"]
 UNTS = ['mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'a.u.', 'px', 'px', 'px', 'px',
         '', 'mm', 'mm', 'mm', 'mm', 'mm', 'deg', 'mm']
 
