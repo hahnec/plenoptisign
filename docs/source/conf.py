@@ -19,7 +19,7 @@ import plenoptisign
 
 # -- Project information -----------------------------------------------------
 
-project = 'Plenoptisign'
+project = 'PlenoptiSign'
 copyright = '2019, Christopher Hahne'
 author = plenoptisign.__author__
 
@@ -116,7 +116,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Plenoptisigndoc'
+htmlhelp_basename = 'PlenoptiSignDoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -143,7 +143,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Plenoptisign.tex', 'Plenoptisign Documentation',
+    (master_doc, 'PlenoptiSign.tex', 'PlenoptiSign Documentation',
      'Christopher Hahne', 'manual'),
 ]
 
@@ -153,7 +153,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'plenoptisign', 'Plenoptisign Documentation',
+    (master_doc, 'plenoptisign', 'PlenoptiSign Documentation',
      [author], 1)
 ]
 
@@ -164,8 +164,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Plenoptisign', 'Plenoptisign Documentation',
-     author, 'Plenoptisign', 'One line description of project.',
+    (master_doc, 'PlenoptiSign', 'PlenoptiSign Documentation',
+     author, 'PlenoptiSign', 'One line description of project.',
      'Miscellaneous'),
 ]
 

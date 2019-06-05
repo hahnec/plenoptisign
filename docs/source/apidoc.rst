@@ -1,4 +1,4 @@
-.. Plenoptisign documentation master file, created by
+.. PlenoptiSign documentation master file, created by
    sphinx-quickstart on Sat Mar 16 18:50:44 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -14,7 +14,7 @@ API documentation
 Architecture
 ------------
 
-A schematic overview of Plenoptisign's architecture is seen in the diagram below:
+A schematic overview of PlenoptiSign's architecture is seen in the diagram below:
 
 .. image:: ../../docs/img/plenoptisign_arch.png
 

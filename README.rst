@@ -1,11 +1,11 @@
 ===================
-|logo| Plenoptisign
+|logo| PlenoptiSign
 ===================
 
 Description
 -----------
 
-*Plenoptisign* is an open-source app_ for geometry estimation of a light field captured by a Standard Plenoptic Camera (SPC).
+*PlenoptiSign* is an open-source app_ for geometry estimation of a light field captured by a Standard Plenoptic Camera (SPC).
 This software treats a pair of light field rays as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions of perspective views (so-called sub-aperture images).
 
 |release| |license| |code| |repo| |downloads|
@@ -113,7 +113,7 @@ Sponsors
 Further information
 -------------------
 
-* check out Plenoptisign's partner project Plenopticam_ capable of rendering light field images from scratch.
+* check out PlenoptiSign's partner project PlenoptiCam_ capable of rendering light field images from scratch.
 * visit `plenoptic.info <http://www.plenoptic.info>`__ for technical details, animated figures and theoretical background
 
 .. Image substitutions
@@ -164,7 +164,7 @@ Further information
 .. _app: https://github.com/hahnec/plenoptisign/releases/
 .. _macOS: https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_macOS.zip
 .. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_win.zip
-.. _Plenopticam: https://github.com/hahnec/plenopticam/
+.. _PlenoptiCam: https://github.com/hahnec/plenopticam/
 .. _CGI demo: http://www.plenoptic.info/pages/coding.html
 
 .. _Optics, Eugene Hecht:  https://www.pearson.com/us/higher-education/program/Hecht-Optics-5th-Edition/PGM45350.html

@@ -1,4 +1,4 @@
-.. Plenoptisign documentation master file, created by
+.. PlenoptiSign documentation master file, created by
    sphinx-quickstart on Sat Mar 16 18:50:44 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -13,7 +13,7 @@ User Guide
 
 ==========
 
-Once Plenoptisign is ready for use (whether from source_, as an app_ or `CGI demo`_), you will be provided with a default parameter set.
+Once PlenoptiSign is ready for use (whether from source_, as an app_ or `CGI demo`_), you will be provided with a default parameter set.
 You can start off varying these parameters as you like to see their impact on the light field geometry.
 As of version 1.1.0, the input and output parameters are defined as shown in the following.
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3. API documentation &#8212; Plenoptisign 1.1.0 documentation</title>
+    <title>3. API documentation &#8212; PlenoptiSign 1.1.1 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -31,7 +31,7 @@
         <li class="right" >
           <a href="guide.html" title="2. User Guide"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Plenoptisign 1.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PlenoptiSign 1.1.1 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -81,7 +81,7 @@
 </div>
 <div class="section" id="architecture">
 <h2>3.1. Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
-<p>A schematic overview of Plenoptisign’s architecture is seen in the diagram below:</p>
+<p>A schematic overview of PlenoptiSign’s architecture is seen in the diagram below:</p>
 <img alt="_images/plenoptisign_arch.png" src="_images/plenoptisign_arch.png" />
 <p>As the mainclass.py and the solver.py will be of primary interest for future extensions, both are documented hereafter.</p>
 </div>
@@ -264,7 +264,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</li>
+<li><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</li>
 <li><strong>amin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – minimum depth plane</li>
 <li><strong>sen_dims</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><em>numpy.ndarray</em></a>) – sensor dimensions</li>
 <li><strong>dep_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – specified depth type, e.g. ‘refo’ or ‘tria’</li>
@@ -287,7 +287,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</li>
+<li><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</li>
 <li><strong>elev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – elevation angle for perspective in 3-D plot</li>
 <li><strong>azim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – azimuth angle for perspective in 3-D plot</li>
 </ul>
@@ -312,7 +312,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</li>
+<li><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</li>
 <li><strong>plane_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – line thickness of depth plane</li>
 <li><strong>ray_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – line thickness of rays</li>
 <li><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – font size of scientific notations</li>
@@ -335,7 +335,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.0.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</li>
+<li><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</li>
 <li><strong>plane_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – line thickness of depth plane</li>
 <li><strong>ray_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – line thickness of rays</li>
 <li><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – font size of scientific notations</li>
@@ -449,7 +449,7 @@ In this application, its purpose is to solve for intersecting ray functions.</p>
         <li class="right" >
           <a href="guide.html" title="2. User Guide"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Plenoptisign 1.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PlenoptiSign 1.1.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
