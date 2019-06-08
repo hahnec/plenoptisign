@@ -54,7 +54,7 @@ class Mixin:
 
         return True
 
-    def plt_3d(self, plt3d, amin, sen_dims=np.array([24.048, 36.072]), dep_type=False):
+    def plt_3d(self, plt3d, amin, sen_dims=np.array([24.048, 36.072]), dep_type=False, ray_th=.75):
         ''' This method draws depth planes in 3-D space based on provided depth method (e.g. :func:`refo()`).
 
         :param plt3d: instance of matplotlib's Axes3D
@@ -122,10 +122,10 @@ class Mixin:
         # plot field of view lines
         x_hw = self.non_inf_max(x)/2
         y_hw = self.non_inf_max(y)/2
-        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, +x_hw], [-sen_dims[0]/2, +y_hw], 'k-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, +x_hw], [+sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self.bU, z_max], [+sen_dims[1]/2, -x_hw], [-sen_dims[0]/2, +y_hw], 'k-.', alpha=.8, linewidth=.5)
-        plt3d.plot([-self.bU, z_max], [+sen_dims[1]/2, -x_hw], [+sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=.5)
+        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, +x_hw], [-sen_dims[0]/2, +y_hw], 'k-.', alpha=.8, linewidth=ray_th)
+        plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, +x_hw], [+sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=ray_th)
+        plt3d.plot([-self.bU, z_max], [+sen_dims[1]/2, -x_hw], [-sen_dims[0]/2, +y_hw], 'k-.', alpha=.8, linewidth=ray_th)
+        plt3d.plot([-self.bU, z_max], [+sen_dims[1]/2, -x_hw], [+sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=ray_th)
 
         return plt3d
 

@@ -24,7 +24,7 @@ import numpy as np
 
 class Mixin:
 
-    def plt_tria(self, ax, plane_th=.5, ray_th=.5, fontsize=11):
+    def plt_tria(self, ax, plane_th=.75, ray_th=.75, fontsize=11):
         ''' This method draws the triangulation distance in 2-D space calculated from :func:`tria()`.
 
         :param ax: instance of matplotlib's Axes

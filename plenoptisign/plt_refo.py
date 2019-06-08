@@ -24,7 +24,7 @@ import numpy as np
 
 class Mixin:
 
-    def plt_refo(self, ax, plane_th=.5, ray_th=.5, fontsize=11):
+    def plt_refo(self, ax, plane_th=.9, ray_th=.75, fontsize=11):
         ''' This method draws the refocusing distance and depth of field limits in 2-D space based on :func:`refo()`.
 
         :param ax: instance of matplotlib's Axes
@@ -67,8 +67,8 @@ class Mixin:
         lens_y = np.arange(-self._sc*self.pm+self.pm/2, self._sc*self.pm+self.pm/2, self.pm)
         lens_f = np.arange(-self._sc*self.pm, self._sc*self.pm, self.pm)
         lens_x = (self.fs+self.hh) * np.ones(len(lens_y))
-        ax.plot(lens_x, lens_y, linestyle='', marker='+', linewidth=plane_th, color='k') # micro lens borders
-        ax.plot(lens_x, lens_f, linestyle='', marker='.', linewidth=plane_th, color='k') # micro optical axis
+        ax.plot(lens_x, lens_y, linestyle='', marker='+', linewidth=plane_th, color='k')    # micro lens borders
+        ax.plot(lens_x, lens_f, linestyle='', marker='.', linewidth=plane_th, color='k')    # micro optical axis
         ax.plot((self.fs, self.fs), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
         ax.plot((self.fs+self.hh, self.fs+self.hh), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
 
