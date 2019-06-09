@@ -47,11 +47,6 @@ class Mixin:
         # perspective view init
         plt3d.view_init(elev, azim)
 
-        # start plotting axis matter
-        plt3d.set_xlabel('z [mm]')
-        plt3d.set_ylabel('x [mm]')
-        plt3d.set_zlabel('y [mm]')
-
         return True
 
     def plt_3d(self, plt3d, amin, sen_dims=np.array([24.048, 36.072]), dep_type=False, ray_th=.75):
@@ -98,7 +93,13 @@ class Mixin:
         z_max = max(z) if max(z) != float('inf') else self.non_inf_max(z)
         max_dist = z_max*1.1
 
+        # plot title
         plt3d.set_title('3-D ' + ('refo', 'tria')[dep_type] + ' plot')
+
+        # plot axis matter
+        plt3d.set_xlabel('z [mm]')
+        plt3d.set_ylabel('x [mm]')
+        plt3d.set_zlabel('y [mm]')
 
         # plot camera axis and sensor
         plt3d.scatter(0, 0, 0, s=20, color='k')
