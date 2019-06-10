@@ -99,7 +99,8 @@ class PltWidget(tk.Frame):
     def change_dim_type(self):
         self.fig.delaxes(self.ax)
         if self.dim_type:
+            self.fig.set_size_inches(FIG_SIZE, forward=True)
             self.ax = self.fig.gca()
         else:
             self.ax = Axes3D(self.fig)
-            self.parent.obj.plt_3d_init(self.ax)
+            self.parent.obj.plt_3d_init(self.fig, self.ax)

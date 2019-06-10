@@ -158,6 +158,7 @@ class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.M
         self.M = float(data['M']) if 'M' in data else 13.9523           # 1-D micro image diameter
         self.G = float(data['G']) if 'G' in data else -6                # viewpoint gap
         self.dx = float(data['dx']) if 'dx' in data else 1              # disparity value
+        self.sd = tuple(data['sd']) if 'sd' in data else (24.048,36.072)# sensor dimensions
         self.refo_opt = float(data['refo']) if 'refo' in data else True # refo bool option
         self.tria_opt = float(data['tria']) if 'tria' in data else True # tria bool option
 

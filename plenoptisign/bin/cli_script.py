@@ -107,6 +107,10 @@ def main():
     # parse options
     refo_opt, tria_opt, plot_opt = parse_options(argv[1:])
 
+    # print info
+    print('\nPlenoptiSign v'+__version__+' is a light field geometry estimator. \r')
+    print('For more details contact inbox [ät] christophahnehahne.de\n')
+
     # construct object
     obj = MainClass()
 
@@ -147,22 +151,22 @@ def main():
         if ret_refo:
             fig = figure(figsize=FIG_SIZE)
             ax = fig.gca()
-            obj.plt_refo(ax, plane_th=.5, ray_th=.5)
+            obj.plt_refo(ax, plane_th=.5)
             show(block=True)
-            fig = figure(figsize=FIG_SIZE)
+            fig = figure(figsize=(FIG_SIZE[0]-2, FIG_SIZE[0]-2))
             ax = Axes3D(fig)
-            obj.plt_3d_init(ax)
-            obj.plt_3d(ax, amin=obj.a, dep_type=0)
+            obj.plt_3d_init(fig, ax)
+            obj.plt_3d(ax, amin=obj.a, dep_type=False)
             show(block=True)
         if ret_tria:
             fig = figure(figsize=FIG_SIZE)
             ax = fig.gca()
-            obj.plt_tria(ax, plane_th=.5, ray_th=.5)
+            obj.plt_tria(ax, plane_th=.5)
             show(block=True)
-            fig = figure(figsize=FIG_SIZE)
+            fig = figure(figsize=(FIG_SIZE[0]-2, FIG_SIZE[0]-2))
             ax = Axes3D(fig)
-            obj.plt_3d_init(ax)
-            obj.plt_3d(ax, amin=obj.dx, dep_type=1)
+            obj.plt_3d_init(fig, ax)
+            obj.plt_3d(ax, amin=obj.dx, dep_type=True)
             show(block=True)
 
 

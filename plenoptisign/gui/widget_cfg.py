@@ -28,8 +28,8 @@ except ImportError:
 # local python files
 from plenoptisign.constants import ABBS, EXPR, RSLT, UNTS, SW, PX, PY, MSG_W, DEC_P, RSYM, ESYM
 
-# 'from', 'to' and 'increment' exponents for 'pp, fs, hh, pm, dA, fU, HH, df, f_num, a, M, G, dx' in that order
-SPIN_SET = ((1,-3), (2,-2), (2,-3), (3,-3), (3,-2), (3,-2), (3,-2), (5,2), (3,-1), (2,-1), (2,-1), (2,-1), (2,-1))
+# 'from', 'to' and 'increment' exponents for 'pp, fs, hh, pm, dA, fU, HH, df, f_num, a, M, G, dx, sen' in that order
+SPIN_SET = ((2,-1), (1,-3), (2,-2), (2,-3), (3,-3), (3,-2), (3,-2), (3,-2), (5,2), (3,-1), (2,-1), (2,-1), (2,-1), (2,-1))
 
 # make object for config widget
 class CfgWidget(tk.Frame):
@@ -47,7 +47,7 @@ class CfgWidget(tk.Frame):
         for key in ABBS:
             tk_params[key].set(str(self.parent.cfg.params[key]))
 
-        # place scientific notations used throughout the author's publications
+        # place scientific notations (used throughout the author's publications)
         for i, exp in enumerate(ESYM+[' ']+RSYM):
             text = tk.Text(self, width=8, height=2, borderwidth=0, background=self.cget('background'), font=('', 10))
             text.tag_configure('ver_align', offset=-4)
@@ -74,10 +74,7 @@ class CfgWidget(tk.Frame):
         # place entries and keep them as instance variables
         self.entries = []
         for i, (s, key) in enumerate(zip(SPIN_SET, ABBS)):
-            if key != 'df' and key != 'f_num' and key != 'M':
-                entry = tk.Spinbox(self, from_=-10**s[0], to=10**s[0], increment=10**s[1],
-                                   textvariable=tk_params[key], width=SW, command=self.parent.run)
-            elif key == 'df':
+            if key == 'df':
                 # special treatment for focus distance 'df' to cover infinity values
                 entry = tk.Entry(self, textvariable=tk_params[key], width=SW)
             elif key == 'f_num':
@@ -88,11 +85,20 @@ class CfgWidget(tk.Frame):
                 # special treatment for micro image size 'M' to trigger f-number estimation
                 entry = tk.Spinbox(self, from_=-10**s[0], to=10**s[0], increment=10**s[1],
                                    textvariable=tk_params[key], width=SW, command=self.update_fnum)
+            elif key == 'sd':
+                var = TwoStringVars(values=self.parent.cfg.params[key])
+                entry = DoubleSpinbox(self, from_=10**s[1], to=10**s[0], increment=10**s[1],
+                                      textvariable=var, width=SW//2, command=self.parent.run)
+                entry.xview_moveto(0.0)  # display text from most right
+            else:
+                entry = tk.Spinbox(self, from_=-10**s[0], to=10**s[0], increment=10**s[1],
+                                   textvariable=tk_params[key], width=SW, command=self.parent.run)
+
             entry.grid(row=i+1, column=2, sticky='W', padx=PX)
             self.entries.append(entry)
 
         # margin separating inputs from outputs
-        margin = tk.Label(self)
+        margin = tk.Label(self, height=0, pady=-25)
         margin.grid(row=i+2, column=2)
 
         # place output labels
@@ -153,3 +159,57 @@ class CfgWidget(tk.Frame):
         # update results
         for j, res_str in enumerate(strings):
             self.msgs[j].config(text=res_str)
+
+class TwoStringVars(tk.StringVar):
+
+    def __init__(self, master=None, values=('', '')):
+        tk.StringVar.__init__(self, master, values)
+
+        self.set(values)
+
+    def get(self):
+        one = int(self._one.get())
+        two = int(self._two.get())
+        return [one, two]
+
+    def set(self, values):
+        if len(values) == 2:
+            self._one = tk.StringVar(value=str(values[0]))
+            self._two = tk.StringVar(value=str(values[1]))
+        else:
+            raise ValueError('Pass list or tuple of two values only')
+
+    @property
+    def one(self):
+        return float(self._one.get())
+
+    @property
+    def two(self):
+        return float(self._two.get())
+
+class DoubleSpinbox(tk.Spinbox):
+
+    def __init__(self, master=None, **kwargs):
+        tk.Spinbox.__init__(self, master, borderwidth=-3, cursor="arrow")    # remove border and use arrow for hovering
+
+        self._v = kwargs['textvariable'] if 'textvariable' in kwargs else TwoStringVars()
+        kwargs['from_'] = kwargs['from_'] if 'from_' in kwargs else 0
+        kwargs['to'] = kwargs['to'] if 'to' in kwargs else 10**2
+        kwargs['width'] = kwargs['width']//2+1 if 'width' in kwargs else 5
+
+        # remove kwarg keys in widget which are given as tuple
+        kwargs.pop('textvariable', None)
+
+        self._spinbox_one = tk.Spinbox(self, textvariable=self._v._one, **kwargs)
+        self._spinbox_one.grid(row=0, column=0, sticky='NSW')
+        self._spinbox_two = tk.Spinbox(self, textvariable=self._v._two, **kwargs)
+        self._spinbox_two.grid(row=0, column=1, sticky='NSE', ipadx=1)
+
+    def xview_moveto(self, val):
+        ''' display text from most right '''
+
+        self._spinbox_one.xview_moveto(val)
+        self._spinbox_two.xview_moveto(val)
+
+    def get(self):
+        return self._v.one, self._v.two

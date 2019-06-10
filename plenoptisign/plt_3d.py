@@ -22,6 +22,7 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 # external libs
 import numpy as np
+from matplotlib.transforms import Bbox
 
 # local python files
 from . import constants as c
@@ -29,9 +30,10 @@ from . import constants as c
 
 class Mixin:
 
-    def plt_3d_init(self, plt3d, elev=30, azim=120):
+    def plt_3d_init(self, fig, plt3d, elev=10, azim=135):
         ''' This method initializes parameters for plots in 3-D space that only need to be set once.
 
+        :param fig: instance of matplotlib's Figure
         :param plt3d: instance of matplotlib's Axes3D
         :param elev: elevation angle for perspective in 3-D plot
         :param azim: azimuth angle for perspective in 3-D plot
@@ -44,12 +46,32 @@ class Mixin:
 
         '''
 
+        # variable initialization
+        w = fig.get_figwidth()
+        h = fig.get_figheight()
+        aspect_ratio = h/w
+        g = (1-aspect_ratio)/2
+
+        # set figure size and bounding box
+        fig.set_size_inches((h, h), forward=True)
+        bbox = fig.bbox.get_points()
+        bbox[1, 0] = w*100
+
+        # self.fig.bbox = Bbox(bbox)
+        # self.ax = self.fig.gca()
+
+        # position axes
+        enlarge_coeff = 1.15
+        pos = np.asarray([[g, 0], [1-g, 1.0]])
+        pos = (pos-pos.max()/2.)*enlarge_coeff+.5
+        plt3d.set_position(pos=Bbox(pos))
+
         # perspective view init
         plt3d.view_init(elev, azim)
 
         return True
 
-    def plt_3d(self, plt3d, amin, sen_dims=np.array([24.048, 36.072]), dep_type=False, ray_th=.75):
+    def plt_3d(self, plt3d, amin, dep_type=False, ray_th=.75):
         ''' This method draws depth planes in 3-D space based on provided depth method (e.g. :func:`refo()`).
 
         :param plt3d: instance of matplotlib's Axes3D
@@ -58,7 +80,7 @@ class Mixin:
         :param dep_type: specified depth type, e.g. 'refo' or 'tria'
         :type plt3d: :class:`~matplotlib:mpl_toolkits.mplot3d.axes3d.Axes3D`
         :type amin: float
-        :type sen_dims: numpy.ndarray
+        :type sen_dims: tuple
         :type dep_type: bool
 
         :return: **plt3d**
@@ -66,8 +88,9 @@ class Mixin:
         '''
 
         x, y, z = ([] for _ in range(3))
-        iter_range = [amin, amin+5]
+        iter_range = [amin, amin+3]
         planes = np.arange(iter_range[0], iter_range[1], 1)[::-1]
+        sen_dims = np.asarray(self.sd)
 
         try:
             for el in planes:
@@ -93,13 +116,13 @@ class Mixin:
         z_max = max(z) if max(z) != float('inf') else self.non_inf_max(z)
         max_dist = z_max*1.1
 
-        # plot title
-        plt3d.set_title('3-D ' + ('refo', 'tria')[dep_type] + ' plot')
+        # plot title (padding for vertical positioning)
+        plt3d.set_title('3-D ' + ('refo', 'tria')[dep_type] + ' plot', pad=-20)
 
         # plot axis matter
-        plt3d.set_xlabel('z [mm]')
-        plt3d.set_ylabel('x [mm]')
-        plt3d.set_zlabel('y [mm]')
+        plt3d.set_xlabel('$z$ [mm]')
+        plt3d.set_ylabel('$x$ [mm]')
+        plt3d.set_zlabel('$y$ [mm]')
 
         # plot camera axis and sensor
         plt3d.scatter(0, 0, 0, s=20, color='k')
@@ -112,13 +135,13 @@ class Mixin:
             if z[i] != float('inf'):
                 yy, xx = np.meshgrid((-y[i]/2, y[i]/2), (-x[i]/2, x[i]/2))
                 zz = z[i]*np.ones(xx.shape)
-                plt3d.plot_surface(zz, xx, yy, color='r', alpha=.5)     # depth plane
-                plt3d.scatter([z[i]], [0], [0], s=20, color='r')        # plane-axis intersection
+                plt3d.plot_surface(zz, xx, yy, color='r', alpha=.3)     # depth plane
+                plt3d.scatter([z[i]], [0], [0], s=20, color='c')        # plane-axis intersection
 
                 # plot marker
                 num_str = str(round(planes[i], 1))
                 label_str = "$Z_{("+str(self.G)+', '+num_str+")}$" if dep_type else "$d_{"+num_str+"}$"
-                plt3d.text(z[i], x[i]/2, y[i]/2, s=label_str, fontsize=18, family='sans-serif')
+                plt3d.text(z[i], -x[i]/1.8, y[i]/1.8, s=label_str, fontsize=16, family='sans-serif')
 
         # plot field of view lines
         x_hw = self.non_inf_max(x)/2
@@ -127,6 +150,8 @@ class Mixin:
         plt3d.plot([-self.bU, z_max], [-sen_dims[1]/2, +x_hw], [+sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=ray_th)
         plt3d.plot([-self.bU, z_max], [+sen_dims[1]/2, -x_hw], [-sen_dims[0]/2, +y_hw], 'k-.', alpha=.8, linewidth=ray_th)
         plt3d.plot([-self.bU, z_max], [+sen_dims[1]/2, -x_hw], [+sen_dims[0]/2, -y_hw], 'k-.', alpha=.8, linewidth=ray_th)
+
+        self.axis_equal_3D(plt3d)
 
         return plt3d
 
@@ -149,3 +174,15 @@ class Mixin:
             max_val = input if isinstance(input, (int, float)) else float('nan')
 
         return max_val
+
+    @staticmethod
+    def axis_equal_3D(ax):
+        extents = np.array([getattr(ax, 'get_{}lim'.format(dim))() for dim in 'yz'])
+        sz = extents[:, 1]-extents[:, 0]
+        centers = np.mean(extents, axis=1)
+        maxsize = max(abs(sz))
+        r = maxsize/2
+        for ctr, dim in zip(centers, 'yz'):
+            getattr(ax, 'set_{}lim'.format(dim))(ctr-r, ctr+r)
+
+        return True

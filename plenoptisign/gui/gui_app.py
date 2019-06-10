@@ -60,7 +60,7 @@ class PlenoptisignApp(tk.Tk):
         self.parent = parent
 
         # window title
-        self.wm_title("Plenoptisign-"+__version__)
+        self.wm_title("PlenoptiSign-"+__version__)
 
         # icon handling
         if sys.platform == 'win32':
@@ -105,10 +105,17 @@ class PlenoptisignApp(tk.Tk):
         # update results in GUI
         self.run()
 
+    @staticmethod
+    def tryfloat(val):
+        try:
+            return float(val)
+        except:
+            return val
+
     def run(self):
 
         # fetch parameter data from GUI
-        self.obj.data = dict(zip(ABBS, [float(entry.get()) for entry in self.cfg_wid.entries]))
+        self.obj.data = dict(zip(ABBS, [self.tryfloat(entry.get()) for entry in self.cfg_wid.entries]))
 
         # compute light field geometry
         self.obj.refo()
@@ -118,9 +125,15 @@ class PlenoptisignApp(tk.Tk):
         self.cfg_wid.refresh()
         self.plt_wid.refresh()
 
+        # update console message
         self.con_wid.msg_box.config(text=self.obj.console_msg)
 
         return True
+
+    @staticmethod
+    def typefloat(var):
+        if var:
+            pass
 
     def save_cfg(self):
         ''' overwrite config file settings '''

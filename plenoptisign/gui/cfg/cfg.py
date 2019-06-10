@@ -51,7 +51,7 @@ class Config(object):
             fp = os.path.join(self.dir_path, 'cfg.json')
 
         with open(fp, 'r') as f:
-            json_data = json.load(f)#self.params.update(json.load(f))
+            json_data = json.load(f)
 
         # transfer parameters to config object
         for key in json_data:

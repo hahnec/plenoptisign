@@ -24,7 +24,7 @@ import numpy as np
 
 class Mixin:
 
-    def plt_refo(self, ax, plane_th=.9, ray_th=.75, fontsize=11):
+    def plt_refo(self, ax, plane_th=.9, ray_th=.75, fontsize=12):
         ''' This method draws the refocusing distance and depth of field limits in 2-D space based on :func:`refo()`.
 
         :param ax: instance of matplotlib's Axes
@@ -40,15 +40,19 @@ class Mixin:
 
         '''
 
-        # ensure refo method runs in advance
+        # run refo method in advance
         self.refo()
 
         # set maximum plot distance
-        z_max = self.d_p if self.d_m > 0 and self.d_p != float('Inf') else 5000 # either furthest plane or 5m
+        z_max = self.d_p if self.d_m > 0 and self.d_p != float('Inf') else 5000     # either furthest plane or 5m
         z_max += z_max/10 # add 10% space to max distance
 
-        ax.set_title('Cross-sectional refocusing plot')
-        ax.set_xlabel('$z_U$ [mm]'), ax.set_ylabel('$(u,s)$ [mm]')
+        # set vertical plot limits
+        y_min = min(self.sd[0]/2, self._UijU[0], self.D/2)
+        ax.set_ylim([-y_min*1.2, y_min*1.2])
+
+        ax.set_title('Cross-sectional refocusing plot', pad=10)
+        ax.set_xlabel('$z$ [mm]'), ax.set_ylabel('$y$ [mm]')
 
         # optical axis
         ax.plot((0, z_max), (0, 0), linestyle='--', linewidth=plane_th, color='k')
@@ -56,24 +60,24 @@ class Mixin:
         # main lens principal planes
         ax.plot((self.fs+self.hh+self.bU, self.fs+self.hh+self.bU), (self._UijU[0], -self._UijU[0]), 'k--', linewidth=plane_th)
         ax.plot((self.fs+self.hh+self.bU+self.HH, self.fs+self.hh+self.bU+self.HH), (self._UijU[0], -self._UijU[0]), 'k--', linewidth=plane_th)
-        ax.text(self.fs+self.hh+self.bU+2, -self._UijU[0]*.5, r'$H_{2U}$', fontsize=fontsize)
-        ax.text(self.fs+self.hh+self.bU+self.HH+2, -self._UijU[0]*.5, r'$H_{1U}$', fontsize=fontsize)
+        ax.text(self.fs+self.hh+self.bU+2, self._UijU[0]*.5, r'$H_{2U}$', fontsize=fontsize)
+        ax.text(self.fs+self.hh+self.bU+self.HH+2, self._UijU[0]*.5, r'$H_{1U}$', fontsize=fontsize)
 
         # main lens focal point
-        ax.plot((self.fs+self.hh+self.bU+self.HH+self.fU, self.fs+self.hh+self.bU+self.HH+self.fU), (self._Uij[0]/50, -self._Uij[0]/50), 'k-', linewidth=plane_th)
-        ax.text(self.fs+self.hh+self.bU+self.HH+self.fU, self._UijU[0]*.15, r'$F_U$', fontsize=fontsize)
+        ax.plot((self.fs+self.hh+self.bU+self.HH+self.fU, self.fs+self.hh+self.bU+self.HH+self.fU), (y_min/50, -y_min/50), 'k-', linewidth=plane_th)
+        ax.text(self.fs+self.hh+self.bU+self.HH+self.fU, -y_min*.12, r'$F_U$', fontsize=fontsize)
 
         # micro lens grid
-        lens_y = np.arange(-self._sc*self.pm+self.pm/2, self._sc*self.pm+self.pm/2, self.pm)
-        lens_f = np.arange(-self._sc*self.pm, self._sc*self.pm, self.pm)
+        lens_y = np.arange(-self.sd[0]/2+self.pm/2, self.sd[0]/2+self.pm/2, self.pm)
+        lens_f = np.arange(-self.sd[0]/2, self.sd[0]/2, self.pm)
         lens_x = (self.fs+self.hh) * np.ones(len(lens_y))
         ax.plot(lens_x, lens_y, linestyle='', marker='+', linewidth=plane_th, color='k')    # micro lens borders
         ax.plot(lens_x, lens_f, linestyle='', marker='.', linewidth=plane_th, color='k')    # micro optical axis
-        ax.plot((self.fs, self.fs), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
-        ax.plot((self.fs+self.hh, self.fs+self.hh), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
+        ax.plot((self.fs, self.fs), (self.sd[0]/2, -self.sd[0]/2), 'k-', linewidth=plane_th)
+        ax.plot((self.fs+self.hh, self.fs+self.hh), (self.sd[0]/2, -self.sd[0]/2), 'k-', linewidth=plane_th)
 
         # sensor plane
-        ax.plot((0, 0), (self._sc*self.pm, -self._sc*self.pm), 'k-', linewidth=plane_th)
+        ax.plot((0, 0), (self.sd[0]/2, -self.sd[0]/2), 'k-', linewidth=plane_th)
         pixel_y0 = np.arange(self._uc[0]-self.pp/2-np.ceil(self.pm/self.pp)/2*self.pp,
                              self._uc[0]+self.pp/2+np.ceil(self.pm/self.pp)/2*self.pp, self.pp)
         pixel_y2 = np.arange(self._uc[1]-self.pp/2-np.ceil(self.pm/self.pp)/2*self.pp,
@@ -84,12 +88,12 @@ class Mixin:
         ax.plot(pixel_x2, pixel_y2, linestyle='', marker='+', color='k')  # pixel borders 2
 
         # intersection planes
-        ax.plot((self.d, self.d), (self._UijU[0], -self._UijU[0]), 'c-', linewidth=plane_th)
-        ax.plot((self.d_p, self.d_p), (self._UijU[0], -self._UijU[0]), 'k-', linewidth=plane_th)
-        ax.plot((self.d_m, self.d_m), (self._UijU[0], -self._UijU[0]), 'r-', linewidth=plane_th)
-        ax.text(self.d+2, -self._UijU[0]*.9, r'$d_a$', fontsize=fontsize, color='c')
-        ax.text(self.d_p+5, -self._UijU[0]*.9, r'$d_{a+}$', fontsize=fontsize, color='k')
-        ax.text(self.d_m-30, -self._UijU[0]*.9, r'$d_{a-}$', fontsize=fontsize, color='r')
+        ax.plot((self.d, self.d), (y_min, -y_min), 'c-', linewidth=plane_th)
+        ax.plot((self.d_p, self.d_p), (y_min, -y_min), 'k-', linewidth=plane_th)
+        ax.plot((self.d_m, self.d_m), (y_min, -y_min), 'r-', linewidth=plane_th)
+        ax.text(self.d*1.01, y_min*.9, r'$d_a$', fontsize=fontsize, color='c')
+        ax.text(self.d_p*1.02, y_min*.9, r'$d_{a+}$', fontsize=fontsize, color='k')
+        ax.text(self.d_m*.9, y_min*.9, r'$d_{a-}$', fontsize=fontsize, color='r')
 
         # ray plots
         # chief rays connecting micro and main lens centres
