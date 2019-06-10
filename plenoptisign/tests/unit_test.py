@@ -26,10 +26,7 @@ from plenoptisign.mainclass import MainClass
 from plenoptisign.constants import ABBS, DEC_P
 
 @ddt
-class TestSPC(unittest.TestCase):
-
-    def setUp(self):
-        pass
+class PlenoptiSignTester(unittest.TestCase):
 
     @data(
         ([.009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'inf', 2.6846, 1, 13, -6, 1], [962.7459, 1110.0123, 838.1359, 271.8764]),
@@ -64,7 +61,6 @@ class TestSPC(unittest.TestCase):
         data_out = [round(float(object.B), DEC_P), round(float(object.phi), DEC_P), round(float(object.Z), DEC_P)]
         # assertion
         self.assertEqual(data_out, data_exp)
-
 
 if __name__ == '__main__':
     unittest.main()
