@@ -7,7 +7,6 @@ from sys import platform
 APP = ['plenoptisign/gui/gui_app.py']
 DATA_FILES = [
         # ('subdir' , ['file_path'])
-        ('cfg', ['plenoptisign/gui/cfg/cfg.json']),
         ('misc', ['plenoptisign/gui/misc/circlecompass_1055093.ico'])
 ]
 
