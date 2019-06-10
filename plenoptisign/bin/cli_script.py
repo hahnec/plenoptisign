@@ -19,6 +19,9 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
+# required for GUI usage from CLI
+import matplotlib
+matplotlib.use("TkAgg")
 
 from sys import exit, version_info, argv
 from getopt import getopt, GetoptError
