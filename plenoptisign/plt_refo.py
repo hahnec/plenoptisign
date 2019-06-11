@@ -88,12 +88,12 @@ class Mixin:
         ax.plot(pixel_x2, pixel_y2, linestyle='', marker='+', color='k')  # pixel borders 2
 
         # intersection planes
-        ax.plot((self.d, self.d), (y_min, -y_min), 'c-', linewidth=plane_th)
-        ax.plot((self.d_p, self.d_p), (y_min, -y_min), 'k-', linewidth=plane_th)
-        ax.plot((self.d_m, self.d_m), (y_min, -y_min), 'r-', linewidth=plane_th)
-        ax.text(self.d*1.01, y_min*.9, r'$d_a$', fontsize=fontsize, color='c')
-        ax.text(self.d_p*1.02, y_min*.9, r'$d_{a+}$', fontsize=fontsize, color='k')
-        ax.text(self.d_m*.9, y_min*.9, r'$d_{a-}$', fontsize=fontsize, color='r')
+        ax.plot((self.d, self.d), (y_min*.85, -y_min), 'c-', linewidth=plane_th)
+        ax.plot((self.d_p, self.d_p), (y_min*.85, -y_min), 'k-', linewidth=plane_th)
+        ax.plot((self.d_m, self.d_m), (y_min*.85, -y_min), 'r-', linewidth=plane_th)
+        ax.text(self.d, y_min, r'$d_a$', fontsize=fontsize, color='c', horizontalalignment='center', verticalalignment='top')
+        ax.text(self.d_p, y_min, r'$d_{a+}$', fontsize=fontsize, color='k', horizontalalignment='center', verticalalignment='top')
+        ax.text(self.d_m, y_min, r'$d_{a-}$', fontsize=fontsize, color='r', horizontalalignment='center', verticalalignment='top')
 
         # ray plots
         # chief rays connecting micro and main lens centres
@@ -121,7 +121,7 @@ class Mixin:
         ax.plot((self.fs+self.hh+self.bU+self.HH, self.fs+self.hh+self.bU+self.HH+self.fU), (0, self._Fij[1]), 'g--', linewidth=ray_th)
 
         # object space ray
-        ray_length = self.d # z_max
+        ray_length = self.d
         ax.plot((self.fs+self.hh+self.bU+self.HH, ray_length), (self._Uij[0], 0), 'b-', linewidth=ray_th)
         ax.plot((self.fs+self.hh+self.bU+self.HH, ray_length), (self._Uij[1], 0), 'g-', linewidth=ray_th)
 

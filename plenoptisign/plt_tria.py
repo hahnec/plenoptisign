@@ -24,7 +24,7 @@ import numpy as np
 
 class Mixin:
 
-    def plt_tria(self, ax, plane_th=.75, ray_th=.75, fontsize=12):
+    def plt_tria(self, ax, plane_th=.9, ray_th=.75, fontsize=12):
         ''' This method draws the triangulation distance in 2-D space calculated from :func:`tria()`.
 
         :param ax: instance of matplotlib's Axes
@@ -45,7 +45,7 @@ class Mixin:
 
         # set maximum plot distance
         z_max = self.Z if self.Z > 0 and self.Z != float('Inf') else 5000 # either furthest plane or 5m
-        z_max += z_max/10   # add 10% space to max distance
+        z_max *= 1.05   # add 5% space to max distance
 
         # set vertical plot limits
         y_min = min(self.sd[0]/2, self._Uij[0], self.D/2)
@@ -88,8 +88,8 @@ class Mixin:
         ax.text(self._ent_pup_pos*.8, -y_min, r"$d_{A''}$", fontsize=fontsize, horizontalalignment='center')
 
         # intersection planes
-        ax.plot((self.Z, self.Z), (y_min, -y_min), linestyle='-', linewidth=plane_th, color='r')
-        ax.text(self.Z + self.Z/100, self._Uij[0]*.8, r'$\Delta x='+str(self.dx)+'$', color='r', fontsize=fontsize)
+        ax.plot((self.Z, self.Z), (y_min*.95, -y_min), linestyle='-', linewidth=plane_th, color='r')
+        ax.text(self.Z, y_min, r'$\Delta x='+str(self.dx)+'$', color='r', fontsize=fontsize, horizontalalignment='right')
 
         # ray plots
 
