@@ -24,7 +24,7 @@ UNTS = ['mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'a.u.', 'px', 'px'
         '', 'mm', 'mm', 'mm', 'mm', 'mm', 'deg', 'mm']
 
 # GUI dimensions
-SW = 9          # spinbox width
+SW = 10          # spinbox width
 PF = 15         # frame margin width
 PX = 10         # horizontal margin width
 PY = 10         # horizontal margin width

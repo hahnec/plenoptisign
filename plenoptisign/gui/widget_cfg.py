@@ -197,15 +197,15 @@ class DoubleSpinbox(tk.Spinbox):
         self._v = kwargs['textvariable'] if 'textvariable' in kwargs else TwoStringVars()
         kwargs['from_'] = kwargs['from_'] if 'from_' in kwargs else 0
         kwargs['to'] = kwargs['to'] if 'to' in kwargs else 10**2
-        kwargs['width'] = int(kwargs['width']/2)-1 if 'width' in kwargs else 5
+        kwargs['width'] = int(kwargs['width']/2)-2 if 'width' in kwargs else 5
 
         # remove kwarg keys in widget which are given as tuple
         kwargs.pop('textvariable', None)
 
-        self._spinbox_one = tk.Spinbox(self, textvariable=self._v._one, font=Font(size=8), **kwargs)
-        self._spinbox_one.grid(row=0, column=0, sticky='NSW', ipadx=1)
-        self._spinbox_two = tk.Spinbox(self, textvariable=self._v._two, font=Font(size=8), **kwargs)
-        self._spinbox_two.grid(row=0, column=1, sticky='NSE', ipadx=1)
+        self._spinbox_one = tk.Spinbox(self, textvariable=self._v._one, **kwargs)   #font=Font(size=8),
+        self._spinbox_one.grid(row=0, column=0, sticky='NSW', ipadx=3)
+        self._spinbox_two = tk.Spinbox(self, textvariable=self._v._two, **kwargs)   #font=Font(size=8),
+        self._spinbox_two.grid(row=0, column=1, sticky='NSE', ipadx=3)
 
     def xview_moveto(self, val):
         ''' display text from most right '''
