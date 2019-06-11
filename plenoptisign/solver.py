@@ -28,9 +28,9 @@ def solve_sle(A, b):
     This function is an algebraic function solver for a system of linear equations of the general form :math:`Ax=b`.
     In this application, its purpose is to solve for intersecting ray functions.
 
-    :param A: :math:`nxm` matrix
-    :param b: :math:`nx1` column vector
-    :param x: :math:`mx1` column vector
+    :param A: :math:`n \\times m` matrix
+    :param b: :math:`n \\times 1` column vector
+    :param x: :math:`m \\times 1` column vector
     :type A: :class:`~numpy:numpy.ndarray`
     :type b: :class:`~numpy:numpy.ndarray`
     :type x: :class:`~numpy:numpy.ndarray`
