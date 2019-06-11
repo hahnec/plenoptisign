@@ -162,8 +162,8 @@ Further information
 
 .. _source: https://github.com/hahnec/plenoptisign/archive/master.zip
 .. _app: https://github.com/hahnec/plenoptisign/releases/
-.. _macOS: https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_macOS.zip
-.. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.1.0/plenoptisign_1.1.0_win.zip
+.. _macOS: https://github.com/hahnec/plenoptisign/releases/download/v1.1.1/plenoptisign_1.1.1_macOS.zip
+.. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.1.1/plenoptisign_1.1.1_win.zip
 .. _PlenoptiCam: https://github.com/hahnec/plenopticam/
 .. _CGI demo: http://www.plenoptic.info/pages/coding.html
 
