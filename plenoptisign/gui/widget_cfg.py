@@ -25,7 +25,6 @@ try:
     from tkinter.font import Font
 except ImportError:
     import Tkinter as tk
-    from Tkinter.font import Font
 
 # local python files
 from plenoptisign.constants import ABBS, EXPR, RSLT, UNTS, SW, PX, PY, MSG_W, DEC_P, RSYM, ESYM
@@ -189,10 +188,10 @@ class TwoStringVars(tk.StringVar):
     def two(self):
         return float(self._two.get())
 
-class DoubleSpinbox(tk.Spinbox):
+class DoubleSpinbox(tk.Frame):
 
     def __init__(self, master=None, **kwargs):
-        tk.Spinbox.__init__(self, master, borderwidth=-3, cursor="arrow")    # remove border and use arrow for hovering
+        tk.Frame.__init__(self, master, borderwidth=-3, cursor="arrow")    # remove border and use arrow for hovering
 
         self._v = kwargs['textvariable'] if 'textvariable' in kwargs else TwoStringVars()
         kwargs['from_'] = kwargs['from_'] if 'from_' in kwargs else 0
@@ -202,10 +201,10 @@ class DoubleSpinbox(tk.Spinbox):
         # remove kwarg keys in widget which are given as tuple
         kwargs.pop('textvariable', None)
 
-        self._spinbox_one = tk.Spinbox(self, textvariable=self._v._one, **kwargs)   #font=Font(size=8),
-        self._spinbox_one.grid(row=0, column=0, sticky='NSW', ipadx=3)
-        self._spinbox_two = tk.Spinbox(self, textvariable=self._v._two, **kwargs)   #font=Font(size=8),
-        self._spinbox_two.grid(row=0, column=1, sticky='NSE', ipadx=3)
+        self._spinbox_one = tk.Spinbox(self, textvariable=self._v._one, **kwargs)
+        self._spinbox_one.grid(row=0, column=0, sticky='NSW', ipadx=2, padx=0)
+        self._spinbox_two = tk.Spinbox(self, textvariable=self._v._two, **kwargs)
+        self._spinbox_two.grid(row=0, column=1, sticky='NSE', ipadx=2, padx=2)
 
     def xview_moveto(self, val):
         ''' display text from most right '''
