@@ -12,12 +12,12 @@ EXPR = ['Sensor Dimensions (Y,X)', 'Pixel Pitch', 'Micro Lens Focal Length', 'Mi
         'Micro Lens Pitch', 'Exit Pupil Distance', 'Main Lens Focal Length',
         'Main Lens Principal Plane Spacing', 'Main Lens Focusing Distance', 'F-number',
         'Shift Parameter', 'Micro Image Resolution', 'Virtual Camera Gap', 'Disparity']
-RSLT = ['Refocusing Distance', 'Depth of Field', 'Far DoF Border', 'Narrow DoF Border',
+RSLT = ['Refocusing Distance', 'Far DoF Border', 'Narrow DoF Border', 'Depth of Field',
         'Baseline', 'Tilt Angle', 'Triangulation Distance']
 
 # notation plots with subscript support
 ESYM = ['Sen', 'p_p', 'f_s', 'H_{1s}H_{2s}', 'p_m', "d_{A'}", 'f_U', 'H_{1U}H_{2U}', 'd_f', 'F#', 'a', 'M', 'G', 'Δx']
-RSYM = ["d_a", "DoF", "d_{a+}", "d_{a-}", "B_G", "Φ_G", "Z_{(G, ∆x)}"]
+RSYM = ["d_a", "d_{a+}", "d_{a-}", "DoF", "B_G", "Φ_G", "Z_{(G, ∆x)}"]
 
 # units
 UNTS = ['mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'mm', 'a.u.', 'px', 'px', 'px', 'px',
