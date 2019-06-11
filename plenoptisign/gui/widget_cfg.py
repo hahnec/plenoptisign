@@ -22,8 +22,10 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 try:
     import tkinter as tk
+    from tkinter.font import Font
 except ImportError:
     import Tkinter as tk
+    from Tkinter.font import Font
 
 # local python files
 from plenoptisign.constants import ABBS, EXPR, RSLT, UNTS, SW, PX, PY, MSG_W, DEC_P, RSYM, ESYM
@@ -88,7 +90,7 @@ class CfgWidget(tk.Frame):
             elif key == 'sd':
                 var = TwoStringVars(values=self.parent.cfg.params[key])
                 entry = DoubleSpinbox(self, from_=10**s[1], to=10**s[0], increment=10**s[1],
-                                      textvariable=var, width=SW//2, command=self.parent.run)
+                                      textvariable=var, width=SW, command=self.parent.run)
                 entry.xview_moveto(0.0)  # display text from most right
             else:
                 entry = tk.Spinbox(self, from_=-10**s[0], to=10**s[0], increment=10**s[1],
@@ -195,14 +197,14 @@ class DoubleSpinbox(tk.Spinbox):
         self._v = kwargs['textvariable'] if 'textvariable' in kwargs else TwoStringVars()
         kwargs['from_'] = kwargs['from_'] if 'from_' in kwargs else 0
         kwargs['to'] = kwargs['to'] if 'to' in kwargs else 10**2
-        kwargs['width'] = kwargs['width']//2+1 if 'width' in kwargs else 5
+        kwargs['width'] = int(kwargs['width']/2)-1 if 'width' in kwargs else 5
 
         # remove kwarg keys in widget which are given as tuple
         kwargs.pop('textvariable', None)
 
-        self._spinbox_one = tk.Spinbox(self, textvariable=self._v._one, **kwargs)
-        self._spinbox_one.grid(row=0, column=0, sticky='NSW')
-        self._spinbox_two = tk.Spinbox(self, textvariable=self._v._two, **kwargs)
+        self._spinbox_one = tk.Spinbox(self, textvariable=self._v._one, font=Font(size=8), **kwargs)
+        self._spinbox_one.grid(row=0, column=0, sticky='NSW', ipadx=1)
+        self._spinbox_two = tk.Spinbox(self, textvariable=self._v._two, font=Font(size=8), **kwargs)
         self._spinbox_two.grid(row=0, column=1, sticky='NSE', ipadx=1)
 
     def xview_moveto(self, val):
