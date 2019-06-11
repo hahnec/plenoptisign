@@ -127,7 +127,7 @@ class CfgWidget(tk.Frame):
         # pass estimated micro image size to entry in GUI
         tk_var = tk.StringVar()
         tk_var.set(str(round(self.parent.obj.M, DEC_P)))
-        self.entries[10].config(textvariable=tk_var)
+        self.entries[11].config(textvariable=tk_var)
 
         # update results in GUI
         self.parent.run()
@@ -142,7 +142,7 @@ class CfgWidget(tk.Frame):
         # pass estimated micro image size to entry in GUI
         tk_var = tk.StringVar()
         tk_var.set(str(round(self.parent.obj.fU/self.parent.obj.D, DEC_P)))
-        self.entries[8].config(textvariable=tk_var)
+        self.entries[9].config(textvariable=tk_var)
 
         # update results in GUI
         self.parent.run()
