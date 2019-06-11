@@ -137,6 +137,11 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 </div>
 </dd></dl>
 
+<dl class="staticmethod">
+<dt id="plenoptisign.MainClass.axis_equal_3D">
+<em class="property">static </em><code class="descname">axis_equal_3D</code><span class="sig-paren">(</span><em>ax</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.axis_equal_3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="plenoptisign.MainClass.compute_img_dist">
 <code class="descname">compute_img_dist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.compute_img_dist" title="Permalink to this definition">¶</a></dt>
@@ -257,7 +262,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 
 <dl class="method">
 <dt id="plenoptisign.MainClass.plt_3d">
-<code class="descname">plt_3d</code><span class="sig-paren">(</span><em>plt3d</em>, <em>amin</em>, <em>sen_dims=array([24.048</em>, <em>36.072])</em>, <em>dep_type=False</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_3d" title="Permalink to this definition">¶</a></dt>
+<code class="descname">plt_3d</code><span class="sig-paren">(</span><em>plt3d</em>, <em>amin</em>, <em>dep_type=False</em>, <em>ray_th=0.75</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_3d" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method draws depth planes in 3-D space based on provided depth method (e.g. <a class="reference internal" href="#plenoptisign.MainClass.refo" title="plenoptisign.MainClass.refo"><code class="xref py py-func docutils literal notranslate"><span class="pre">refo()</span></code></a>).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -266,7 +271,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</li>
 <li><strong>amin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – minimum depth plane</li>
-<li><strong>sen_dims</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><em>numpy.ndarray</em></a>) – sensor dimensions</li>
+<li><strong>sen_dims</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a>) – sensor dimensions</li>
 <li><strong>dep_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – specified depth type, e.g. ‘refo’ or ‘tria’</li>
 </ul>
 </td>
@@ -280,13 +285,14 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 
 <dl class="method">
 <dt id="plenoptisign.MainClass.plt_3d_init">
-<code class="descname">plt_3d_init</code><span class="sig-paren">(</span><em>plt3d</em>, <em>elev=30</em>, <em>azim=120</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_3d_init" title="Permalink to this definition">¶</a></dt>
+<code class="descname">plt_3d_init</code><span class="sig-paren">(</span><em>fig</em>, <em>plt3d</em>, <em>elev=10</em>, <em>azim=135</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_3d_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method initializes parameters for plots in 3-D space that only need to be set once.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fig</strong> – instance of matplotlib’s Figure</li>
 <li><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</li>
 <li><strong>elev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – elevation angle for perspective in 3-D plot</li>
 <li><strong>azim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – azimuth angle for perspective in 3-D plot</li>
@@ -305,7 +311,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 
 <dl class="method">
 <dt id="plenoptisign.MainClass.plt_refo">
-<code class="descname">plt_refo</code><span class="sig-paren">(</span><em>ax</em>, <em>plane_th=0.5</em>, <em>ray_th=0.5</em>, <em>fontsize=11</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_refo" title="Permalink to this definition">¶</a></dt>
+<code class="descname">plt_refo</code><span class="sig-paren">(</span><em>ax</em>, <em>plane_th=0.9</em>, <em>ray_th=0.75</em>, <em>fontsize=12</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_refo" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method draws the refocusing distance and depth of field limits in 2-D space based on <a class="reference internal" href="#plenoptisign.MainClass.refo" title="plenoptisign.MainClass.refo"><code class="xref py py-func docutils literal notranslate"><span class="pre">refo()</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -328,7 +334,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 
 <dl class="method">
 <dt id="plenoptisign.MainClass.plt_tria">
-<code class="descname">plt_tria</code><span class="sig-paren">(</span><em>ax</em>, <em>plane_th=0.5</em>, <em>ray_th=0.5</em>, <em>fontsize=11</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_tria" title="Permalink to this definition">¶</a></dt>
+<code class="descname">plt_tria</code><span class="sig-paren">(</span><em>ax</em>, <em>plane_th=0.9</em>, <em>ray_th=0.75</em>, <em>fontsize=12</em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_tria" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method draws the triangulation distance in 2-D space calculated from <a class="reference internal" href="#plenoptisign.MainClass.tria" title="plenoptisign.MainClass.tria"><code class="xref py py-func docutils literal notranslate"><span class="pre">tria()</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -415,9 +421,9 @@ In this application, its purpose is to solve for intersecting ray functions.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>A</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(nxm\)</span> matrix</li>
-<li><strong>b</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(nx1\)</span> column vector</li>
-<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(mx1\)</span> column vector</li>
+<li><strong>A</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(n \times m\)</span> matrix</li>
+<li><strong>b</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(n \times 1\)</span> column vector</li>
+<li><strong>x</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(m \times 1\)</span> column vector</li>
 </ul>
 </td>
 </tr>
