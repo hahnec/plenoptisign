@@ -170,7 +170,7 @@ class Mixin:
 
         try:
             max_val = max([x for x in input if x != float('inf')])
-        except TypeError:
+        except:
             max_val = input if isinstance(input, (int, float)) else float('nan')
 
         return max_val
