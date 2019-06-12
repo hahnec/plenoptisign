@@ -77,6 +77,8 @@ def parse_options(argv):
             if opt in ("-g", "--gui"):
                 MainWindow = PlenoptisignApp(None)
                 MainWindow.mainloop()
+                refo_opt = False
+                tria_opt = False
 
     return refo_opt, tria_opt, plot_opt
 
