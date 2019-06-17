@@ -196,7 +196,7 @@ class DoubleSpinbox(tk.Frame):
         self._v = kwargs['textvariable'] if 'textvariable' in kwargs else TwoStringVars()
         kwargs['from_'] = kwargs['from_'] if 'from_' in kwargs else 0
         kwargs['to'] = kwargs['to'] if 'to' in kwargs else 10**2
-        kwargs['width'] = int(kwargs['width']/2)-2 if 'width' in kwargs else 5
+        kwargs['width'] = int(kwargs['width']/2)-2 if 'width' in kwargs else 3
 
         # remove kwarg keys in widget which are given as tuple
         kwargs.pop('textvariable', None)
@@ -214,3 +214,13 @@ class DoubleSpinbox(tk.Frame):
 
     def get(self):
         return self._v.one, self._v.two
+
+    def config(self, **kwargs):
+
+        self._v = kwargs['textvariable'] if 'textvariable' in kwargs else TwoStringVars()
+
+        # remove kwarg keys in widget which are given as tuple
+        kwargs.pop('textvariable', None)
+
+        self._spinbox_one.config(textvariable=self._v._one, **kwargs)
+        self._spinbox_two.config(textvariable=self._v._two, **kwargs)

@@ -55,7 +55,10 @@ class Config(object):
 
         # transfer parameters to config object
         for key in json_data:
-            self.params[key] = float(json_data[key])
+            if isinstance(json_data[key], float):
+                self.params[key] = float(json_data[key])
+            elif isinstance(json_data[key], (list, tuple)):
+                self.params[key] = tuple(json_data[key])
 
         return True
 

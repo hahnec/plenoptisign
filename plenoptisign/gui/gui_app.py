@@ -37,7 +37,7 @@ from plenoptisign.constants import ABBS, PF
 from plenoptisign.mainclass import MainClass
 from plenoptisign.gui.cfg import Config
 from plenoptisign.gui.widget_men import MenWidget
-from plenoptisign.gui.widget_cfg import CfgWidget
+from plenoptisign.gui.widget_cfg import CfgWidget, TwoStringVars
 from plenoptisign.gui.widget_plt import PltWidget
 from plenoptisign.gui.widget_cmd import CmdWidget
 from plenoptisign.gui.widget_con import ConWidget
@@ -145,7 +145,7 @@ class PlenoptisignApp(tk.Tk):
 
         # transfer parameters from GUI to config object
         for i, key in enumerate(ABBS):
-            self.cfg.params[key] = float(self.cfg_wid.entries[i].get())
+            self.cfg.params[key] = self.tryfloat(self.cfg_wid.entries[i].get())
 
         # write parameters from config object to hard drive
         self.cfg.write_json()
@@ -173,8 +173,13 @@ class PlenoptisignApp(tk.Tk):
 
             # transfer parameters from config object to GUI
             for i, key in enumerate(ABBS):
-                tk_var = tk.StringVar()
-                tk_var.set(str(self.cfg.params[key]))
+
+                if isinstance(self.cfg.params[key], (list, tuple)):
+                    tk_var = TwoStringVars(values=self.cfg.params[key])
+                else:
+                    tk_var = tk.StringVar()
+                    tk_var.set(str(self.cfg.params[key]))
+
                 self.cfg_wid.entries[i].config(textvariable=tk_var)
 
             # update results in GUI
