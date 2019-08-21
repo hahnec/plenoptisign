@@ -14,7 +14,7 @@ OPTIONS = {
     "argv_emulation": True,
     "compressed": True,
     "optimize": 2,
-    "iconfile":'plenoptisign/gui/misc/circlecompass_1055093.icns',
+    "iconfile": 'plenoptisign/gui/misc/circlecompass_1055093.icns',
     "excludes": ['pillow', 'Image'],
     "plist": dict(NSHumanReadableCopyright='2019 Christopher Hahne')
 }
@@ -38,7 +38,6 @@ else:
      # Normally unix-like platforms will use "setup.py install"
      # and install the main script as such
      setup_requires=[],
-     scripts=APP,
  )
 
 setup(
