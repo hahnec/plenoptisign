@@ -79,6 +79,7 @@ def parse_options(argv):
                 MainWindow.mainloop()
                 refo_opt = False
                 tria_opt = False
+                exit()
 
     return refo_opt, tria_opt, plot_opt
 
