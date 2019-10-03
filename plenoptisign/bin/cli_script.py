@@ -111,7 +111,7 @@ def main():
 
     # print info
     print('\nPlenoptiSign v'+__version__+' is a light field geometry estimator. \r')
-    print('For more details contact inbox [ät] christophahnehahne.de\n')
+    print('For more details contact inbox [ät] christopherhahne.de\n')
 
     # construct object
     obj = MainClass()
