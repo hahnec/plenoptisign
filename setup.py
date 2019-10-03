@@ -3,6 +3,7 @@
 from setuptools import setup, find_packages
 from plenoptisign import __version__
 from sys import platform
+from docutils import core
 
 APP = ['plenoptisign/gui/gui_app.py']
 DATA_FILES = [
@@ -41,15 +42,26 @@ else:
      scripts=APP,
  )
 
+# parse description section text
+with open("README.rst", "r") as f:
+ data = f.read()
+ readme_nodes = list(core.publish_doctree(data))
+ for node in readme_nodes:
+     if node.astext().startswith('Description'):
+         long_description = node.astext().rsplit('\n\n')[1]
+
 setup(
       name='plenoptisign',
       version=__version__,
       description='Light field geometry estimator for a Standard Plenoptic Camera (SPC)',
+      long_description=long_description,
+      long_description_content_type='text/x-rst',
       url='http://github.com/hahnec/plenoptisign',
       author='Christopher Hahne',
       copyright='Christopher Hahne',
       author_email='inbox@christopherhahne.de',
       license='GNU GPL V3.0',
+      keywords='plenoptic camera optics design software',
       scripts=['plenoptisign/bin/cli_script.py'],
       entry_points={'console_scripts': ['plenoptisign=plenoptisign.bin.cli_script:main'],},
       packages=find_packages(),
