@@ -41,7 +41,6 @@ Command-line interface
 ======================
 
 * **Installation**:
-
     For ease of use, you can install with pip:
 
     * ``$ pip install plenoptisign``
@@ -54,7 +53,7 @@ Command-line interface
 
 
 * **Usage**:
-    run ``$ plenoptisign`` from the command line with optional arguments
+    Run ``$ plenoptisign`` from the command line with optional arguments:
 
     * -g, --gui: open graphical user interface
     * -p, --plot: plot paraxial rays
@@ -63,7 +62,7 @@ Command-line interface
     * -h, --help: print help message
 
 
-    unit testing: ``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
+    Unit testing is done with ``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
 
 CGI server
 ==========
