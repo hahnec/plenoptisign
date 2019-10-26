@@ -115,4 +115,8 @@ class Mixin:
         z_min = min(0, self._ent_pup_pos*5)
         ax.set_xlim([z_min, z_max])
 
+        # swap coordinates for current cursor position
+        self._ax = ax
+        ax.format_coord = self.format_coord_2d
+
         return ax

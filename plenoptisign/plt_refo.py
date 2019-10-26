@@ -156,4 +156,8 @@ class Mixin:
         ax.plot((self.fs+self.hh+self.bU+self.HH, self.d_m), (self._UijU[1], 0), 'r-', linewidth=ray_th)
         ax.plot((self.fs+self.hh+self.bU+self.HH, self.d_p), (self._UijL[1], 0), 'k-', linewidth=ray_th)
 
+        # swap coordinates for current cursor position
+        self._ax = ax
+        ax.format_coord = self.format_coord_2d
+
         return ax

@@ -228,3 +228,12 @@ class MainClass(plt_3d.Mixin, plt_tria.Mixin, plt_refo.Mixin, tria.Mixin, refo.M
         self.D = (self.M*self.fU*self.pp)/self.fs
 
         return True
+
+    def _format_coord_2d(self, x, y):
+        """ wrapper function used to swap on hover coordinates fox x and z axes in plot window """
+
+        # swap coordinates for current cursor position
+        xs = self._ax.format_xdata(x)
+        ys = self._ax.format_ydata(y)
+
+        return 'z=%s, y=%s' % (xs, ys)
