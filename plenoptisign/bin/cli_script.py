@@ -79,6 +79,7 @@ def parse_options(argv):
                 MainWindow.mainloop()
                 refo_opt = False
                 tria_opt = False
+                exit()
 
     return refo_opt, tria_opt, plot_opt
 
@@ -111,7 +112,7 @@ def main():
 
     # print info
     print('\nPlenoptiSign v'+__version__+' is a light field geometry estimator. \r')
-    print('For more details contact inbox [ät] christophahnehahne.de\n')
+    print('For more details contact inbox [ät] christopherhahne.de\n')
 
     # construct object
     obj = MainClass()

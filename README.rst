@@ -12,8 +12,6 @@ This software treats a pair of light field rays as a system of linear functions 
 
 |zenodo|
 
-Installation
-------------
 
 GUI-based executable
 ====================
@@ -28,11 +26,13 @@ GUI-based executable
 |gui|
 
 .. note::
-    Insightful description of the parameter terminology can be found in the author's publications:
+    Insightful description of the parameter terminology and experimental validation can be found in the author's publications:
 
     * `Refocusing distance of a standard plenoptic camera`_, Hahne et al., *OpticsExpress*, `[BibTeX] <http://www.plenoptic.info/bibtex/HAHNE-OPEX.2016.bib>`__
 
     * `Baseline and triangulation geometry in a standard plenoptic camera`_, Hahne et al., *Int. J. of Comp. Vis.*, `[BibTeX] <http://plenoptic.info/bibtex/HAHNE-IJCV.2017.bib>`__
+
+    * `PlenoptiSign paper`_, Hahne and Aggoun, *SoftwareX*, Volume 10, 2019
 
     If you find this work helpful for your research, please cite as appropriate.
 
@@ -41,13 +41,19 @@ Command-line interface
 ======================
 
 * **Installation**:
+    For ease of use, you can install with pip:
+
+    * ``$ pip install plenoptisign``
+
+    Alternatively, installation is possible from source via:
+
     1. download the source_ using ``$ git clone https://github.com/hahnec/plenoptisign.git``
     2. go to the root directory ``$ cd plenoptisign``
     3. install with ``$ python setup.py install`` from the root directory
 
 
 * **Usage**:
-    run ``$ plenoptisign`` from the command line with optional arguments
+    Run ``$ plenoptisign`` from the command line with optional arguments:
 
     * -g, --gui: open graphical user interface
     * -p, --plot: plot paraxial rays
@@ -56,7 +62,7 @@ Command-line interface
     * -h, --help: print help message
 
 
-    unit testing: ``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
+    Unit testing is done with ``$ python plenoptisign/tests/plenoptisign_unittest.py -v``
 
 CGI server
 ==========
@@ -170,3 +176,4 @@ Further information
 .. _Optics, Eugene Hecht:  https://www.pearson.com/us/higher-education/program/Hecht-Optics-5th-Edition/PGM45350.html
 .. _Refocusing distance of a standard plenoptic camera: https://doi.org/10.1364/OE.24.021521
 .. _Baseline and triangulation geometry in a standard plenoptic camera: http://www.plenoptic.info/files/IJCV_Hahne17_final.pdf
+.. _PlenoptiSign paper: https://doi.org/10.1016/j.softx.2019.100259
