@@ -158,6 +158,6 @@ class Mixin:
 
         # swap coordinates for current cursor position
         self._ax = ax
-        ax.format_coord = self.format_coord_2d
+        ax.format_coord = self._format_coord_2d
 
         return ax
