@@ -17,11 +17,11 @@ GUI-based executable
 ====================
 
 * **Installation**:
-    1. download as an app_ (for macOS_ and Windows_ only)
+    1. download as an app_ (macOS_, Windows_ and Linux_)
     2. extract the archive to obtain the executable
 
 * **Usage**:
-    run extracted app_ (for macOS_ and Windows_ only)
+    run extracted app_ (macOS_, Windows_ and Linux_)
 
 |gui|
 
@@ -168,8 +168,9 @@ Further information
 
 .. _source: https://github.com/hahnec/plenoptisign/archive/master.zip
 .. _app: https://github.com/hahnec/plenoptisign/releases/
-.. _macOS: https://github.com/hahnec/plenoptisign/releases/download/v1.1.2/plenoptisign_1.1.2_macOS.zip
-.. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.1.2/plenoptisign_1.1.2_win.zip
+.. _macOS: https://github.com/hahnec/plenoptisign/releases/download/v1.1.3/plenoptisign_1.1.3_macOS.zip
+.. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.1.3/plenoptisign_1.1.3_win.zip
+.. _Linux: https://github.com/hahnec/plenoptisign/releases/download/v1.1.3/plenoptisign_1.1.3_linux.zip
 .. _PlenoptiCam: https://github.com/hahnec/plenopticam/
 .. _CGI demo: http://www.plenoptic.info/pages/coding.html
 
