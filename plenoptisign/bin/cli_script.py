@@ -51,7 +51,7 @@ def parse_options(argv):
     # default settings
     refo_opt = True
     tria_opt = True
-    plot_opt = True
+    plot_opt = False
     opts = None
 
     try:
