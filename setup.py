@@ -64,7 +64,7 @@ setup(
       scripts=['plenoptisign/bin/cli_script.py'],
       entry_points={'console_scripts': ['plenoptisign=plenoptisign.bin.cli_script:main'],},
       packages=find_packages(),
-      install_requires=['numpy', 'matplotlib'],
+      install_requires=['numpy', 'matplotlib', 'ddt', 'nose'],
       include_package_data=True,
       zip_safe=False,
       **extra_options
