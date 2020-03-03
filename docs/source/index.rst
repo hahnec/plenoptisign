@@ -7,7 +7,7 @@
 PlenoptiSign Reference Document
 ===============================
 
-PlenoptiSign is a Python software tool designed to facilitate localisation of depth planes prior to lightfield acquistion by a plenoptic camera. This may help simulate, design and prototype lightfield imaging devices.
+PlenoptiSign is a tool designed to facilitate localisation of depth planes prior to lightfield acquistion by a plenoptic camera. This may help simulate, design and prototype lightfield imaging devices.
 
 Click below for PlenoptiSign's short README, User Guide or full API documentation:
 
