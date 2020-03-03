@@ -20,7 +20,7 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 """
 
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 
 from .mainclass import MainClass
 from .solver import solve_sle
