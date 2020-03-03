@@ -35,7 +35,9 @@ from plenoptisign.gui import PlenoptisignApp
 
 def usage():
 
-    print("\nplenoptisign v" + __version__ + " is a light field geometry estimator written by C. Hahne")
+    print("\nplenoptisign v" + __version__ + " is a light field geometry estimator.")
+    print("For information please send an email to inbox [ät] christopherhahne.de")
+
     print("Usage: plenoptisign <options>\n")
     print("Options:")
     print("-g, --gui                open graphical user interface")
@@ -111,8 +113,7 @@ def main():
     refo_opt, tria_opt, plot_opt = parse_options(argv[1:])
 
     # print info
-    print('\nPlenoptiSign v'+__version__+' is a light field geometry estimator. \r')
-    print('For more details contact inbox [ät] christopherhahne.de\n')
+    print('\nPlenoptiSign v'+__version__+'\r')
 
     # construct object
     obj = MainClass()
