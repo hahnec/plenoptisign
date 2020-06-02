@@ -22,8 +22,9 @@ Copyright (c) 2019 Christopher Hahne <inbox@christopherhahne.de>
 
 import numpy as np
 
+
 def solve_sle(A, b):
-    '''
+    """
 
     This function is an algebraic function solver for a system of linear equations of the general form :math:`Ax=b`.
     In this application, its purpose is to solve for intersecting ray functions.
@@ -37,7 +38,7 @@ def solve_sle(A, b):
 
     :return: **x**
 
-    '''
+    """
 
     if is_square(A):
         A_inv = np.linalg.inv(A)
@@ -46,7 +47,8 @@ def solve_sle(A, b):
 
     return np.dot(A_inv, b)
 
+
 def is_square(A):
-    ''' check if matrix is square'''
+    """ check if matrix is square """
 
     return all(len(row) == len(A) for row in A)

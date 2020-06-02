@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>1. PlenoptiSign &#8212; PlenoptiSign 1.1.4 documentation</title>
@@ -48,8 +48,9 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#credits">1.2. Credits</a><ul>
-<li><a class="reference internal" href="#contributors">1.2.1. Contributors</a></li>
-<li><a class="reference internal" href="#sponsors">1.2.2. Sponsors</a></li>
+<li><a class="reference internal" href="#citation">1.2.1. Citation</a></li>
+<li><a class="reference internal" href="#contributors">1.2.2. Contributors</a></li>
+<li><a class="reference internal" href="#sponsors">1.2.3. Sponsors</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#further-information">1.3. Further information</a></li>
@@ -94,8 +95,8 @@
 <h2><span class="section-number">1.1. </span>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><em>PlenoptiSign</em> is an open-source <a class="reference external" href="https://github.com/hahnec/plenoptisign/releases/">app</a> for geometry estimation of a light field captured by a Standard Plenoptic Camera (SPC).
 This software treats a pair of light field rays as a system of linear functions whose solution yields ray intersections indicating distances to refocused object planes or virtual camera positions of perspective views (so-called sub-aperture images).</p>
-<p><a class="reference external" href="https://github.com/hahnec/plenoptisign/releases"><img alt="release" src="https://img.shields.io/github/release/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img alt="License" src="https://img.shields.io/badge/License-GPL%20v3.0-orange.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Code size" src="https://img.shields.io/github/languages/code-size/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Repo size" src="https://img.shields.io/github/repo-size/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.0.zip"><img alt="Downloads" src="https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?style=flat-square" /></a></p>
-<p><a class="reference external" href="https://zenodo.org/badge/latestdoi/126895033"><img alt="zenodo link" src="https://zenodo.org/badge/126895033.svg?style=flat-square" /></a></p>
+<p><a class="reference external" href="https://github.com/hahnec/plenoptisign/releases"><img alt="release" src="https://img.shields.io/github/release/hahnec/plenoptisign.svg?style=flat-square" /></a> <a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img alt="License" src="https://img.shields.io/badge/License-GPL%20v3.0-orange.svg?style=flat-square" /></a> <a class="reference external" href="https://github.com/hahnec/plenoptisign/archive/v1.1.3.zip"><img alt="Downloads" src="https://img.shields.io/github/downloads/hahnec/plenoptisign/total.svg?label=Release%20downloads&amp;style=flat-square" /></a> <a class="reference external" href="https://pypi.org/project/plenoptisign/"><img alt="PyPI Downloads" src="https://img.shields.io/pypi/dm/plenoptisign?label=PyPI%20downloads&amp;style=flat-square" /></a></p>
+<p><a class="reference external" href="https://arxiv.org/pdf/2006.01015.pdf"><img alt="arXiv link" src="http://img.shields.io/badge/paper-arxiv.2006.01015-red.svg?style=flat-square" /></a> <a class="reference external" href="https://zenodo.org/badge/latestdoi/126895033"><img alt="zenodo link" src="https://zenodo.org/badge/126895033.svg?style=flat-square" /></a></p>
 <div class="section" id="gui-based-executable">
 <h3><span class="section-number">1.1.1. </span>GUI-based executable<a class="headerlink" href="#gui-based-executable" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -196,13 +197,31 @@ This software treats a pair of light field rays as a system of linear functions 
 </div>
 <div class="section" id="credits">
 <h2><span class="section-number">1.2. </span>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="citation">
+<h3><span class="section-number">1.2.1. </span>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-BibTeX notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">Hahne_2019</span><span class="p">,</span>
+   <span class="na">title</span><span class="p">=</span><span class="s">{PlenoptiSign: An optical design tool for plenoptic imaging}</span><span class="p">,</span>
+   <span class="na">volume</span><span class="p">=</span><span class="s">{10}</span><span class="p">,</span>
+   <span class="na">ISSN</span><span class="p">=</span><span class="s">{2352-7110}</span><span class="p">,</span>
+   <span class="na">url</span><span class="p">=</span><span class="s">{http://dx.doi.org/10.1016/j.softx.2019.100259}</span><span class="p">,</span>
+   <span class="na">DOI</span><span class="p">=</span><span class="s">{10.1016/j.softx.2019.100259}</span><span class="p">,</span>
+   <span class="na">journal</span><span class="p">=</span><span class="s">{SoftwareX}</span><span class="p">,</span>
+   <span class="na">publisher</span><span class="p">=</span><span class="s">{Elsevier BV}</span><span class="p">,</span>
+   <span class="na">author</span><span class="p">=</span><span class="s">{Hahne, Christopher and Aggoun, Amar}</span><span class="p">,</span>
+   <span class="na">year</span><span class="p">=</span><span class="s">{2019}</span><span class="p">,</span>
+   <span class="na">month</span><span class="p">=</span><span class="s">{Jul}</span><span class="p">,</span>
+   <span class="na">pages</span><span class="p">=</span><span class="s">{100259}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="contributors">
-<h3><span class="section-number">1.2.1. </span>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.2. </span>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
 <p><img src="http://www.christopherhahne.de/images/about.jpg" width="100px"></p>
 <p><a class="reference external" href="http://www.christopherhahne.de/">Christopher Hahne</a></p>
 </div>
 <div class="section" id="sponsors">
-<h3><span class="section-number">1.2.2. </span>Sponsors<a class="headerlink" href="#sponsors" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.3. </span>Sponsors<a class="headerlink" href="#sponsors" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -257,7 +276,7 @@ This software treats a pair of light field rays as a system of linear functions 
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Christopher Hahne.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
     </div>
   </body>
 </html>

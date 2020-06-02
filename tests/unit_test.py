@@ -29,7 +29,8 @@ from plenoptisign.constants import ABBS, DEC_P
 class PlenoptiSignTester(unittest.TestCase):
 
     @data(
-        ([(0,0), .009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'inf', 2.6846, 1, 13, -6, 1], [962.7459, 1110.0123, 838.1359, 271.8764]),
+        ([(0, 0), .009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'inf', 2.6846, 1, 13, -6, 1],
+         [962.7459, 1110.0123, 838.1359, 271.8764]),
         )
     @unpack
     def test_refo(self, vals, data_exp):
@@ -46,8 +47,10 @@ class PlenoptiSignTester(unittest.TestCase):
         self.assertEqual(data_out, data_exp)
     
     @data(
-        ([(0,0), .009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'Inf', 2.6846, 0, 13, -6, 1], [3.7956, 0.0, 5869.2898]),
-        ([(0,0), .009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'Inf', 2.6846, 0, 13, 1, 0], [-0.6326, 0.0, float('inf')]),
+        ([(0, 0), .009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'Inf', 2.6846, 0, 13, -6, 1],
+         [3.7956, 0.0, 5869.2898]),
+        ([(0,0), .009, 2.75, .396, .125, 111.0324, 193.2935, -65.5563, 'Inf', 2.6846, 0, 13, 1, 0],
+         [-0.6326, 0.0, float('inf')]),
         )
     @unpack
     def test_tria(self, vals, data_exp):
@@ -61,6 +64,7 @@ class PlenoptiSignTester(unittest.TestCase):
         data_out = [round(float(object.B), DEC_P), round(float(object.phi), DEC_P), round(float(object.Z), DEC_P)]
         # assertion
         self.assertEqual(data_out, data_exp)
+
 
 if __name__ == '__main__':
     unittest.main()
