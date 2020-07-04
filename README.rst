@@ -90,7 +90,7 @@ CGI server
 
 * **Usage**:
 
-    website demo: http://www.plenoptic.info/pages/coding.html
+    website demo: http://www.plenoptic.info/pages/software.html
 
 Tested on macOS 10.14.2 and Windows 10 w/ Python 2.7 & Python 3.6
 
