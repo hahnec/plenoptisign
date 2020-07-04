@@ -4,6 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3. API documentation &#8212; PlenoptiSign 1.1.4 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -12,7 +13,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="2. User Guide" href="guide.html" /> 
@@ -29,42 +30,10 @@
         <li class="right" >
           <a href="guide.html" title="2. User Guide"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">PlenoptiSign 1.1.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PlenoptiSign 1.1.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>API documentation</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">3. API documentation</a><ul>
-<li><a class="reference internal" href="#architecture">3.1. Architecture</a></li>
-<li><a class="reference internal" href="#module-plenoptisign">3.2. MainClass</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="guide.html"
-                        title="previous chapter"><span class="section-number">2. </span>User Guide</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/apidoc.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -105,16 +74,16 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>dict</em>) – dictionary containing input parameters (see full description below)</p></li>
-<li><p><strong>d</strong> (<em>float</em>) – refocusing distance</p></li>
-<li><p><strong>d_p</strong> (<em>float</em>) – far depth of field border in refocusing</p></li>
-<li><p><strong>d_m</strong> (<em>float</em>) – near depth of field border in refocusing</p></li>
-<li><p><strong>dof</strong> (<em>float</em>) – depth of field</p></li>
-<li><p><strong>B</strong> (<em>float</em>) – baseline at entrance pupil of the main lens</p></li>
-<li><p><strong>phi</strong> (<em>float</em>) – tilt angle of virtual camera</p></li>
-<li><p><strong>Z</strong> (<em>float</em>) – triangulation distance</p></li>
-<li><p><strong>bU</strong> (<em>float</em>) – main lens image distance</p></li>
-<li><p><strong>console_msg</strong> (<em>str</em>) – text for console output</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – dictionary containing input parameters (see full description below)</p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – refocusing distance</p></li>
+<li><p><strong>d_p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – far depth of field border in refocusing</p></li>
+<li><p><strong>d_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – near depth of field border in refocusing</p></li>
+<li><p><strong>dof</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – depth of field</p></li>
+<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – baseline at entrance pupil of the main lens</p></li>
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – tilt angle of virtual camera</p></li>
+<li><p><strong>Z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – triangulation distance</p></li>
+<li><p><strong>bU</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – main lens image distance</p></li>
+<li><p><strong>console_msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – text for console output</p></li>
 </ul>
 </dd>
 </dl>
@@ -139,7 +108,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dd class="field-odd"><p><strong>True</strong></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>bool</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -154,7 +123,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dd class="field-odd"><p><strong>True</strong></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>bool</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -169,7 +138,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dd class="field-odd"><p><strong>True</strong></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>bool</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -183,7 +152,7 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dd class="field-odd"><p>list(<strong>d</strong>, <strong>d_p</strong>, <strong>d_m</strong>, <strong>dof</strong>, <strong>B</strong>, <strong>phi</strong>, <strong>Z</strong>)</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>list</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -195,8 +164,8 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input</strong> (<em>list</em>) – list of real numbers</p></li>
-<li><p><strong>max_val</strong> (<em>float</em>) – maximum value excluding infinity</p></li>
+<li><p><strong>input</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – list of real numbers</p></li>
+<li><p><strong>max_val</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – maximum value excluding infinity</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -212,10 +181,10 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>plt3d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code>) – instance of matplotlib’s Axes3D</p></li>
-<li><p><strong>amin</strong> (<em>float</em>) – minimum depth plane</p></li>
-<li><p><strong>sen_dims</strong> (<em>tuple</em>) – sensor dimensions</p></li>
-<li><p><strong>dep_type</strong> (<em>bool</em>) – specified depth type, e.g. ‘refo’ or ‘tria’</p></li>
+<li><p><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</p></li>
+<li><p><strong>amin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – minimum depth plane</p></li>
+<li><p><strong>sen_dims</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><em>tuple</em></a>) – sensor dimensions</p></li>
+<li><p><strong>dep_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – specified depth type, e.g. ‘refo’ or ‘tria’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -232,16 +201,16 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fig</strong> – instance of matplotlib’s Figure</p></li>
-<li><p><strong>plt3d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code>) – instance of matplotlib’s Axes3D</p></li>
-<li><p><strong>elev</strong> (<em>float</em>) – elevation angle for perspective in 3-D plot</p></li>
-<li><p><strong>azim</strong> (<em>float</em>) – azimuth angle for perspective in 3-D plot</p></li>
+<li><p><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</p></li>
+<li><p><strong>elev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – elevation angle for perspective in 3-D plot</p></li>
+<li><p><strong>azim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – azimuth angle for perspective in 3-D plot</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>True</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -253,10 +222,10 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ax</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>) – instance of matplotlib’s Axes</p></li>
-<li><p><strong>plane_th</strong> (<em>float</em>) – line thickness of depth plane</p></li>
-<li><p><strong>ray_th</strong> (<em>float</em>) – line thickness of rays</p></li>
-<li><p><strong>fontsize</strong> (<em>float</em>) – font size of scientific notations</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</p></li>
+<li><p><strong>plane_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – line thickness of depth plane</p></li>
+<li><p><strong>ray_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – line thickness of rays</p></li>
+<li><p><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – font size of scientific notations</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -272,10 +241,10 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ax</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>) – instance of matplotlib’s Axes</p></li>
-<li><p><strong>plane_th</strong> (<em>float</em>) – line thickness of depth plane</p></li>
-<li><p><strong>ray_th</strong> (<em>float</em>) – line thickness of rays</p></li>
-<li><p><strong>fontsize</strong> (<em>float</em>) – font size of scientific notations</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</p></li>
+<li><p><strong>plane_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – line thickness of depth plane</p></li>
+<li><p><strong>ray_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – line thickness of rays</p></li>
+<li><p><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – font size of scientific notations</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -293,17 +262,17 @@ are mutated are as follows</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>float</em>) – refocusing distance</p></li>
-<li><p><strong>d_p</strong> (<em>float</em>) – far depth of field border in refocusing</p></li>
-<li><p><strong>d_m</strong> (<em>float</em>) – near depth of field border in refocusing</p></li>
-<li><p><strong>dof</strong> (<em>float</em>) – depth of field</p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – refocusing distance</p></li>
+<li><p><strong>d_p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – far depth of field border in refocusing</p></li>
+<li><p><strong>d_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – near depth of field border in refocusing</p></li>
+<li><p><strong>dof</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – depth of field</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>True</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -316,16 +285,16 @@ and baseline <span class="math notranslate nohighlight">\(B_G\)</span> of a stan
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>B</strong> (<em>float</em>) – baseline at entrance pupil of the main lens</p></li>
-<li><p><strong>phi</strong> (<em>float</em>) – tilt angle of virtual camera</p></li>
-<li><p><strong>Z</strong> (<em>float</em>) – triangulation distance</p></li>
+<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – baseline at entrance pupil of the main lens</p></li>
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – tilt angle of virtual camera</p></li>
+<li><p><strong>Z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – triangulation distance</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>True</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -365,9 +334,9 @@ In this application, its purpose is to solve for intersecting ray functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>A</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – <span class="math notranslate nohighlight">\(n \times m\)</span> matrix</p></li>
-<li><p><strong>b</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – <span class="math notranslate nohighlight">\(n \times 1\)</span> column vector</p></li>
-<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – <span class="math notranslate nohighlight">\(m \times 1\)</span> column vector</p></li>
+<li><p><strong>A</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(n \times m\)</span> matrix</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(n \times 1\)</span> column vector</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(m \times 1\)</span> column vector</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -380,7 +349,41 @@ In this application, its purpose is to solve for intersecting ray functions.</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3. API documentation</a><ul>
+<li><a class="reference internal" href="#architecture">3.1. Architecture</a></li>
+<li><a class="reference internal" href="#module-plenoptisign">3.2. MainClass</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="guide.html"
+                        title="previous chapter"><span class="section-number">2. </span>User Guide</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/apidoc.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -397,12 +400,13 @@ In this application, its purpose is to solve for intersecting ray functions.</p>
         <li class="right" >
           <a href="guide.html" title="2. User Guide"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">PlenoptiSign 1.1.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PlenoptiSign 1.1.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>API documentation</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Christopher Hahne.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
     </div>
   </body>
 </html>
