@@ -193,7 +193,7 @@ Further information
 
 .. |Hahne| raw:: html
 
-    <img src="http://www.christopherhahne.de/images/about.jpg" width="100px">
+    <img src="http://www.christopherhahne.de/images/about_alt.jpg" width="100px">
 
 .. Hyperlink aliases
 
