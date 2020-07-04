@@ -203,7 +203,7 @@ Further information
 .. _Windows: https://github.com/hahnec/plenoptisign/releases/download/v1.1.3/plenoptisign_1.1.3_win.zip
 .. _Linux: https://github.com/hahnec/plenoptisign/releases/download/v1.1.3/plenoptisign_1.1.3_linux.zip
 .. _PlenoptiCam: https://github.com/hahnec/plenopticam/
-.. _CGI demo: http://www.plenoptic.info/pages/coding.html
+.. _CGI demo: http://www.plenoptic.info/pages/software.html
 
 .. _Optics, Eugene Hecht:  https://www.pearson.com/us/higher-education/program/Hecht-Optics-5th-Edition/PGM45350.html
 .. _Refocusing distance of a standard plenoptic camera: https://doi.org/10.1364/OE.24.021521
