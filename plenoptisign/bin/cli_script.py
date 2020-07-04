@@ -33,6 +33,7 @@ from plenoptisign.mainclass import MainClass
 from plenoptisign.constants import VALS, ABBS, EXPR, DEC_P, FIG_SIZE, PlenoptisignError
 from plenoptisign.gui import PlenoptisignApp
 
+
 def usage():
 
     print("\nplenoptisign v" + __version__ + " is a light field geometry estimator.")
@@ -84,6 +85,7 @@ def parse_options(argv):
                 exit()
 
     return refo_opt, tria_opt, plot_opt
+
 
 def cmd_read():
 
