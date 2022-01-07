@@ -123,13 +123,9 @@ Contributors
 
 Sponsors
 ========
-|
 
-.. list-table::
-   :widths: 8 8
-
-   * - `under Grant EU-FP7 ICT-2010-248420 <https://cordis.europa.eu/project/rcn/94148_en.html>`__
-     - `Institute for Research in Applicable Computing (IRAC) <https://www.beds.ac.uk/research-ref/irac/about>`__
+   * `Grant EU-FP7 ICT-2010-248420 <https://cordis.europa.eu/project/rcn/94148_en.html>`__
+   * `Institute for Research in Applicable Computing (IRAC) <https://www.beds.ac.uk/research-ref/irac/about>`__
 
 Further information
 -------------------
