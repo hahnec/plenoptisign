@@ -4,16 +4,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3. API documentation &#8212; PlenoptiSign 1.1.4 documentation</title>
-    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="2. User Guide" href="guide.html" /> 
@@ -53,8 +52,8 @@
 <div class="section" id="module-plenoptisign">
 <span id="mainclass"></span><h2><span class="section-number">3.2. </span>MainClass<a class="headerlink" href="#module-plenoptisign" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="plenoptisign.MainClass">
-<em class="property">class </em><code class="sig-prename descclassname">plenoptisign.</code><code class="sig-name descname">MainClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">plenoptisign.</span></span><span class="sig-name descname"><span class="pre">MainClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass" title="Permalink to this definition">¶</a></dt>
 <dd><p>The MainClass stores optical parameters and performs numerical light field geometry calculations.</p>
 <p>It is made of five Mixin classes which are laid off in separate files containing methods for distance retrieval.
 The main methods to compute the plenoptic geometry are <a class="reference internal" href="#plenoptisign.MainClass.refo" title="plenoptisign.MainClass.refo"><code class="xref py py-func docutils literal notranslate"><span class="pre">refo()</span></code></a> and <a class="reference internal" href="#plenoptisign.MainClass.tria" title="plenoptisign.MainClass.tria"><code class="xref py py-func docutils literal notranslate"><span class="pre">tria()</span></code></a>.
@@ -68,22 +67,22 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 </pre></div>
 </div>
 <dl class="py method">
-<dt id="plenoptisign.MainClass.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize plenoptic camera parameters with following instance variables:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – dictionary containing input parameters (see full description below)</p></li>
-<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – refocusing distance</p></li>
-<li><p><strong>d_p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – far depth of field border in refocusing</p></li>
-<li><p><strong>d_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – near depth of field border in refocusing</p></li>
-<li><p><strong>dof</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – depth of field</p></li>
-<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – baseline at entrance pupil of the main lens</p></li>
-<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – tilt angle of virtual camera</p></li>
-<li><p><strong>Z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – triangulation distance</p></li>
-<li><p><strong>bU</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – main lens image distance</p></li>
-<li><p><strong>console_msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – text for console output</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – dictionary containing input parameters (see full description below)</p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – refocusing distance</p></li>
+<li><p><strong>d_p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – far depth of field border in refocusing</p></li>
+<li><p><strong>d_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – near depth of field border in refocusing</p></li>
+<li><p><strong>dof</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – depth of field</p></li>
+<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – baseline at entrance pupil of the main lens</p></li>
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – tilt angle of virtual camera</p></li>
+<li><p><strong>Z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – triangulation distance</p></li>
+<li><p><strong>bU</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – main lens image distance</p></li>
+<li><p><strong>console_msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – text for console output</p></li>
 </ul>
 </dd>
 </dl>
@@ -99,8 +98,8 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.compute_img_dist">
-<code class="sig-name descname">compute_img_dist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.compute_img_dist" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.compute_img_dist">
+<span class="sig-name descname"><span class="pre">compute_img_dist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.compute_img_dist" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method iteratively computes the main lens image distance <span class="math notranslate nohighlight">\(b_U\)</span> via
 <span class="math notranslate nohighlight">\(b_U = (\frac{1}{f_U}-\frac{1}{a_U})^{-1}\)</span> until both sides match. The initial value is <span class="math notranslate nohighlight">\(b_U=f_U\)</span>.</p>
 <dl class="field-list simple">
@@ -108,14 +107,14 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dd class="field-odd"><p><strong>True</strong></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.compute_mic_img_size">
-<code class="sig-name descname">compute_mic_img_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.compute_mic_img_size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.compute_mic_img_size">
+<span class="sig-name descname"><span class="pre">compute_mic_img_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.compute_mic_img_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method mutates the micro image size <span class="math notranslate nohighlight">\(M\)</span> according to
 <span class="math notranslate nohighlight">\(M = \frac{D \times f_s}{f_U \times p_p}\)</span>.</p>
 <dl class="field-list simple">
@@ -123,14 +122,14 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dd class="field-odd"><p><strong>True</strong></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.compute_pupil_size">
-<code class="sig-name descname">compute_pupil_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.compute_pupil_size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.compute_pupil_size">
+<span class="sig-name descname"><span class="pre">compute_pupil_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.compute_pupil_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method estimates the pupil size <span class="math notranslate nohighlight">\(D\)</span> of the main lens via
 <span class="math notranslate nohighlight">\(D = \frac{M \times f_U \times p_p}{f_s}.\)</span></p>
 <dl class="field-list simple">
@@ -138,34 +137,34 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 <dd class="field-odd"><p><strong>True</strong></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.get_results">
-<code class="sig-name descname">get_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.get_results" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.get_results">
+<span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.get_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the getter function for output parameters. See <a class="reference internal" href="#plenoptisign.MainClass.__init__" title="plenoptisign.MainClass.__init__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__init__()</span></code></a> for more details on the parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>list(<strong>d</strong>, <strong>d_p</strong>, <strong>d_m</strong>, <strong>dof</strong>, <strong>B</strong>, <strong>phi</strong>, <strong>Z</strong>)</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.non_inf_max">
-<em class="property">static </em><code class="sig-name descname">non_inf_max</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.non_inf_max" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.non_inf_max">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">non_inf_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.non_inf_max" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function computes the maximum value from an input list without consideration of infinity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – list of real numbers</p></li>
-<li><p><strong>max_val</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – maximum value excluding infinity</p></li>
+<li><p><strong>input</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of real numbers</p></li>
+<li><p><strong>max_val</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – maximum value excluding infinity</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -175,16 +174,16 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.plt_3d">
-<code class="sig-name descname">plt_3d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plt3d</span></em>, <em class="sig-param"><span class="n">amin</span></em>, <em class="sig-param"><span class="n">dep_type</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ray_th</span><span class="o">=</span><span class="default_value">0.75</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_3d" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.plt_3d">
+<span class="sig-name descname"><span class="pre">plt_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plt3d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dep_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ray_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_3d" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method draws depth planes in Axes3D plot based on provided depth method (e.g. <a class="reference internal" href="#plenoptisign.MainClass.refo" title="plenoptisign.MainClass.refo"><code class="xref py py-func docutils literal notranslate"><span class="pre">refo()</span></code></a>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</p></li>
-<li><p><strong>amin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – minimum depth plane</p></li>
-<li><p><strong>sen_dims</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><em>tuple</em></a>) – sensor dimensions</p></li>
-<li><p><strong>dep_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – specified depth type, e.g. ‘refo’ or ‘tria’</p></li>
+<li><p><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.5.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</p></li>
+<li><p><strong>amin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – minimum depth plane</p></li>
+<li><p><strong>sen_dims</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a>) – sensor dimensions</p></li>
+<li><p><strong>dep_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – specified depth type, e.g. ‘refo’ or ‘tria’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -194,38 +193,38 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.plt_3d_init">
-<code class="sig-name descname">plt_3d_init</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fig</span></em>, <em class="sig-param"><span class="n">plt3d</span></em>, <em class="sig-param"><span class="n">elev</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">azim</span><span class="o">=</span><span class="default_value">135</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_3d_init" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.plt_3d_init">
+<span class="sig-name descname"><span class="pre">plt_3d_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plt3d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">135</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_3d_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method initializes parameters for plots in 3-D space that only need to be set once.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fig</strong> – instance of matplotlib’s Figure</p></li>
-<li><p><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</p></li>
-<li><p><strong>elev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – elevation angle for perspective in 3-D plot</p></li>
-<li><p><strong>azim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – azimuth angle for perspective in 3-D plot</p></li>
+<li><p><strong>plt3d</strong> (<a class="reference external" href="https://matplotlib.org/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.html#mpl_toolkits.mplot3d.axes3d.Axes3D" title="(in Matplotlib v3.5.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes3D</span></code></a>) – instance of matplotlib’s Axes3D</p></li>
+<li><p><strong>elev</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – elevation angle for perspective in 3-D plot</p></li>
+<li><p><strong>azim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – azimuth angle for perspective in 3-D plot</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>True</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.plt_refo">
-<code class="sig-name descname">plt_refo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ax</span></em>, <em class="sig-param"><span class="n">plane_th</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">ray_th</span><span class="o">=</span><span class="default_value">0.75</span></em>, <em class="sig-param"><span class="n">fontsize</span><span class="o">=</span><span class="default_value">12</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_refo" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.plt_refo">
+<span class="sig-name descname"><span class="pre">plt_refo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ray_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_refo" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method draws the refocusing distance and depth of field limits in 2-D space based on <a class="reference internal" href="#plenoptisign.MainClass.refo" title="plenoptisign.MainClass.refo"><code class="xref py py-func docutils literal notranslate"><span class="pre">refo()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</p></li>
-<li><p><strong>plane_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – line thickness of depth plane</p></li>
-<li><p><strong>ray_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – line thickness of rays</p></li>
-<li><p><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – font size of scientific notations</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.5.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</p></li>
+<li><p><strong>plane_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – line thickness of depth plane</p></li>
+<li><p><strong>ray_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – line thickness of rays</p></li>
+<li><p><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – font size of scientific notations</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -235,16 +234,16 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.plt_tria">
-<code class="sig-name descname">plt_tria</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ax</span></em>, <em class="sig-param"><span class="n">plane_th</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">ray_th</span><span class="o">=</span><span class="default_value">0.75</span></em>, <em class="sig-param"><span class="n">fontsize</span><span class="o">=</span><span class="default_value">12</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_tria" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.plt_tria">
+<span class="sig-name descname"><span class="pre">plt_tria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ray_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.plt_tria" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method draws the triangulation distance in 2-D space calculated from <a class="reference internal" href="#plenoptisign.MainClass.tria" title="plenoptisign.MainClass.tria"><code class="xref py py-func docutils literal notranslate"><span class="pre">tria()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</p></li>
-<li><p><strong>plane_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – line thickness of depth plane</p></li>
-<li><p><strong>ray_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – line thickness of rays</p></li>
-<li><p><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – font size of scientific notations</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.5.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code></a>) – instance of matplotlib’s Axes</p></li>
+<li><p><strong>plane_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – line thickness of depth plane</p></li>
+<li><p><strong>ray_th</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – line thickness of rays</p></li>
+<li><p><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – font size of scientific notations</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -254,54 +253,54 @@ The Mixin classes share the optical parameters which are initialized as seen in 
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.refo">
-<code class="sig-name descname">refo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.refo" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.refo">
+<span class="sig-name descname"><span class="pre">refo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.refo" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method computes the distance <span class="math notranslate nohighlight">\(d_a\)</span> and depth of field limits <span class="math notranslate nohighlight">\(d_{a\pm }\)</span>
 of a plane that is computationally focused based on a standard plenoptic camera. The instance variables that
 are mutated are as follows</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – refocusing distance</p></li>
-<li><p><strong>d_p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – far depth of field border in refocusing</p></li>
-<li><p><strong>d_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – near depth of field border in refocusing</p></li>
-<li><p><strong>dof</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – depth of field</p></li>
+<li><p><strong>d</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – refocusing distance</p></li>
+<li><p><strong>d_p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – far depth of field border in refocusing</p></li>
+<li><p><strong>d_m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – near depth of field border in refocusing</p></li>
+<li><p><strong>dof</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – depth of field</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>True</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="plenoptisign.MainClass.tria">
-<code class="sig-name descname">tria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.tria" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.MainClass.tria">
+<span class="sig-name descname"><span class="pre">tria</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.MainClass.tria" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method computes depth plane distance <span class="math notranslate nohighlight">\(Z_{(G, \Delta x)}\)</span>, virtual camera tilt <span class="math notranslate nohighlight">\(\Phi_G\)</span>
 and baseline <span class="math notranslate nohighlight">\(B_G\)</span> of a standard plenoptic camera. The instance variables that are mutated are as follows:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – baseline at entrance pupil of the main lens</p></li>
-<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – tilt angle of virtual camera</p></li>
-<li><p><strong>Z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – triangulation distance</p></li>
+<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – baseline at entrance pupil of the main lens</p></li>
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – tilt angle of virtual camera</p></li>
+<li><p><strong>Z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – triangulation distance</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>True</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="plenoptisign.MainClass.data">
-<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#plenoptisign.MainClass.data" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="plenoptisign.MainClass.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#plenoptisign.MainClass.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instance variable of type dict containing input parameters with following keys</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
@@ -327,16 +326,16 @@ and baseline <span class="math notranslate nohighlight">\(B_G\)</span> of a stan
 </dd></dl>
 
 <dl class="py function">
-<dt id="plenoptisign.solve_sle">
-<code class="sig-prename descclassname">plenoptisign.</code><code class="sig-name descname">solve_sle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.solve_sle" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="plenoptisign.solve_sle">
+<span class="sig-prename descclassname"><span class="pre">plenoptisign.</span></span><span class="sig-name descname"><span class="pre">solve_sle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plenoptisign.solve_sle" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function is an algebraic function solver for a system of linear equations of the general form <span class="math notranslate nohighlight">\(Ax=b\)</span>.
 In this application, its purpose is to solve for intersecting ray functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>A</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(n \times m\)</span> matrix</p></li>
-<li><p><strong>b</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(n \times 1\)</span> column vector</p></li>
-<li><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(m \times 1\)</span> column vector</p></li>
+<li><p><strong>A</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(n \times m\)</span> matrix</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(n \times 1\)</span> column vector</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – <span class="math notranslate nohighlight">\(m \times 1\)</span> column vector</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -378,7 +377,7 @@ In this application, its purpose is to solve for intersecting ray functions.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -406,7 +405,7 @@ In this application, its purpose is to solve for intersecting ray functions.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Christopher Hahne.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>
